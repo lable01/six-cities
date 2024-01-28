@@ -1,4 +1,5 @@
-import MainScreen from '../pages/main-screen';
+import {Route, BrowserRouter, Routes} from 'react-router-dom';
+import MainScreen from 'pages/main-screen';
 
 type AppScreenProps = {
   cartCount: number;
@@ -6,7 +7,15 @@ type AppScreenProps = {
 
 function App({cartCount}: AppScreenProps): JSX.Element {
   return (
-    <MainScreen cartCount={cartCount} />
+    <BrowserRouter>
+      <Routes>
+        <Route
+          path='/'
+          element={<MainScreen cartCount={cartCount} />}
+        />
+      </Routes>
+    </BrowserRouter>
+
   );
 }
 

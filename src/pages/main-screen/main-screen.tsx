@@ -1,4 +1,4 @@
-import CartItem from 'components/cart-item/cart-item';
+import CartItem from 'components/cart-item';
 
 type AppScreenProps = {
   cartCount: number;

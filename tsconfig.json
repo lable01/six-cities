@@ -26,7 +26,8 @@
     "paths": {
       "app/*": ["app/*"],
       "components/*": ["components/*"],
-      "pages/*": ["pages/*"]
+      "pages/*": ["pages/*"],
+      "layouts/*": ["layouts/*"]
     }
   },
   "include": ["src", "vite.config.ts"],

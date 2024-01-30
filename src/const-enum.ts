@@ -3,8 +3,9 @@ export const Setting = {
 } as const;
 
 export const AppRoute = {
-  Main: '/',
-  Login : '/login',
-  Favorites : '/favorites',
-  Offer : '/offer/:id'
+  Layout: '/',
+  Main: '',
+  Login : 'login',
+  Favorites : 'favorites',
+  Offer : 'offer/:id'
 } as const;

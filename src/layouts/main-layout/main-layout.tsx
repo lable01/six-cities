@@ -1,0 +1,21 @@
+
+import Header from 'components/header';
+import {Outlet, useLocation} from 'react-router-dom';
+import classNames from 'classnames';
+
+function MainLayout(): JSX.Element {
+  const { pathname } = useLocation();
+  const headerLoginClass = (pathname === '/login') ? 'page--login' : 'page--main';
+  const headerClass = classNames(
+    'page page--gray',
+    headerLoginClass
+  );
+  return (
+    <div className={headerClass}>
+      <Header />
+      <Outlet />
+    </div>
+  );
+}
+
+export default MainLayout;

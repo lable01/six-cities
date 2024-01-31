@@ -1,4 +1,5 @@
-import styles from './NotFound.module.scss';
+import styles from './styles.module.scss';
+
 function NotFound(): JSX.Element {
   return (
     <div className="page page--gray page--main">

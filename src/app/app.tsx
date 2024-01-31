@@ -1,8 +1,8 @@
 import {Route, BrowserRouter, Routes} from 'react-router-dom';
-import {AppRoute} from './../const-enum.ts';
+import {AppRoute} from '../const.ts';
 import MainScreen from 'pages/main-screen';
 import LoginScreen from 'pages/login-screen';
-import FavoritiesScreen from 'pages/favorities-screen';
+import FavoritesScreen from 'pages/favorites-screen';
 import NotFound from 'pages/not-found';
 import MainLayout from 'layouts/main-layout';
 
@@ -28,7 +28,7 @@ function App({cartCount}: AppScreenProps): JSX.Element {
           />
           <Route
             path={AppRoute.Favorites}
-            element={<FavoritiesScreen />}
+            element={<FavoritesScreen />}
           />
           <Route
             path='*'

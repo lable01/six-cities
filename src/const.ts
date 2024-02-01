@@ -9,3 +9,8 @@ export const AppRoute = {
   Favorites : 'favorites',
   Offer : 'offer/:id'
 } as const;
+
+export const ClassName = {
+  Login: 'page--login',
+  Main: 'page--main'
+} as const;

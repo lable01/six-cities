@@ -1,5 +1,6 @@
 import {Route, BrowserRouter, Routes} from 'react-router-dom';
 import {AppRoute} from '../const.ts';
+import {ClassName} from '../const.ts';
 import MainScreen from 'pages/main-screen';
 import LoginScreen from 'pages/login-screen';
 import FavoritesScreen from 'pages/favorites-screen';
@@ -16,7 +17,7 @@ function App({cartCount}: AppScreenProps): JSX.Element {
       <Routes>
         <Route
           path={AppRoute.Layout}
-          element={<MainLayout />}
+          element={<MainLayout className={ClassName} />}
         >
           <Route
             path={AppRoute.Main}

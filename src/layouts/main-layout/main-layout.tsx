@@ -13,7 +13,7 @@ type ClassNameProps = {
 function MainLayout({className}: ClassNameProps): JSX.Element {
   const { Login: loginClass, Main: mainClass} = className;
   const { pathname } = useLocation();
-  const headerLoginClass = (pathname.slice(1) === AppRoute.Login) ? loginClass : mainClass;
+  const headerLoginClass = (pathname === AppRoute.Login) ? loginClass : mainClass;
   const headerClass = clsx(
     'page page--gray',
     headerLoginClass

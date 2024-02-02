@@ -3,11 +3,11 @@ export const Setting = {
 } as const;
 
 export const AppRoute = {
-  Layout: '/',
-  Main: '',
-  Login : 'login',
-  Favorites : 'favorites',
-  Offer : 'offer/:id'
+  Main: '/',
+  Login : '/login',
+  Favorites : '/favorites',
+  Offer : '/offer/:id',
+  NotFound: '*'
 } as const;
 
 export const ClassName = {

@@ -14,3 +14,9 @@ export const ClassName = {
   Login: 'page--login',
   Main: 'page--main'
 } as const;
+
+export const AuthorizationStatus = {
+  Auth: 'AUTH',
+  NoAuth: 'NO_AUTH',
+  Unknown: 'UNKNOWN'
+} as const;

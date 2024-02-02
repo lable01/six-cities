@@ -4,7 +4,7 @@ type AppScreenProps = {
   cartCount: number;
 }
 
-function MainScreen({cartCount}: AppScreenProps): JSX.Element {
+function MainPage({cartCount}: AppScreenProps): JSX.Element {
   const cartItems = Array.from({length: cartCount}).map((_, index: number) => (
     <CartItem key={index} />
   ));
@@ -81,4 +81,4 @@ function MainScreen({cartCount}: AppScreenProps): JSX.Element {
   );
 }
 
-export default MainScreen;
+export default MainPage;

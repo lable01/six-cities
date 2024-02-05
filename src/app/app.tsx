@@ -1,5 +1,4 @@
-import {ReactNode} from 'react';
-import {createBrowserRouter, RouterProvider, Navigate} from 'react-router-dom';
+import {createBrowserRouter, RouterProvider} from 'react-router-dom';
 import {AppRoute, AuthorizationStatus} from '../const.ts';
 import {ClassName} from '../const.ts';
 import MainPage from 'pages/main-page';
@@ -8,20 +7,13 @@ import FavoritesPage from 'pages/favorites-page';
 import NotFound from 'pages/not-found';
 import MainLayout from 'layouts/main-layout';
 import OfferPage from 'pages/offer-page';
+import ProtectedRoute from 'components/protected-route';
 
-type AppScreenProps = {
+type TAppScreenProps = {
   cartCount: number;
 }
 
-type PrivateRouteProps = {
-  children: ReactNode;
-}
-
-function App({cartCount}: AppScreenProps) {
-  function PrivateRoute({children}: PrivateRouteProps) {
-    return (!AuthorizationStatus.Auth) ? children : <Navigate to="/login" />;
-  }
-
+function App({cartCount}: TAppScreenProps) {
   const router = createBrowserRouter([
     {
       element: <MainLayout className={ClassName} />,
@@ -42,9 +34,12 @@ function App({cartCount}: AppScreenProps) {
         {
           path: AppRoute.Favorites,
           element: (
-            <PrivateRoute>
+            <ProtectedRoute
+              restrictedFor={AuthorizationStatus.NoAuth}
+              redirectTo={AppRoute.Login}
+            >
               <FavoritesPage />
-            </PrivateRoute>
+            </ProtectedRoute>
           ),
         },
       ],

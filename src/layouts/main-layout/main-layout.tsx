@@ -3,14 +3,14 @@ import {AppRoute} from '../../const.ts';
 import {Outlet, useLocation} from 'react-router-dom';
 import clsx from 'clsx';
 
-type ClassNameProps = {
+type TClassNameProps = {
   className: {
     Login: string;
     Main: string;
   };
 }
 
-function MainLayout({className}: ClassNameProps): JSX.Element {
+function MainLayout({className}: TClassNameProps): JSX.Element {
   const { Login: loginClass, Main: mainClass} = className;
   const { pathname } = useLocation();
   const headerLoginClass = (pathname === AppRoute.Login) ? loginClass : mainClass;

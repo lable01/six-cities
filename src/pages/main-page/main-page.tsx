@@ -1,10 +1,10 @@
 import CartItem from 'components/cart-item';
 
-type AppScreenProps = {
+type TAppScreenProps = {
   cartCount: number;
 }
 
-function MainPage({cartCount}: AppScreenProps): JSX.Element {
+function MainPage({cartCount}: TAppScreenProps): JSX.Element {
   const cartItems = Array.from({length: cartCount}).map((_, index: number) => (
     <CartItem key={index} />
   ));

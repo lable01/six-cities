@@ -16,7 +16,7 @@ type TAppScreenProps = {
 function App({cartCount}: TAppScreenProps) {
   const router = createBrowserRouter([
     {
-      element: <MainLayout className={ClassName} />,
+      element: <MainLayout />,
       errorElement: <NotFound />,
       children: [
         {

@@ -9,6 +9,6 @@ const root = ReactDOM.createRoot(
 
 root.render(
   <React.StrictMode>
-    <App cartCount = {Setting.CartCount}/>
+    <App cartCount={Setting.CartCount}/>
   </React.StrictMode>
 );

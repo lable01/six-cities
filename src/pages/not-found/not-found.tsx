@@ -1,6 +1,6 @@
 import styles from './styles.module.scss';
 
-function NotFound(): JSX.Element {
+function NotFound() {
   return (
     <div className="page page--gray page--main">
       <h2 className={styles.title}>К сожалению вы оказались на не существующей странице</h2>

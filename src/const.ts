@@ -11,8 +11,10 @@ export const AppRoute = {
 } as const;
 
 export const ClassName = {
-  Login: 'page--login',
-  Main: 'page--main'
+  Login: 'page--gray page--login',
+  Main: 'page--gray page--main',
+  Favorites: '',
+  Offer: ''
 } as const;
 
 export const AuthorizationStatus = {

@@ -1,4 +1,4 @@
-function CartItem(): JSX.Element {
+function CartItem() {
   return (
     <article className="cities__card place-card">
       <div className="place-card__mark">

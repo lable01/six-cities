@@ -1,10 +1,11 @@
 import {AuthorizationStatus} from '../../const.ts';
 import {Navigate} from 'react-router-dom';
+import {ReactNode} from 'react';
 
 type TPrivateRouteProps = {
-  children: JSX.Element;
+  children: ReactNode;
   redirectTo: string;
-  restrictedFor: string|JSX.Element;
+  restrictedFor: string|ReactNode;
 }
 
 function ProtectedRoute({restrictedFor, redirectTo, children}: TPrivateRouteProps) {

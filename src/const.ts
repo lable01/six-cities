@@ -1,24 +1,24 @@
 export const Setting = {
-  CartCount: 5
+  CartCount: 5,
 } as const;
 
 export const AppRoute = {
   Main: '/',
-  Login : '/login',
-  Favorites : '/favorites',
-  Offer : '/offer/:id',
-  NotFound: '*'
+  Login: '/login',
+  Favorites: '/favorites',
+  Offer: '/offer/:id',
+  NotFound: '*',
 } as const;
 
 export const ClassName = {
   Login: 'page--gray page--login',
   Main: 'page--gray page--main',
   Favorites: '',
-  Offer: ''
+  Offer: '',
 } as const;
 
 export const AuthorizationStatus = {
   Auth: 'AUTH',
   NoAuth: 'NO_AUTH',
-  Unknown: 'UNKNOWN'
+  Unknown: 'UNKNOWN',
 } as const;

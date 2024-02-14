@@ -1,1 +1,1 @@
-export {default} from './offer-page.tsx';
+export { default } from './offer-page.tsx';

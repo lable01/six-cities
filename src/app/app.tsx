@@ -1,5 +1,5 @@
-import {createBrowserRouter, RouterProvider} from 'react-router-dom';
-import {AppRoute, AuthorizationStatus} from '../const.ts';
+import { createBrowserRouter, RouterProvider } from 'react-router-dom';
+import { AppRoute, AuthorizationStatus } from '../const.ts';
 import MainPage from 'pages/main-page';
 import LoginPage from 'pages/login-page';
 import FavoritesPage from 'pages/favorites-page';
@@ -9,9 +9,9 @@ import ProtectedRoute from 'components/protected-route';
 
 type TAppScreenProps = {
   cartCount: number;
-}
+};
 
-function App({cartCount}: TAppScreenProps) {
+function App({ cartCount }: TAppScreenProps) {
   const router = createBrowserRouter([
     {
       path: AppRoute.Main,
@@ -19,15 +19,15 @@ function App({cartCount}: TAppScreenProps) {
     },
     {
       path: AppRoute.Login,
-      element:  <LoginPage />,
+      element: <LoginPage />,
     },
     {
       path: AppRoute.Offer,
-      element:  <OfferPage />,
+      element: <OfferPage />,
     },
     {
       path: AppRoute.NotFound,
-      element:  <NotFound />,
+      element: <NotFound />,
     },
     {
       path: AppRoute.Favorites,
@@ -39,12 +39,10 @@ function App({cartCount}: TAppScreenProps) {
           <FavoritesPage />
         </ProtectedRoute>
       ),
-    }
+    },
   ]);
 
-  return (
-    <RouterProvider router={router} />
-  );
+  return <RouterProvider router={router} />;
 }
 
 export default App;

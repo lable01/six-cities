@@ -22,3 +22,12 @@ export const AuthorizationStatus = {
   NoAuth: 'NO_AUTH',
   Unknown: 'UNKNOWN',
 } as const;
+
+export const CitiesNames = {
+  Paris: 'Paris',
+  Cologne: 'Cologne',
+  Brussels: 'Brussels',
+  Amsterdam: 'Amsterdam',
+  Hamburg: 'Hamburg',
+  Dusseldorf: 'Dusseldorf',
+} as const;

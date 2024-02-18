@@ -6,24 +6,25 @@ import FavoritesPage from 'pages/favorites-page';
 import NotFound from 'pages/not-found';
 import OfferPage from 'pages/offer-page';
 import ProtectedRoute from 'components/protected-route';
+import { TOffer } from 'mocks/offer-type';
 
-type TAppScreenProps = {
-  cartCount: number;
+type TAppPageProps = {
+  offers: TOffer[];
 };
 
-function App({ cartCount }: TAppScreenProps) {
+function App({ offers }: TAppPageProps) {
   const router = createBrowserRouter([
     {
       path: AppRoute.Main,
-      element: <MainPage cartCount={cartCount} />,
+      element: <MainPage offers={offers} />,
     },
     {
       path: AppRoute.Login,
       element: <LoginPage />,
     },
     {
-      path: AppRoute.Offer,
-      element: <OfferPage />,
+      path: `${AppRoute.Offer}/:id`,
+      element: <OfferPage offers={offers} />,
     },
     {
       path: AppRoute.NotFound,
@@ -36,7 +37,7 @@ function App({ cartCount }: TAppScreenProps) {
           restrictedFor={AuthorizationStatus.NoAuth}
           redirectTo={AppRoute.Login}
         >
-          <FavoritesPage />
+          <FavoritesPage offers={offers} />
         </ProtectedRoute>
       ),
     },

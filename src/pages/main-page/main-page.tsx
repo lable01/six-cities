@@ -2,15 +2,19 @@ import CartItem from 'components/cart-item';
 import MainLayout from 'layouts/main-layout';
 import Header from 'components/header';
 import { ClassName } from '../../const.ts';
+import { TOffer } from 'mocks/offer-type.ts';
+import { useState } from 'react';
 
-type TAppScreenProps = {
-  cartCount: number;
+type TMainPageProps = {
+  offers: TOffer[];
 };
 
-function MainPage({ cartCount }: TAppScreenProps) {
-  const cartItems = Array.from({ length: cartCount }).map(
-    (_, index: number) => <CartItem key={index} />,
-  );
+function MainPage({ offers }: TMainPageProps) {
+  const [cardHover, setCardHover] = useState<TOffer['id'] | null>(null);
+
+  function handleCardHover(offerId: TOffer['id'] | null) {
+    setCardHover(offerId);
+  }
 
   return (
     <MainLayout header={<Header />} className={ClassName.Main}>
@@ -75,7 +79,13 @@ function MainPage({ cartCount }: TAppScreenProps) {
                 </ul>
               </form>
               <div className="cities__places-list places__list tabs__content">
-                {cartItems}
+                {offers.map((offer) => (
+                  <CartItem
+                    key={offer.id}
+                    onCardHover={handleCardHover}
+                    offer={offer}
+                  />
+                ))}
               </div>
             </section>
             <div className="cities__right-section">

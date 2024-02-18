@@ -52,7 +52,7 @@ export const Offers: TOffer[] = [
         'https://14.design.htmlacademy.pro/static/host/avatar-angelina.jpg',
     },
     isPremium: false,
-    isFavorite: false,
+    isFavorite: true,
     rating: 4.5,
     bedrooms: 4,
     maxAdults: 8,

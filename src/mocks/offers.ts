@@ -1,6 +1,6 @@
-import { TOffer } from 'mocks/offer-type.ts';
+import { TOfferDetail } from 'types/offer-detail.ts';
 
-export const Offers: TOffer[] = [
+export const Offers: TOfferDetail[] = [
   {
     id: '7b0aaac0-6cd6-4fc0-bb7f-2d8c473f8ab5',
     title: 'House in countryside',

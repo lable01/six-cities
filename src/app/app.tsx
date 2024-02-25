@@ -6,10 +6,10 @@ import FavoritesPage from 'pages/favorites-page';
 import NotFound from 'pages/not-found';
 import OfferPage from 'pages/offer-page';
 import ProtectedRoute from 'components/protected-route';
-import { TOffer } from 'mocks/offer-type';
+import { TOfferDetail } from 'types/offer-detail.ts';
 
 type TAppPageProps = {
-  offers: TOffer[];
+  offers: TOfferDetail[];
 };
 
 function App({ offers }: TAppPageProps) {

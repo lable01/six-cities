@@ -1,4 +1,4 @@
-import { AuthorizationStatus } from '../../const.ts';
+import { AuthorizationStatus } from '../../const';
 import { Navigate } from 'react-router-dom';
 import { ReactNode } from 'react';
 

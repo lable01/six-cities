@@ -1,13 +1,13 @@
 import MainLayout from 'layouts/main-layout';
 import Header from 'components/header';
-import { AppRoute, ClassName } from '../../const.ts';
-import { TOffer } from 'mocks/offer-type.ts';
+import { AppRoute, ClassName } from '../../const';
+import { TOfferDetail } from 'types/offer-detail.ts';
 import { Navigate, useParams } from 'react-router-dom';
 import OfferDetails from 'components/offer-details';
 import OtherOffers from 'components/other-offers';
 
 type TOfferPageProps = {
-  offers: TOffer[];
+  offers: TOfferDetail[];
 };
 
 function OfferPage({ offers }: TOfferPageProps) {

@@ -9,6 +9,7 @@ export const AppRoute = {
 export const ClassName = {
   Login: 'page--gray page--login',
   Main: 'page--gray page--main',
+  MainEmpty: 'page__main page__main--index page__main--index-empty',
   Favorites: '',
   Offer: '',
 } as const;

@@ -2,13 +2,10 @@ import MainLayout from 'layouts/main-layout';
 import Header from 'components/header';
 import Footer from 'components/footer';
 import { AppRoute, ClassName } from '../../const';
-import { TOffer } from 'mocks/offer-type';
 import { Link } from 'react-router-dom';
+import { TListItemProps } from 'components/main-full/main-full';
 
-type TFavoritesPageProps = {
-  offers: TOffer[];
-};
-function FavoritesPage({ offers }: TFavoritesPageProps) {
+function FavoritesPage({ offers }: TListItemProps) {
   const favoriteOffers = offers.filter((offer) => offer.isFavorite);
   const favoriteOffersParis = favoriteOffers.filter(
     (offer) => offer.city.name === 'Paris',

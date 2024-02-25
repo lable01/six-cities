@@ -1,4 +1,4 @@
-import { TLocation } from 'mocks/location-type.ts';
+import { TLocation } from './location';
 
 export type TCity = {
   name: string;

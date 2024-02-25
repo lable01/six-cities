@@ -28,7 +28,7 @@
       "components/*": ["components/*"],
       "pages/*": ["pages/*"],
       "layouts/*": ["layouts/*"],
-      "mocks/*": ["type/*"],
+      "types/*": ["types/*"],
     }
   },
   "include": ["src", "vite.config.ts"],

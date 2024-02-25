@@ -1,11 +1,11 @@
 import { Link } from 'react-router-dom';
-import { TOffer } from 'mocks/offer-type.ts';
+import { TOfferItemType } from 'types/offer-item.ts';
 import clsx from 'clsx';
 import { AppRoute } from '../../const';
 
 type TCartItemProps = {
-  offer: TOffer;
-  onCardHover: ((offerId: string | null) => void) | undefined;
+  offer: TOfferItemType;
+  onCardHover?: (offerId: string | null) => void;
 };
 
 function CartItem({ offer, onCardHover }: TCartItemProps) {

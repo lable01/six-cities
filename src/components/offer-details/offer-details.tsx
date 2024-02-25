@@ -1,7 +1,8 @@
-import { TOffer } from 'mocks/offer-type.ts';
+import Map from 'components/map';
+import { TOfferDetail } from 'types/offer-detail.ts';
 
 type TOfferDetailsProps = {
-  offer: TOffer;
+  offer: TOfferDetail;
 };
 
 function OfferDetails({ offer }: TOfferDetailsProps) {
@@ -250,7 +251,7 @@ function OfferDetails({ offer }: TOfferDetailsProps) {
           </section>
         </div>
       </div>
-      <section className="offer__map map"></section>
+      <Map className="offer__map" />
     </section>
   );
 }

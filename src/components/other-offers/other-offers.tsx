@@ -1,9 +1,9 @@
-import { TOffer } from 'mocks/offer-type';
+import { TOfferDetail } from 'types/offer-detail.ts';
 import { Link, Navigate, useParams } from 'react-router-dom';
 import { AppRoute } from '../../const.ts';
 
 type TOtherOffersProps = {
-  offers: TOffer[];
+  offers: TOfferDetail[];
 };
 
 function OtherOffers({ offers }: TOtherOffersProps) {

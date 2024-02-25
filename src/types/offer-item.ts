@@ -1,7 +1,7 @@
-import { TLocation } from 'mocks/location-type.ts';
-import { TCity } from 'mocks/city-type.ts';
+import { TLocation } from './location';
+import { TCity } from './city';
 
-export type TOfferFavoritesType = {
+export type TOfferItemType = {
   id: string;
   title: string;
   type: string;

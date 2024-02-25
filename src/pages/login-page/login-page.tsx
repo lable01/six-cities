@@ -1,6 +1,6 @@
 import MainLayout from 'layouts/main-layout';
 import Header from 'components/header';
-import { ClassName } from '../../const.ts';
+import { ClassName } from '../../const';
 
 function LoginPage() {
   return (

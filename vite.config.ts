@@ -13,7 +13,7 @@ export default defineConfig({
       components: '/src/components',
       pages: '/src/pages',
       layouts: '/src/layouts',
-      type: '/src/type',
+      types: '/src/types',
     },
   },
   test: {

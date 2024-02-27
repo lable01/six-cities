@@ -1,6 +1,6 @@
 import MainLayout from 'layouts/main-layout';
 import Header from 'components/header';
-import {ClassName} from '../../const.ts';
+import { ClassName } from '../../const';
 
 function LoginPage() {
   return (
@@ -12,13 +12,28 @@ function LoginPage() {
             <form className="login__form form" action="#" method="post">
               <div className="login__input-wrapper form__input-wrapper">
                 <label className="visually-hidden">E-mail</label>
-                <input className="login__input form__input" type="email" name="email" placeholder="Email"/>
+                <input
+                  className="login__input form__input"
+                  type="email"
+                  name="email"
+                  placeholder="Email"
+                />
               </div>
               <div className="login__input-wrapper form__input-wrapper">
                 <label className="visually-hidden">Password</label>
-                <input className="login__input form__input" type="password" name="password" placeholder="Password"/>
+                <input
+                  className="login__input form__input"
+                  type="password"
+                  name="password"
+                  placeholder="Password"
+                />
               </div>
-              <button className="login__submit form__submit button" type="submit">Sign in</button>
+              <button
+                className="login__submit form__submit button"
+                type="submit"
+              >
+                Sign in
+              </button>
             </form>
           </section>
           <section className="locations locations--login locations--current">

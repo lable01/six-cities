@@ -1,85 +1,29 @@
-import CartItem from 'components/cart-item';
+import MainFull from 'components/main-full';
+import MainEmpty from 'components/main-empty';
 import MainLayout from 'layouts/main-layout';
 import Header from 'components/header';
-import {ClassName} from '../../const.ts';
+import Tabs from 'components/tabs';
+import { ClassName } from '../../const';
+import { TOfferItemType } from 'types/offer-item';
 
-type TAppScreenProps = {
-  cartCount: number;
-}
+type TMainPageProps = {
+  offers: TOfferItemType[];
+};
 
-function MainPage({cartCount}: TAppScreenProps) {
-  const cartItems = Array.from({length: cartCount}).map((_, index: number) => (
-    <CartItem key={index} />
-  ));
-
+function MainPage({ offers }: TMainPageProps) {
   return (
     <MainLayout header={<Header />} className={ClassName.Main}>
-      <main className="page__main page__main--index">
+      <main
+        className={
+          offers
+            ? 'page__main page__main--index'
+            : 'page__main page__main--index page__main--index-empty'
+        }
+      >
         <h1 className="visually-hidden">Cities</h1>
-        <div className="tabs">
-          <section className="locations container">
-            <ul className="locations__list tabs__list">
-              <li className="locations__item">
-                <a className="locations__item-link tabs__item" href="#">
-                  <span>Paris</span>
-                </a>
-              </li>
-              <li className="locations__item">
-                <a className="locations__item-link tabs__item" href="#">
-                  <span>Cologne</span>
-                </a>
-              </li>
-              <li className="locations__item">
-                <a className="locations__item-link tabs__item" href="#">
-                  <span>Brussels</span>
-                </a>
-              </li>
-              <li className="locations__item">
-                <a className="locations__item-link tabs__item tabs__item--active">
-                  <span>Amsterdam</span>
-                </a>
-              </li>
-              <li className="locations__item">
-                <a className="locations__item-link tabs__item" href="#">
-                  <span>Hamburg</span>
-                </a>
-              </li>
-              <li className="locations__item">
-                <a className="locations__item-link tabs__item" href="#">
-                  <span>Dusseldorf</span>
-                </a>
-              </li>
-            </ul>
-          </section>
-        </div>
+        <Tabs />
         <div className="cities">
-          <div className="cities__places-container container">
-            <section className="cities__places places">
-              <h2 className="visually-hidden">Places</h2>
-              <b className="places__found">312 places to stay in Amsterdam</b>
-              <form className="places__sorting" action="#" method="get">
-                <span className="places__sorting-caption">Sort by</span>
-                <span className="places__sorting-type">
-                Popular
-                <svg className="places__sorting-arrow" width="7" height="4">
-                  <use xlinkHref="#icon-arrow-select"></use>
-                </svg>
-              </span>
-                <ul className="places__options places__options--custom places__options--opened">
-                  <li className="places__option places__option--active">Popular</li>
-                  <li className="places__option">Price: low to high</li>
-                  <li className="places__option">Price: high to low</li>
-                  <li className="places__option">Top rated first</li>
-                </ul>
-              </form>
-              <div className="cities__places-list places__list tabs__content">
-                {cartItems}
-              </div>
-            </section>
-            <div className="cities__right-section">
-              <section className="cities__map map"></section>
-            </div>
-          </div>
+          {offers ? <MainFull offers={offers} /> : <MainEmpty />}
         </div>
       </main>
     </MainLayout>

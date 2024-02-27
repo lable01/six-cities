@@ -12,8 +12,9 @@ export default defineConfig({
       app: '/src/app',
       components: '/src/components',
       pages: '/src/pages',
-      layouts: '/src/layouts'
-    }
+      layouts: '/src/layouts',
+      types: '/src/types',
+    },
   },
   test: {
     globals: true,

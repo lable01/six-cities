@@ -1,13 +1,13 @@
-import {ReactNode} from 'react';
+import { ReactNode } from 'react';
 import clsx from 'clsx';
 
 type TMainLayoutProps = {
   children: ReactNode;
   header: ReactNode;
   className: string;
-}
+};
 
-function MainLayout({children, header, className}: TMainLayoutProps) {
+function MainLayout({ children, header, className }: TMainLayoutProps) {
   return (
     <div className={clsx('page', className)}>
       {header}
@@ -15,7 +15,5 @@ function MainLayout({children, header, className}: TMainLayoutProps) {
     </div>
   );
 }
-
-
 
 export default MainLayout;

@@ -27,7 +27,8 @@
       "app/*": ["app/*"],
       "components/*": ["components/*"],
       "pages/*": ["pages/*"],
-      "layouts/*": ["layouts/*"]
+      "layouts/*": ["layouts/*"],
+      "types/*": ["types/*"],
     }
   },
   "include": ["src", "vite.config.ts"],

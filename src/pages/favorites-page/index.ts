@@ -1,1 +1,1 @@
-export {default} from './favorites-page.tsx';
+export { default } from './favorites-page';

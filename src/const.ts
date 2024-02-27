@@ -28,3 +28,10 @@ export const CitiesNames = {
   Hamburg: 'Hamburg',
   Dusseldorf: 'Dusseldorf',
 } as const;
+
+export const OffersFilters = {
+  Popular: 'Popular',
+  PriceHigh: 'Price: low to high',
+  PriceLow: 'Price: high to low',
+  RateTop: 'Top rated first',
+} as const;

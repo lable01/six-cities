@@ -10,9 +10,11 @@ export type TListItemProps = {
 
 function MainFull({ offers }: TListItemProps) {
   const [cardHover, setCardHover] = useState<TOfferItemType['id'] | null>(null);
+
   function handleCardHover(offerId: TOfferItemType['id'] | null) {
     setCardHover(offerId);
   }
+
   return (
     <div className="cities__places-container container">
       <section className="cities__places places">

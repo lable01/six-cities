@@ -1,13 +1,6 @@
 import { CitiesNames } from '../../const';
 function Tabs() {
-  const cities = [
-    CitiesNames.Paris,
-    CitiesNames.Cologne,
-    CitiesNames.Brussels,
-    CitiesNames.Amsterdam,
-    CitiesNames.Hamburg,
-    CitiesNames.Dusseldorf,
-  ];
+  const cities = Object.values(CitiesNames);
 
   return (
     <div className="tabs">

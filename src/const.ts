@@ -28,3 +28,7 @@ export const CitiesNames = {
   Hamburg: 'Hamburg',
   Dusseldorf: 'Dusseldorf',
 } as const;
+
+export const ReviewsCharacters = 50;
+
+export const date = new Date();

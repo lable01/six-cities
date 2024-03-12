@@ -18,6 +18,7 @@ function OfferDetails({ offer }: TOfferDetailsProps) {
     price,
     goods,
     rating,
+    host,
   } = offer;
 
   return (
@@ -83,14 +84,14 @@ function OfferDetails({ offer }: TOfferDetailsProps) {
               <div className="offer__avatar-wrapper offer__avatar-wrapper--pro user__avatar-wrapper">
                 <img
                   className="offer__avatar user__avatar"
-                  src="img/avatar-angelina.jpg"
+                  src={host.avatarUrl}
                   width="74"
                   height="74"
                   alt="Host avatar"
                 />
               </div>
-              <span className="offer__user-name">Angelina</span>
-              <span className="offer__user-status">Pro</span>
+              <span className="offer__user-name">{host.name}</span>
+              <span className="offer__user-status">{host.isPro}</span>
             </div>
             <div className="offer__description">
               <p className="offer__text">
@@ -110,21 +111,7 @@ function OfferDetails({ offer }: TOfferDetailsProps) {
               Reviews &middot; <span className="reviews__amount">1</span>
             </h2>
             <ul className="reviews__list">
-              <li className="reviews__item">
-                <div className="reviews__user user">
-                  <div className="reviews__avatar-wrapper user__avatar-wrapper">
-                    <img
-                      className="reviews__avatar user__avatar"
-                      src="img/avatar-max.jpg"
-                      width="54"
-                      height="54"
-                      alt="Reviews avatar"
-                    />
-                  </div>
-                  <span className="reviews__user-name">Max</span>
-                </div>
-                <ReviewsInfo />
-              </li>
+              <ReviewsInfo offer={offer} />
             </ul>
             <ReviewsForm />
           </section>

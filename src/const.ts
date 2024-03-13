@@ -31,4 +31,4 @@ export const CitiesNames = {
 
 export const ReviewsCharacters = 50;
 
-export const date = new Date();
+export const StarsWidth = ['0%', '20%', '40%', '60%', '80%', '100%'];

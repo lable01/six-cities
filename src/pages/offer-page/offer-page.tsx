@@ -5,12 +5,14 @@ import { TOfferDetail } from 'types/offer-detail.ts';
 import { Navigate, useParams } from 'react-router-dom';
 import OfferDetails from 'components/offer-details';
 import OtherOffers from 'components/other-offers';
+import { TReview } from 'types/review.ts';
 
 type TOfferPageProps = {
   offers: TOfferDetail[];
+  reviews: TReview[];
 };
 
-function OfferPage({ offers }: TOfferPageProps) {
+function OfferPage({ offers, reviews }: TOfferPageProps) {
   const { id } = useParams();
   const offer = offers.find((item) => item.id === id);
   if (!offer) {
@@ -20,7 +22,7 @@ function OfferPage({ offers }: TOfferPageProps) {
   return (
     <MainLayout header={<Header />} className={ClassName.Offer}>
       <main className="page__main page__main--offer">
-        <OfferDetails offer={offer} />
+        <OfferDetails offer={offer} reviews={reviews} />
         <OtherOffers offers={offers} />
       </main>
     </MainLayout>

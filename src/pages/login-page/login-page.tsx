@@ -1,10 +1,14 @@
 import MainLayout from 'layouts/main-layout';
 import Header from 'components/header';
 import { ClassName } from '../../const';
+import { Helmet } from 'react-helmet-async';
 
 function LoginPage() {
   return (
     <MainLayout header={<Header />} className={ClassName.Login}>
+      <Helmet>
+        <title>Login six cities service for travelers - official website</title>
+      </Helmet>
       <main className="page__main page__main--login">
         <div className="page__login-container container">
           <section className="login">

@@ -4,6 +4,7 @@ import Footer from 'components/footer';
 import { AppRoute, ClassName } from '../../const';
 import { Link } from 'react-router-dom';
 import { TListItemProps } from 'components/main-full/main-full';
+import { Helmet } from 'react-helmet-async';
 
 function FavoritesPage({ offers }: TListItemProps) {
   const favoriteOffers = offers.filter((offer) => offer.isFavorite);
@@ -14,6 +15,11 @@ function FavoritesPage({ offers }: TListItemProps) {
   return (
     <>
       <MainLayout header={<Header />} className={ClassName.Favorites}>
+        <Helmet>
+          <title>
+            Favorite page six cities service for travelers - official website
+          </title>
+        </Helmet>
         <main className="page__main page__main--favorites">
           <div className="page__favorites-container container">
             <section className="favorites">

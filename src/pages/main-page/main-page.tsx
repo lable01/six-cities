@@ -5,6 +5,7 @@ import Header from 'components/header';
 import Tabs from 'components/tabs';
 import { ClassName } from '../../const';
 import { TOfferItemType } from 'types/offer-item';
+import { Helmet } from 'react-helmet-async';
 
 type TMainPageProps = {
   offers: TOfferItemType[];
@@ -13,6 +14,9 @@ type TMainPageProps = {
 function MainPage({ offers }: TMainPageProps) {
   return (
     <MainLayout header={<Header />} className={ClassName.Main}>
+      <Helmet>
+        <title>Six cities service for travelers - official website</title>
+      </Helmet>
       <main
         className={
           offers

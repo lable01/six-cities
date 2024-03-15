@@ -1,6 +1,5 @@
 import { TReview } from 'types/review.ts';
-import { getCurrentDate } from '../../utils/function.ts';
-import { StarsWidth } from '../../const.ts';
+import { getCurrentDate, getStarsWidth } from '../../utils/function.ts';
 
 type TReviewsInfo = {
   review: TReview;
@@ -8,7 +7,8 @@ type TReviewsInfo = {
 
 function ReviewsInfo({ review }: TReviewsInfo) {
   const { name, stars, date, userUrl, comment } = review;
-  const starWidth = StarsWidth[`${stars}`];
+  const starWidth = getStarsWidth(stars);
+
   return (
     <li className="reviews__item">
       <div className="reviews__user user">

@@ -7,4 +7,12 @@ function getCurrentDate(date: Date, isDay: boolean) {
   return dayjs(date).format('MMMM YYYY');
 }
 
-export { getCurrentDate };
+function getStarsWidth(stars: number) {
+  if (stars === 0) {
+    return `${stars}%`;
+  }
+  const width = (100 / 5) * stars;
+  return `${width}%`;
+}
+
+export { getCurrentDate, getStarsWidth };

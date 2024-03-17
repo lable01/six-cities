@@ -1,15 +1,14 @@
 import Map from 'components/map';
 import { TOfferDetail } from 'types/offer-detail.ts';
-import ReviewsInfo from 'components/reviews-info';
-import ReviewsForm from 'components/reviews-form/reviews-form.tsx';
 import { TReview } from 'types/review.ts';
+import ReviewsBlock from 'components/reviews-block';
 
 type TOfferDetailsProps = {
   offer: TOfferDetail;
-  reviews: TReview[];
+  review: TReview[];
 };
 
-function OfferDetails({ offer, reviews }: TOfferDetailsProps) {
+function OfferDetails({ offer, review }: TOfferDetailsProps) {
   const {
     images,
     isPremium,
@@ -108,17 +107,18 @@ function OfferDetails({ offer, reviews }: TOfferDetailsProps) {
               </p>
             </div>
           </div>
-          <section className="offer__reviews reviews">
-            <h2 className="reviews__title">
-              Reviews &middot; <span className="reviews__amount">1</span>
-            </h2>
-            <ul className="reviews__list">
-              {reviews.map((review) => (
-                <ReviewsInfo key={review.userUrl} review={review} />
-              ))}
-            </ul>
-            <ReviewsForm />
-          </section>
+          <ReviewsBlock review={review} />
+          {/*<section className="offer__reviews reviews">*/}
+          {/*  <h2 className="reviews__title">*/}
+          {/*    Reviews &middot; <span className="reviews__amount">1</span>*/}
+          {/*  </h2>*/}
+          {/*  <ul className="reviews__list">*/}
+          {/*    {review.map((item) => (*/}
+          {/*      <ReviewsInfo key={item.id} review={item} />*/}
+          {/*    ))}*/}
+          {/*  </ul>*/}
+          {/*  <ReviewsForm />*/}
+          {/*</section>*/}
         </div>
       </div>
       <Map className="offer__map" />

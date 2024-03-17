@@ -1,6 +1,6 @@
 import { ReactEventHandler, useState } from 'react';
 import { Fragment } from 'react';
-import { ReviewsCharacters } from '../../const';
+import { ReviewLength } from '../../const';
 
 type TChangeHandler = ReactEventHandler<HTMLInputElement | HTMLTextAreaElement>;
 
@@ -19,8 +19,8 @@ function ReviewsForm() {
   });
 
   const isValidReviews =
-    review.review.length < 50 ||
-    review.review.length > 300 ||
+    review.review.length < ReviewLength.min ||
+    review.review.length > ReviewLength.max ||
     review.rating === 0;
 
   const handleFieldChange: TChangeHandler = (event) => {
@@ -69,8 +69,7 @@ function ReviewsForm() {
           To submit review please make sure to set{' '}
           <span className="reviews__star">rating</span> and describe your stay
           with at least{' '}
-          <b className="reviews__text-amount">{ReviewsCharacters} characters</b>
-          .
+          <b className="reviews__text-amount">{ReviewLength.min} characters</b>.
         </p>
         <button
           className="reviews__submit form__submit button"

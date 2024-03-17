@@ -1,7 +1,9 @@
+import { TUser } from 'types/user-type.ts';
+
 export type TReview = {
-  name: string;
-  userUrl: string;
-  stars: number;
-  comment: string;
+  id: string;
   date: Date;
+  user: TUser;
+  comment: string;
+  rating: number;
 };

@@ -29,6 +29,7 @@ export const CitiesNames = {
   Dusseldorf: 'Dusseldorf',
 } as const;
 
-export const ReviewsCharacters = 50;
-
-export const StarsWidth = ['0%', '20%', '40%', '60%', '80%', '100%'];
+export const ReviewLength = {
+  min: 50,
+  max: 300,
+};

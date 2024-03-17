@@ -13,6 +13,7 @@ function MainFull({ offers }: TListItemProps) {
   function handleCardHover(offerId: TOfferItemType['id'] | null) {
     setCardHover(offerId);
   }
+
   return (
     <div className="cities__places-container container">
       <section className="cities__places places">

@@ -6,8 +6,13 @@ type TReviewsInfo = {
 };
 
 function ReviewsInfo({ review }: TReviewsInfo) {
-  const { name, stars, date, userUrl, comment } = review;
-  const starWidth = getStarsWidth(stars);
+  const {
+    user: { name, avatarUrl },
+    date,
+    comment,
+    rating,
+  } = review;
+  const starWidth = getStarsWidth(rating);
 
   return (
     <li className="reviews__item">
@@ -15,7 +20,7 @@ function ReviewsInfo({ review }: TReviewsInfo) {
         <div className="reviews__avatar-wrapper user__avatar-wrapper">
           <img
             className="reviews__avatar user__avatar"
-            src={userUrl}
+            src={avatarUrl}
             width="54"
             height="54"
             alt="Reviews avatar"
@@ -31,7 +36,7 @@ function ReviewsInfo({ review }: TReviewsInfo) {
           </div>
         </div>
         <p className="reviews__text">{comment}</p>
-        <time className="reviews__time" dateTime={getCurrentDate(date, true)}>
+        <time className="reviews__time" dateTime={getCurrentDate(date)}>
           {getCurrentDate(date, false)}
         </time>
       </div>

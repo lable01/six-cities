@@ -10,7 +10,7 @@ function NotFound() {
         </title>
       </Helmet>
       <h2 className={styles.title}>
-        К сожалению вы оказались на не существующей странице
+        Unfortunately, you ended up on a non-existing page
       </h2>
     </div>
   );

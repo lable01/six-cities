@@ -3,19 +3,19 @@ import ReviewsForm from 'components/reviews-form';
 import { TReview } from 'types/review.ts';
 
 type TReviewsBlock = {
-  review: TReview[];
+  reviews: TReview[];
 };
 
-function ReviewsBlock({ review }: TReviewsBlock) {
+function ReviewsBlock({ reviews }: TReviewsBlock) {
   return (
     <section className="offer__reviews reviews">
       <h2 className="reviews__title">
         Reviews &middot;{' '}
-        <span className="reviews__amount">{review.length}</span>
+        <span className="reviews__amount">{reviews.length}</span>
       </h2>
       <ul className="reviews__list">
-        {review.map((item) => (
-          <ReviewsInfo key={item.comment} review={item} />
+        {reviews.map((review) => (
+          <ReviewsInfo key={review.id} review={review} />
         ))}
       </ul>
       <ReviewsForm />

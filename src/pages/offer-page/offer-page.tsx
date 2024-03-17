@@ -16,7 +16,6 @@ type TOfferPageProps = {
 function OfferPage({ offers, reviews }: TOfferPageProps) {
   const { id } = useParams();
   const offer = offers.find((item) => item.id === id);
-  const review = reviews.filter((item) => item.id === id);
 
   if (!offer) {
     return <Navigate to={AppRoute.NotFound} />;
@@ -30,7 +29,7 @@ function OfferPage({ offers, reviews }: TOfferPageProps) {
         </title>
       </Helmet>
       <main className="page__main page__main--offer">
-        <OfferDetails offer={offer} review={review} />
+        <OfferDetails offer={offer} reviews={reviews} />
         <OtherOffers offers={offers} />
       </main>
     </MainLayout>

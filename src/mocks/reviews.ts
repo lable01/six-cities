@@ -1,11 +1,10 @@
 import { TReview } from 'types/review.ts';
 import { faker } from '@faker-js/faker/locale/en_GB';
-import { getOffersId, randomBoolean } from '../utils/function.ts';
-import { Offers } from './offers.ts';
+import { randomBoolean } from '../utils/function.ts';
 
 const getReview = () => {
   const Review: TReview = {
-    id: getOffersId(Offers)[faker.number.int(3)],
+    id: faker.string.nanoid(10),
     date: faker.date.past({ refDate: '2024-01-01T00:00:00.000Z' }),
     user: {
       name: faker.person.firstName(),
@@ -18,4 +17,4 @@ const getReview = () => {
   return Review;
 };
 
-export const Reviews = Array.from(new Array(15), () => getReview());
+export const Reviews = Array.from(new Array(5), () => getReview());

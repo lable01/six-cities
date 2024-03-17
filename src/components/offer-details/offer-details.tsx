@@ -5,10 +5,10 @@ import ReviewsBlock from 'components/reviews-block';
 
 type TOfferDetailsProps = {
   offer: TOfferDetail;
-  review: TReview[];
+  reviews: TReview[];
 };
 
-function OfferDetails({ offer, review }: TOfferDetailsProps) {
+function OfferDetails({ offer, reviews }: TOfferDetailsProps) {
   const {
     images,
     isPremium,
@@ -107,18 +107,7 @@ function OfferDetails({ offer, review }: TOfferDetailsProps) {
               </p>
             </div>
           </div>
-          <ReviewsBlock review={review} />
-          {/*<section className="offer__reviews reviews">*/}
-          {/*  <h2 className="reviews__title">*/}
-          {/*    Reviews &middot; <span className="reviews__amount">1</span>*/}
-          {/*  </h2>*/}
-          {/*  <ul className="reviews__list">*/}
-          {/*    {review.map((item) => (*/}
-          {/*      <ReviewsInfo key={item.id} review={item} />*/}
-          {/*    ))}*/}
-          {/*  </ul>*/}
-          {/*  <ReviewsForm />*/}
-          {/*</section>*/}
+          <ReviewsBlock reviews={reviews} />
         </div>
       </div>
       <Map className="offer__map" />

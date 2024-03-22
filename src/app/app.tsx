@@ -7,12 +7,14 @@ import NotFound from 'pages/not-found';
 import OfferPage from 'pages/offer-page';
 import ProtectedRoute from 'components/protected-route';
 import { TOfferDetail } from 'types/offer-detail.ts';
+import { TReview } from 'types/review.ts';
 
 type TAppPageProps = {
   offers: TOfferDetail[];
+  reviews: TReview[];
 };
 
-function App({ offers }: TAppPageProps) {
+function App({ offers, reviews }: TAppPageProps) {
   const router = createBrowserRouter([
     {
       path: AppRoute.Main,
@@ -24,7 +26,7 @@ function App({ offers }: TAppPageProps) {
     },
     {
       path: `${AppRoute.Offer}/:id`,
-      element: <OfferPage offers={offers} />,
+      element: <OfferPage offers={offers} reviews={reviews} />,
     },
     {
       path: AppRoute.NotFound,

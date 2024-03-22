@@ -28,3 +28,8 @@ export const CitiesNames = {
   Hamburg: 'Hamburg',
   Dusseldorf: 'Dusseldorf',
 } as const;
+
+export const ReviewLength = {
+  min: 50,
+  max: 300,
+};

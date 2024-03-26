@@ -33,3 +33,7 @@ export const ReviewLength = {
   min: 50,
   max: 300,
 };
+
+export const URL_MARKER_DEFAULT = './img/pin.svg';
+
+export const URL_MARKER_ACTIVE = './img/pin-active.svg';

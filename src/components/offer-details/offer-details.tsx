@@ -1,4 +1,4 @@
-import Map from 'components/map';
+// import Map from 'components/map';
 import { TOfferDetailProps } from 'types/offer-detail.ts';
 import { TReviewType } from 'types/review.ts';
 import ReviewsBlock from 'components/reviews-block';
@@ -110,7 +110,7 @@ function OfferDetails({ offer, reviews }: TOfferDetailsProps) {
           <ReviewsBlock reviews={reviews} />
         </div>
       </div>
-      <Map className="offer__map" />
+      {/*<Map className="offer__map" />*/}
     </section>
   );
 }

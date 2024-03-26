@@ -6,7 +6,8 @@ import { TOfferItemType } from 'types/offer-item';
 import { TListItemsProps } from 'types/list-items.ts';
 
 function MainFull({ offers }: TListItemsProps) {
-  const [, setCardHover] = useState<TOfferItemType['id'] | null>(null);
+  const [cardHover, setCardHover] = useState<TOfferItemType['id'] | null>(null);
+
   function handleCardHover(offerId: TOfferItemType['id'] | null) {
     setCardHover(offerId);
   }
@@ -28,7 +29,7 @@ function MainFull({ offers }: TListItemsProps) {
         </div>
       </section>
       <div className="cities__right-section">
-        <Map className="cities__map" />
+        <Map offers={offers} cardHover={cardHover} className="cities__map" />
       </div>
     </div>
   );

@@ -1,11 +1,11 @@
 import { TOfferItemType } from './offer-item.ts';
-import { TUser } from './user-type';
+import { TUserType } from './user-type';
 
-export type TOfferDetail = TOfferItemType & {
+export type TOfferDetailProps = TOfferItemType & {
   description: string;
   bedrooms: number;
   goods: string[];
-  host: TUser;
+  host: TUserType;
   images: string[];
   maxAdults: number;
 };

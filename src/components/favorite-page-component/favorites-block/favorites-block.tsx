@@ -1,8 +1,8 @@
-import { TListItemProps } from 'components/main-full/main-full.tsx';
 import FavoritesOffers from 'components/favorite-page-component/favorites-offers';
 import { TOfferItemType } from 'types/offer-item.ts';
+import { TListItemsProps } from 'types/list-items.ts';
 
-function FavoritesBlock({ offers }: TListItemProps) {
+function FavoritesBlock({ offers }: TListItemsProps) {
   const favoriteOffersByCity = offers.reduce<{
     [key: string]: TOfferItemType[];
   }>((result, offer) => {

@@ -1,8 +1,8 @@
-import { TReview } from 'types/review.ts';
+import { TReviewType } from 'types/review.ts';
 import { getCurrentDate, getStarsWidth } from '../../utils/function.ts';
 
 type TReviewsInfo = {
-  review: TReview;
+  review: TReviewType;
 };
 
 function ReviewsInfo({ review }: TReviewsInfo) {

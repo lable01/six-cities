@@ -1,11 +1,11 @@
 import Map from 'components/map';
-import { TOfferDetail } from 'types/offer-detail.ts';
-import { TReview } from 'types/review.ts';
+import { TOfferDetailProps } from 'types/offer-detail.ts';
+import { TReviewType } from 'types/review.ts';
 import ReviewsBlock from 'components/reviews-block';
 
 type TOfferDetailsProps = {
-  offer: TOfferDetail;
-  reviews: TReview[];
+  offer: TOfferDetailProps;
+  reviews: TReviewType[];
 };
 
 function OfferDetails({ offer, reviews }: TOfferDetailsProps) {

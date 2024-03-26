@@ -1,16 +1,16 @@
 import MainLayout from 'layouts/main-layout';
 import Header from 'components/header';
 import { AppRoute, ClassName } from '../../const';
-import { TOfferDetail } from 'types/offer-detail.ts';
+import { TOfferDetailProps } from 'types/offer-detail.ts';
 import { Navigate, useParams } from 'react-router-dom';
 import OfferDetails from 'components/offer-details';
 import OtherOffers from 'components/other-offers';
-import { TReview } from 'types/review.ts';
+import { TReviewType } from 'types/review.ts';
 import { Helmet } from 'react-helmet-async';
 
 type TOfferPageProps = {
-  offers: TOfferDetail[];
-  reviews: TReview[];
+  offers: TOfferDetailProps[];
+  reviews: TReviewType[];
 };
 
 function OfferPage({ offers, reviews }: TOfferPageProps) {

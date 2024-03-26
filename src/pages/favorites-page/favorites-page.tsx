@@ -2,11 +2,11 @@ import MainLayout from 'layouts/main-layout';
 import Header from 'components/header';
 import Footer from 'components/footer';
 import { ClassName } from '../../const';
-import { TListItemProps } from 'components/main-full/main-full';
 import { Helmet } from 'react-helmet-async';
 import FavoritesBlock from 'components/favorite-page-component/favorites-block';
+import { TListItemsProps } from 'types/list-items.ts';
 
-function FavoritesPage({ offers }: TListItemProps) {
+function FavoritesPage({ offers }: TListItemsProps) {
   return (
     <>
       <MainLayout header={<Header />} className={ClassName.Favorites}>

@@ -1,9 +1,9 @@
-import { TUser } from 'types/user-type.ts';
+import { TUserType } from 'types/user-type.ts';
 
-export type TReview = {
+export type TReviewType = {
   id: string;
   date: Date;
-  user: TUser;
+  user: TUserType;
   comment: string;
   rating: number;
 };

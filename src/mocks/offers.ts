@@ -1,6 +1,6 @@
-import { TOfferDetail } from 'types/offer-detail.ts';
+import { TOfferDetailProps } from 'types/offer-detail.ts';
 
-export const Offers: TOfferDetail[] = [
+export const Offers: TOfferDetailProps[] = [
   {
     id: '7b0aaac0-6cd6-4fc0-bb7f-2d8c473f8ab5',
     title: 'House in countryside',

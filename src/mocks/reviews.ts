@@ -1,9 +1,9 @@
-import { TReview } from 'types/review.ts';
+import { TReviewType } from 'types/review.ts';
 import { faker } from '@faker-js/faker/locale/en_GB';
 import { randomBoolean } from '../utils/function.ts';
 
 const getReview = () => {
-  const Review: TReview = {
+  const Review: TReviewType = {
     id: faker.string.nanoid(10),
     date: faker.date.past({ refDate: '2024-01-01T00:00:00.000Z' }),
     user: {

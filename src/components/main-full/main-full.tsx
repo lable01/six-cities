@@ -2,13 +2,13 @@ import { useState } from 'react';
 import CartItem from 'components/cart-item';
 import OffersSorting from 'components/offers-sorting';
 import Map from 'components/map';
-import { TOfferItemType } from 'types/offer-item';
-import { TListItemsProps } from 'types/list-items.ts';
+import { TOfferItem } from 'types/offer-item';
+import { TListItems } from 'types/list-items.ts';
 
-function MainFull({ offers }: TListItemsProps) {
-  const [cardHover, setCardHover] = useState<TOfferItemType['id'] | null>(null);
+function MainFull({ offers }: TListItems) {
+  const [cardHover, setCardHover] = useState<TOfferItem['id'] | null>(null);
 
-  function handleCardHover(offerId: TOfferItemType['id'] | null) {
+  function handleCardHover(offerId: TOfferItem['id'] | null) {
     setCardHover(offerId);
   }
 

@@ -1,10 +1,10 @@
 import FavoritesOffers from 'components/favorite-page-component/favorites-offers';
-import { TOfferItemType } from 'types/offer-item.ts';
-import { TListItemsProps } from 'types/list-items.ts';
+import { TOfferItem } from 'types/offer-item.ts';
+import { TListItems } from 'types/list-items.ts';
 
-function FavoritesBlock({ offers }: TListItemsProps) {
+function FavoritesBlock({ offers }: TListItems) {
   const favoriteOffersByCity = offers.reduce<{
-    [key: string]: TOfferItemType[];
+    [key: string]: TOfferItem[];
   }>((result, offer) => {
     if (offer.isFavorite) {
       const city = offer.city.name;

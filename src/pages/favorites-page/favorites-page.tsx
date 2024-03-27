@@ -4,9 +4,9 @@ import Footer from 'components/footer';
 import { ClassName } from '../../const';
 import { Helmet } from 'react-helmet-async';
 import FavoritesBlock from 'components/favorite-page-component/favorites-block';
-import { TListItemsProps } from 'types/list-items.ts';
+import { TListItems } from 'types/list-items.ts';
 
-function FavoritesPage({ offers }: TListItemsProps) {
+function FavoritesPage({ offers }: TListItems) {
   return (
     <>
       <MainLayout header={<Header />} className={ClassName.Favorites}>

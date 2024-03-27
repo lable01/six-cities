@@ -1,9 +1,9 @@
 import ReviewsInfo from 'components/reviews-info';
 import ReviewsForm from 'components/reviews-form';
-import { TReviewType } from 'types/review.ts';
+import { TReview } from 'types/review.ts';
 
 type TReviewsBlock = {
-  reviews: TReviewType[];
+  reviews: TReview[];
 };
 
 function ReviewsBlock({ reviews }: TReviewsBlock) {

@@ -4,11 +4,11 @@ import MainLayout from 'layouts/main-layout';
 import Header from 'components/header';
 import Tabs from 'components/tabs';
 import { ClassName } from '../../const';
-import { TOfferItemType } from 'types/offer-item';
+import { TOfferItem } from 'types/offer-item';
 import { Helmet } from 'react-helmet-async';
 
 type TMainPageProps = {
-  offers: TOfferItemType[];
+  offers: TOfferItem[];
 };
 
 function MainPage({ offers }: TMainPageProps) {

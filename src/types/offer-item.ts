@@ -1,13 +1,13 @@
-import { TLocationProps } from './location';
-import { TCityProps } from './city';
+import { TLocation } from './location';
+import { TCity } from './city';
 
-export type TOfferItemType = {
+export type TOfferItem = {
   id: string;
   title: string;
   type: string;
   price: number;
-  city: TCityProps;
-  location: TLocationProps;
+  city: TCity;
+  location: TLocation;
   isFavorite: boolean;
   isPremium: boolean;
   rating: number;

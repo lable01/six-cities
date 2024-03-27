@@ -1,10 +1,10 @@
-import { TOfferItemType } from 'types/offer-item.ts';
+import { TOfferItem } from 'types/offer-item.ts';
 import { getStarsWidth } from '../../../utils/function.ts';
 import { AppRoute } from '../../../const.ts';
 import { Link } from 'react-router-dom';
 
 type TFavoriteOfferProps = {
-  offer: TOfferItemType;
+  offer: TOfferItem;
 };
 
 function FavoriteOffer({ offer }: TFavoriteOfferProps) {

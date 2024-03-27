@@ -1,5 +1,5 @@
 import clsx from 'clsx';
-import { TOfferItemType } from 'types/offer-item.ts';
+import { TOfferItem } from 'types/offer-item.ts';
 import { useEffect, useRef } from 'react';
 import leaflet from 'leaflet';
 import 'leaflet/dist/leaflet.css';
@@ -7,7 +7,7 @@ import useMap from 'hooks/use-map';
 import { URL_MARKER_ACTIVE, URL_MARKER_DEFAULT } from '../../const.ts';
 
 type MapProps = {
-  offers: TOfferItemType[];
+  offers: TOfferItem[];
   cardHover?: string | null;
   className: string;
 };

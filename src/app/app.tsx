@@ -6,12 +6,12 @@ import FavoritesPage from 'pages/favorites-page';
 import NotFound from 'pages/not-found';
 import OfferPage from 'pages/offer-page';
 import ProtectedRoute from 'components/protected-route';
-import { TOfferDetailProps } from 'types/offer-detail.ts';
-import { TReviewType } from 'types/review.ts';
+import { TOfferDetail } from 'types/offer-detail.ts';
+import { TReview } from 'types/review.ts';
 
 type TAppPageProps = {
-  offers: TOfferDetailProps[];
-  reviews: TReviewType[];
+  offers: TOfferDetail[];
+  reviews: TReview[];
 };
 
 function App({ offers, reviews }: TAppPageProps) {

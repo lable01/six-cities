@@ -1,6 +1,6 @@
-import { TLocationProps } from './location';
+import { TLocation } from './location';
 
-export type TCityProps = {
+export type TCity = {
   name: string;
-  location: TLocationProps;
+  location: TLocation;
 };

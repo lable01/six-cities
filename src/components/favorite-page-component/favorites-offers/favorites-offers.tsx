@@ -1,12 +1,12 @@
 import FavoriteOffer from 'components/favorite-page-component/favorite-offer/';
-import { TOfferItemType } from 'types/offer-item.ts';
+import { TOfferItem } from 'types/offer-item.ts';
 
 function FavoritesOffers({
   city,
   favoritesOffers,
 }: {
   city: string;
-  favoritesOffers: TOfferItemType[];
+  favoritesOffers: TOfferItem[];
 }) {
   return (
     <li className="favorites__locations-items">

@@ -1,5 +1,5 @@
-import { TOfferItemType } from 'types/offer-item';
+import { TOfferItem } from 'types/offer-item';
 
-export type TListItemsProps = {
-  offers: TOfferItemType[];
+export type TListItems = {
+  offers: TOfferItem[];
 };

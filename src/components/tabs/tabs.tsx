@@ -1,5 +1,11 @@
 import { CitiesNames } from '../../const';
-function Tabs() {
+import Tab from 'components/tab';
+
+type TabsProps = {
+  handleCityClick?: (city: string | null) => void;
+};
+
+function Tabs({ handleCityClick }: TabsProps) {
   const cities = [
     CitiesNames.Paris,
     CitiesNames.Cologne,
@@ -14,11 +20,7 @@ function Tabs() {
       <section className="locations container">
         <ul className="locations__list tabs__list">
           {cities.map((city, index) => (
-            <li key={index} className="locations__item">
-              <a className="locations__item-link tabs__item" href="#">
-                <span>{city}</span>
-              </a>
-            </li>
+            <Tab city={city} key={index} onCityClick={handleCityClick} />
           ))}
         </ul>
       </section>

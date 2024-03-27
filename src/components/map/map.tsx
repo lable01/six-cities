@@ -10,6 +10,7 @@ type MapProps = {
   offers: TOfferItem[];
   cardHover?: string | null;
   className: string;
+  сurrentCity: string | null;
 };
 
 const defaultMarkerIcon = leaflet.icon({
@@ -24,7 +25,7 @@ const activeMarkerIcon = leaflet.icon({
   iconAnchor: [20, 40],
 });
 
-function Map({ offers, cardHover, className }: MapProps) {
+function Map({ offers, cardHover, className, сurrentCity }: MapProps) {
   const mapContainerRef = useRef<HTMLDivElement>(null);
   const map = useMap({
     location: {

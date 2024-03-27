@@ -3,9 +3,13 @@ import CartItem from 'components/cart-item';
 import OffersSorting from 'components/offers-sorting';
 import Map from 'components/map';
 import { TOfferItem } from 'types/offer-item';
-import { TListItems } from 'types/list-items.ts';
 
-function MainFull({ offers }: TListItems) {
+type MainFullProps = {
+  offers: TOfferItem[];
+  currentCity: string | null;
+};
+
+function MainFull({ offers, сurrentCity }: MainFullProps) {
   const [cardHover, setCardHover] = useState<TOfferItem['id'] | null>(null);
 
   function handleCardHover(offerId: TOfferItem['id'] | null) {
@@ -29,7 +33,12 @@ function MainFull({ offers }: TListItems) {
         </div>
       </section>
       <div className="cities__right-section">
-        <Map offers={offers} cardHover={cardHover} className="cities__map" />
+        <Map
+          offers={offers}
+          cardHover={cardHover}
+          className="cities__map"
+          сurrentCity={сurrentCity}
+        />
       </div>
     </div>
   );

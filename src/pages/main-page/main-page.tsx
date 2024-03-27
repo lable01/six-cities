@@ -6,12 +6,19 @@ import Tabs from 'components/tabs';
 import { ClassName } from '../../const';
 import { TOfferItem } from 'types/offer-item';
 import { Helmet } from 'react-helmet-async';
+import { useState } from 'react';
 
 type TMainPageProps = {
   offers: TOfferItem[];
 };
 
 function MainPage({ offers }: TMainPageProps) {
+  const [сurrentCity, setCurrentCity] = useState<string | null>(null);
+
+  function handleCityClick(currentCity: string | null) {
+    setCurrentCity(currentCity);
+  }
+
   return (
     <MainLayout header={<Header />} className={ClassName.Main}>
       <Helmet>
@@ -25,9 +32,13 @@ function MainPage({ offers }: TMainPageProps) {
         }
       >
         <h1 className="visually-hidden">Cities</h1>
-        <Tabs />
+        <Tabs handleCityClick={handleCityClick} />
         <div className="cities">
-          {offers ? <MainFull offers={offers} /> : <MainEmpty />}
+          {offers ? (
+            <MainFull сurrentCity={сurrentCity} offers={offers} />
+          ) : (
+            <MainEmpty />
+          )}
         </div>
       </main>
     </MainLayout>

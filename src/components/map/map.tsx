@@ -7,10 +7,9 @@ import useMap from 'hooks/use-map';
 import { URL_MARKER_ACTIVE, URL_MARKER_DEFAULT } from '../../const.ts';
 
 type MapProps = {
-  offers: TOfferItem[];
+  currentOffers: TOfferItem[];
   cardHover?: string | null;
   className: string;
-  сurrentCity: string | null;
 };
 
 const defaultMarkerIcon = leaflet.icon({
@@ -25,20 +24,18 @@ const activeMarkerIcon = leaflet.icon({
   iconAnchor: [20, 40],
 });
 
-function Map({ offers, cardHover, className, сurrentCity }: MapProps) {
+function Map({ currentOffers, cardHover, className }: MapProps) {
   const mapContainerRef = useRef<HTMLDivElement>(null);
+
+  const currentCityLocation = currentOffers[0].city.location;
   const map = useMap({
-    location: {
-      latitude: 52.37454,
-      longitude: 4.897976,
-      zoom: 13,
-    },
+    location: currentCityLocation,
     containerRef: mapContainerRef,
   });
 
   useEffect(() => {
     if (map) {
-      offers.forEach((offer) => {
+      currentOffers.forEach((offer) => {
         leaflet
           .marker(
             {
@@ -53,7 +50,7 @@ function Map({ offers, cardHover, className, сurrentCity }: MapProps) {
           .addTo(map);
       });
     }
-  }, [cardHover, map, offers]);
+  }, [cardHover, map, currentOffers, currentCityLocation]);
 
   return (
     <section className={clsx('map', className)} ref={mapContainerRef}></section>

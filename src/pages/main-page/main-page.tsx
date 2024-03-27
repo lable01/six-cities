@@ -3,7 +3,7 @@ import MainEmpty from 'components/main-empty';
 import MainLayout from 'layouts/main-layout';
 import Header from 'components/header';
 import Tabs from 'components/tabs';
-import { ClassName } from '../../const';
+import { CitiesNames, ClassName } from '../../const';
 import { TOfferItem } from 'types/offer-item';
 import { Helmet } from 'react-helmet-async';
 import { useState } from 'react';
@@ -13,11 +13,15 @@ type TMainPageProps = {
 };
 
 function MainPage({ offers }: TMainPageProps) {
-  const [сurrentCity, setCurrentCity] = useState<string | null>(null);
+  const [currentCity, setCurrentCity] = useState<string>(CitiesNames.Paris);
 
-  function handleCityClick(currentCity: string | null) {
-    setCurrentCity(currentCity);
+  function handleCityClick(selected: string) {
+    setCurrentCity(selected);
   }
+
+  const currentOffers = offers.filter((offer) => {
+    return offer.city.name === currentCity;
+  });
 
   return (
     <MainLayout header={<Header />} className={ClassName.Main}>
@@ -26,16 +30,16 @@ function MainPage({ offers }: TMainPageProps) {
       </Helmet>
       <main
         className={
-          offers
+          currentOffers
             ? 'page__main page__main--index'
             : 'page__main page__main--index page__main--index-empty'
         }
       >
         <h1 className="visually-hidden">Cities</h1>
-        <Tabs handleCityClick={handleCityClick} />
+        <Tabs handleCityClick={handleCityClick} currentCity={currentCity} />
         <div className="cities">
-          {offers ? (
-            <MainFull сurrentCity={сurrentCity} offers={offers} />
+          {currentOffers.length !== 0 ? (
+            <MainFull currentOffers={currentOffers} />
           ) : (
             <MainEmpty />
           )}

@@ -2,10 +2,11 @@ import { CitiesNames } from '../../const';
 import Tab from 'components/tab';
 
 type TabsProps = {
-  handleCityClick?: (city: string | null) => void;
+  handleCityClick: (city: string) => void;
+  currentCity: string;
 };
 
-function Tabs({ handleCityClick }: TabsProps) {
+function Tabs({ handleCityClick, currentCity }: TabsProps) {
   const cities = [
     CitiesNames.Paris,
     CitiesNames.Cologne,
@@ -20,7 +21,12 @@ function Tabs({ handleCityClick }: TabsProps) {
       <section className="locations container">
         <ul className="locations__list tabs__list">
           {cities.map((city, index) => (
-            <Tab city={city} key={index} onCityClick={handleCityClick} />
+            <Tab
+              city={city}
+              key={index}
+              onCityClick={handleCityClick}
+              currentCity={currentCity}
+            />
           ))}
         </ul>
       </section>

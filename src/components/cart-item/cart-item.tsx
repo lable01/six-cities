@@ -1,10 +1,10 @@
 import { Link } from 'react-router-dom';
-import { TOfferItemType } from 'types/offer-item.ts';
+import { TOfferItem } from 'types/offer-item.ts';
 import clsx from 'clsx';
 import { AppRoute } from '../../const';
 
 type TCartItemProps = {
-  offer: TOfferItemType;
+  offer: TOfferItem;
   onCardHover?: (offerId: string | null) => void;
 };
 

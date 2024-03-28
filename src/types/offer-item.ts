@@ -1,7 +1,7 @@
 import { TLocation } from './location';
 import { TCity } from './city';
 
-export type TOfferItemType = {
+export type TOfferItem = {
   id: string;
   title: string;
   type: string;

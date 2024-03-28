@@ -14,6 +14,7 @@ export default defineConfig({
       pages: '/src/pages',
       layouts: '/src/layouts',
       types: '/src/types',
+      hooks: '/src/hooks',
     },
   },
   test: {

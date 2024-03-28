@@ -1,12 +1,15 @@
-import { TOfferItemType } from 'types/offer-item.ts';
+import { TOfferItem } from 'types/offer-item.ts';
 import { getStarsWidth } from '../../../utils/function.ts';
 import { AppRoute } from '../../../const.ts';
 import { Link } from 'react-router-dom';
 
-function FavoriteOffer({ offer }: TOfferItemType) {
+type TFavoriteOfferProps = {
+  offer: TOfferItem;
+};
+
+function FavoriteOffer({ offer }: TFavoriteOfferProps) {
   const { id, price, isPremium, previewImage, rating, title, type } = offer;
   const starWidth = getStarsWidth(rating);
-
   return (
     <article className="favorites__card place-card">
       {isPremium && (

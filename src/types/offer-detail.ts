@@ -1,7 +1,7 @@
-import { TOfferItemType } from './offer-item.ts';
-import { TUser } from './user-type';
+import { TOfferItem } from './offer-item.ts';
+import { TUser } from './user.ts';
 
-export type TOfferDetail = TOfferItemType & {
+export type TOfferDetail = TOfferItem & {
   description: string;
   bedrooms: number;
   goods: string[];

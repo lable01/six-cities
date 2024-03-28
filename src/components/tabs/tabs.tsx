@@ -20,10 +20,10 @@ function Tabs({ handleCityClick, currentCity }: TabsProps) {
     <div className="tabs">
       <section className="locations container">
         <ul className="locations__list tabs__list">
-          {cities.map((city, index) => (
+          {cities.map((city) => (
             <Tab
               city={city}
-              key={index}
+              key={city}
               onCityClick={handleCityClick}
               currentCity={currentCity}
             />

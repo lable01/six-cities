@@ -1,7 +1,7 @@
 import clsx from 'clsx';
 import { TOfferItem } from 'types/offer-item.ts';
 import { useEffect, useRef } from 'react';
-import leaflet from 'leaflet';
+import leaflet, { LayerGroup } from 'leaflet';
 import 'leaflet/dist/leaflet.css';
 import useMap from 'hooks/use-map';
 import { URL_MARKER_ACTIVE, URL_MARKER_DEFAULT } from '../../const.ts';
@@ -26,12 +26,23 @@ const activeMarkerIcon = leaflet.icon({
 
 function Map({ currentOffers, cardHover, className }: MapProps) {
   const mapContainerRef = useRef<HTMLDivElement>(null);
-
   const currentCityLocation = currentOffers[0].city.location;
   const map = useMap({
     location: currentCityLocation,
     containerRef: mapContainerRef,
   });
+  const markerLayer = useRef<LayerGroup>(leaflet.layerGroup());
+
+  useEffect(() => {
+    if (map) {
+      map.setView(
+        [currentCityLocation.latitude, currentCityLocation.longitude],
+        currentCityLocation.zoom,
+      );
+      markerLayer.current.addTo(map);
+      markerLayer.current.clearLayers();
+    }
+  }, [currentCityLocation, map]);
 
   useEffect(() => {
     if (map) {
@@ -47,10 +58,10 @@ function Map({ currentOffers, cardHover, className }: MapProps) {
                 offer.id === cardHover ? activeMarkerIcon : defaultMarkerIcon,
             },
           )
-          .addTo(map);
+          .addTo(markerLayer.current);
       });
     }
-  }, [cardHover, map, currentOffers, currentCityLocation]);
+  }, [cardHover, map, currentOffers]);
 
   return (
     <section className={clsx('map', className)} ref={mapContainerRef}></section>

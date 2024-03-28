@@ -6,9 +6,10 @@ import { TOfferItem } from 'types/offer-item';
 
 type MainFullProps = {
   currentOffers: TOfferItem[];
+  currentCity: string;
 };
 
-function MainFull({ currentOffers }: MainFullProps) {
+function MainFull({ currentOffers, currentCity }: MainFullProps) {
   const [cardHover, setCardHover] = useState<TOfferItem['id'] | null>(null);
 
   function handleCardHover(offerId: TOfferItem['id'] | null) {
@@ -19,7 +20,9 @@ function MainFull({ currentOffers }: MainFullProps) {
     <div className="cities__places-container container">
       <section className="cities__places places">
         <h2 className="visually-hidden">Places</h2>
-        <b className="places__found">312 places to stay in Amsterdam</b>
+        <b className="places__found">
+          {currentOffers.length} places to stay in {currentCity}
+        </b>
         <OffersSorting />
         <div className="cities__places-list places__list tabs__content">
           {currentOffers.map((offer) => (

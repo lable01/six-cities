@@ -19,9 +19,9 @@ function MainPage({ offers }: TMainPageProps) {
     setCurrentCity(selected);
   }
 
-  const currentOffers = offers.filter((offer) => {
-    return offer.city.name === currentCity;
-  });
+  const currentOffers = offers.filter(
+    (offer) => offer.city.name === currentCity,
+  );
 
   return (
     <MainLayout header={<Header />} className={ClassName.Main}>
@@ -30,7 +30,7 @@ function MainPage({ offers }: TMainPageProps) {
       </Helmet>
       <main
         className={
-          currentOffers
+          currentOffers.length !== 0
             ? 'page__main page__main--index'
             : 'page__main page__main--index page__main--index-empty'
         }
@@ -39,7 +39,7 @@ function MainPage({ offers }: TMainPageProps) {
         <Tabs handleCityClick={handleCityClick} currentCity={currentCity} />
         <div className="cities">
           {currentOffers.length !== 0 ? (
-            <MainFull currentOffers={currentOffers} />
+            <MainFull currentOffers={currentOffers} currentCity={currentCity} />
           ) : (
             <MainEmpty />
           )}

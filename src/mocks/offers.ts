@@ -402,4 +402,51 @@ export const Offers: TOfferDetail[] = [
     bedrooms: 3,
     maxAdults: 2,
   },
+  {
+    id: '32476867-1232134-5562610-5562610-5562610',
+    title: 'Nice, cozy, warm big bed apartment',
+    previewImage: 'https://14.design.htmlacademy.pro/static/hotel/3.jpg',
+    description:
+      'A new spacious villa, one floor. All commodities, jacuzzi and beautiful scenery. Ideal for families or friends.',
+    type: 'apartment',
+    price: 234,
+    images: [
+      'https://14.design.htmlacademy.pro/static/hotel/7.jpg',
+      'https://14.design.htmlacademy.pro/static/hotel/8.jpg',
+      'https://14.design.htmlacademy.pro/static/hotel/9.jpg',
+    ],
+    city: {
+      name: 'Amsterdam',
+      location: {
+        latitude: 52.37454,
+        longitude: 4.897976,
+        zoom: 13,
+      },
+    },
+    location: {
+      latitude: 52.3809553943508,
+      longitude: 4.85309666406198,
+      zoom: 16,
+    },
+    goods: [
+      'Dishwasher',
+      'Breakfast',
+      'Washing machine',
+      'Air conditioning',
+      'Towels',
+      'Cable TV',
+      'Laptop friendly workspace',
+    ],
+    host: {
+      isPro: true,
+      name: 'Angelina',
+      avatarUrl:
+        'https://14.design.htmlacademy.pro/static/host/avatar-angelina.jpg',
+    },
+    isPremium: true,
+    isFavorite: true,
+    rating: 2.5,
+    bedrooms: 3,
+    maxAdults: 2,
+  },
 ];

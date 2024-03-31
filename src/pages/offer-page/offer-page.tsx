@@ -15,11 +15,25 @@ type TOfferPageProps = {
 
 function OfferPage({ offers, reviews }: TOfferPageProps) {
   const { id } = useParams();
-  const offer = offers.find((item) => item.id === id);
+  const currentOffer = offers.find((item) => item.id === id);
 
-  if (!offer) {
+  if (!currentOffer) {
     return <Navigate to={AppRoute.NotFound} />;
   }
+
+  const nearOffers = Object.values(
+    offers.reduce<{ [key: string]: TOfferDetail }>((result, offer) => {
+      if (offer.city.name === currentOffer.city.name) {
+        if (offer.id === id) {
+          result['0'] = offer;
+        } else {
+          result[Object.keys(result).length] = offer;
+        }
+      }
+
+      return result;
+    }, {}),
+  ).slice(0, 4);
 
   return (
     <MainLayout header={<Header />} className={ClassName.Offer}>
@@ -29,8 +43,12 @@ function OfferPage({ offers, reviews }: TOfferPageProps) {
         </title>
       </Helmet>
       <main className="page__main page__main--offer">
-        <OfferDetails offer={offer} reviews={reviews} />
-        <OtherOffers offers={offers} />
+        <OfferDetails
+          offer={currentOffer}
+          reviews={reviews}
+          offers={nearOffers}
+        />
+        <OtherOffers offers={nearOffers} />
       </main>
     </MainLayout>
   );

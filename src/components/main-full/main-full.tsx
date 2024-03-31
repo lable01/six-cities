@@ -1,8 +1,8 @@
-import { useState } from 'react';
 import CartItem from 'components/cart-item';
 import OffersSorting from 'components/offers-sorting';
 import Map from 'components/map';
 import { TOfferItem } from 'types/offer-item';
+import { useState } from 'react';
 
 type MainFullProps = {
   currentOffers: TOfferItem[];
@@ -10,10 +10,12 @@ type MainFullProps = {
 };
 
 function MainFull({ currentOffers, currentCity }: MainFullProps) {
-  const [cardHover, setCardHover] = useState<TOfferItem['id'] | null>(null);
+  const [activeOfferId, setActiveOfferId] = useState<TOfferItem['id'] | null>(
+    null,
+  );
 
   function handleCardHover(offerId: TOfferItem['id'] | null) {
-    setCardHover(offerId);
+    setActiveOfferId(offerId);
   }
 
   return (
@@ -36,8 +38,8 @@ function MainFull({ currentOffers, currentCity }: MainFullProps) {
       </section>
       <div className="cities__right-section">
         <Map
-          currentOffers={currentOffers}
-          cardHover={cardHover}
+          offers={currentOffers}
+          activeOfferId={activeOfferId}
           className="cities__map"
         />
       </div>

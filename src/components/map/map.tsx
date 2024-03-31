@@ -7,8 +7,8 @@ import useMap from 'hooks/use-map';
 import { URL_MARKER_ACTIVE, URL_MARKER_DEFAULT } from '../../const.ts';
 
 type MapProps = {
-  currentOffers: TOfferItem[];
-  cardHover?: string | null;
+  offers: TOfferItem[];
+  activeOfferId?: string | null;
   className: string;
 };
 
@@ -24,9 +24,9 @@ const activeMarkerIcon = leaflet.icon({
   iconAnchor: [20, 40],
 });
 
-function Map({ currentOffers, cardHover, className }: MapProps) {
+function Map({ offers, activeOfferId, className }: MapProps) {
   const mapContainerRef = useRef<HTMLDivElement>(null);
-  const currentCityLocation = currentOffers[0].city.location;
+  const currentCityLocation = offers[0].city.location;
   const map = useMap({
     location: currentCityLocation,
     containerRef: mapContainerRef,
@@ -46,7 +46,8 @@ function Map({ currentOffers, cardHover, className }: MapProps) {
 
   useEffect(() => {
     if (map) {
-      currentOffers.forEach((offer) => {
+      markerLayer.current.clearLayers();
+      offers.forEach((offer) => {
         leaflet
           .marker(
             {
@@ -55,13 +56,15 @@ function Map({ currentOffers, cardHover, className }: MapProps) {
             },
             {
               icon:
-                offer.id === cardHover ? activeMarkerIcon : defaultMarkerIcon,
+                offer.id === activeOfferId
+                  ? activeMarkerIcon
+                  : defaultMarkerIcon,
             },
           )
           .addTo(markerLayer.current);
       });
     }
-  }, [cardHover, map, currentOffers]);
+  }, [activeOfferId, map, offers]);
 
   return (
     <section className={clsx('map', className)} ref={mapContainerRef}></section>

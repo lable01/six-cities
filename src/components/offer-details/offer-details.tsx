@@ -1,4 +1,4 @@
-// import Map from 'components/map';
+import Map from 'components/map';
 import { TOfferDetail } from 'types/offer-detail.ts';
 import { TReview } from 'types/review.ts';
 import ReviewsBlock from 'components/reviews-block';
@@ -6,10 +6,12 @@ import ReviewsBlock from 'components/reviews-block';
 type TOfferDetailsProps = {
   offer: TOfferDetail;
   reviews: TReview[];
+  offers: TOfferDetail[];
 };
 
-function OfferDetails({ offer, reviews }: TOfferDetailsProps) {
+function OfferDetails({ offer, reviews, offers }: TOfferDetailsProps) {
   const {
+    id,
     images,
     isPremium,
     title,
@@ -21,7 +23,6 @@ function OfferDetails({ offer, reviews }: TOfferDetailsProps) {
     rating,
     host,
   } = offer;
-
   return (
     <section className="offer">
       <div className="offer__gallery-container container">
@@ -110,7 +111,7 @@ function OfferDetails({ offer, reviews }: TOfferDetailsProps) {
           <ReviewsBlock reviews={reviews} />
         </div>
       </div>
-      {/*<Map className="offer__map" />*/}
+      <Map className="offer__map" offers={offers} activeOfferId={id} />
     </section>
   );
 }

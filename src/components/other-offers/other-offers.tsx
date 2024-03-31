@@ -1,14 +1,14 @@
-import { TOfferDetail } from 'types/offer-detail.ts';
 import { Link, Navigate, useParams } from 'react-router-dom';
 import { AppRoute } from '../../const.ts';
+import { TOfferItem } from 'types/offer-item.ts';
 
 type TOtherOffersProps = {
-  offers: TOfferDetail[];
+  nearOffers: TOfferItem[];
 };
 
-function OtherOffers({ offers }: TOtherOffersProps) {
+function OtherOffers({ nearOffers }: TOtherOffersProps) {
   const { id } = useParams();
-  const otherOffers = offers.filter((offer) => offer.id !== id);
+  const otherOffers = nearOffers.filter((offer) => offer.id !== id);
   if (!otherOffers) {
     return <Navigate to={AppRoute.NotFound} />;
   }

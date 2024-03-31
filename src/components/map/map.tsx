@@ -4,7 +4,7 @@ import { useEffect, useRef } from 'react';
 import leaflet, { LayerGroup } from 'leaflet';
 import 'leaflet/dist/leaflet.css';
 import useMap from 'hooks/use-map';
-import { URL_MARKER_ACTIVE, URL_MARKER_DEFAULT } from '../../const.ts';
+import { URL_MARKER_ACTIVE, URL_MARKER_DEFAULT } from './const.ts';
 
 type MapProps = {
   offers: TOfferItem[];

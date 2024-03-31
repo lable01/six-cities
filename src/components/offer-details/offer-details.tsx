@@ -2,14 +2,15 @@ import Map from 'components/map';
 import { TOfferDetail } from 'types/offer-detail.ts';
 import { TReview } from 'types/review.ts';
 import ReviewsBlock from 'components/reviews-block';
+import { TOfferItem } from 'types/offer-item.ts';
 
 type TOfferDetailsProps = {
   offer: TOfferDetail;
   reviews: TReview[];
-  offers: TOfferDetail[];
+  nearOffers: TOfferItem[];
 };
 
-function OfferDetails({ offer, reviews, offers }: TOfferDetailsProps) {
+function OfferDetails({ offer, reviews, nearOffers }: TOfferDetailsProps) {
   const {
     id,
     images,
@@ -23,6 +24,7 @@ function OfferDetails({ offer, reviews, offers }: TOfferDetailsProps) {
     rating,
     host,
   } = offer;
+
   return (
     <section className="offer">
       <div className="offer__gallery-container container">
@@ -111,7 +113,7 @@ function OfferDetails({ offer, reviews, offers }: TOfferDetailsProps) {
           <ReviewsBlock reviews={reviews} />
         </div>
       </div>
-      <Map className="offer__map" offers={offers} activeOfferId={id} />
+      <Map className="offer__map" offers={nearOffers} activeOfferId={id} />
     </section>
   );
 }

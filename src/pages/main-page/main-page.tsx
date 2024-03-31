@@ -7,6 +7,7 @@ import { CitiesNames, ClassName } from '../../const';
 import { TOfferItem } from 'types/offer-item';
 import { Helmet } from 'react-helmet-async';
 import { useState } from 'react';
+import clsx from 'clsx';
 
 type TMainPageProps = {
   offers: TOfferItem[];
@@ -23,18 +24,15 @@ function MainPage({ offers }: TMainPageProps) {
     (offer) => offer.city.name === currentCity,
   );
 
+  const mainClassName =
+    currentOffers.length === 0 ? 'page__main--index-empty' : '';
+
   return (
     <MainLayout header={<Header />} className={ClassName.Main}>
       <Helmet>
         <title>Six cities service for travelers - official website</title>
       </Helmet>
-      <main
-        className={
-          currentOffers.length !== 0
-            ? 'page__main page__main--index'
-            : 'page__main page__main--index page__main--index-empty'
-        }
-      >
+      <main className={clsx('page__main page__main--index', mainClassName)}>
         <h1 className="visually-hidden">Cities</h1>
         <Tabs handleCityClick={handleCityClick} currentCity={currentCity} />
         <div className="cities">

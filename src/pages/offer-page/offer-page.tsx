@@ -7,22 +7,24 @@ import OfferDetails from 'components/offer-details';
 import OtherOffers from 'components/other-offers';
 import { TReview } from 'types/review.ts';
 import { Helmet } from 'react-helmet-async';
+import { TOfferItem } from 'types/offer-item.ts';
 
 type TOfferPageProps = {
-  offers: TOfferDetail[];
+  offers: TOfferItem[];
+  offersDetail: TOfferDetail[];
   reviews: TReview[];
 };
 
-function OfferPage({ offers, reviews }: TOfferPageProps) {
+function OfferPage({ offers, offersDetail, reviews }: TOfferPageProps) {
   const { id } = useParams();
-  const currentOffer = offers.find((item) => item.id === id);
+  const currentOffer = offersDetail.find((item) => item.id === id);
 
   if (!currentOffer) {
     return <Navigate to={AppRoute.NotFound} />;
   }
 
   const nearOffers = Object.values(
-    offers.reduce<{ [key: string]: TOfferDetail }>((result, offer) => {
+    offers.reduce<{ [key: string]: TOfferItem }>((result, offer) => {
       if (offer.city.name === currentOffer.city.name) {
         if (offer.id === id) {
           result['0'] = offer;
@@ -33,7 +35,7 @@ function OfferPage({ offers, reviews }: TOfferPageProps) {
 
       return result;
     }, {}),
-  ).slice(0, 4);
+  );
 
   return (
     <MainLayout header={<Header />} className={ClassName.Offer}>
@@ -46,9 +48,9 @@ function OfferPage({ offers, reviews }: TOfferPageProps) {
         <OfferDetails
           offer={currentOffer}
           reviews={reviews}
-          offers={nearOffers}
+          nearOffers={nearOffers}
         />
-        <OtherOffers offers={nearOffers} />
+        <OtherOffers nearOffers={nearOffers} />
       </main>
     </MainLayout>
   );

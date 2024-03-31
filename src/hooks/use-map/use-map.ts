@@ -1,13 +1,13 @@
 import leaflet, { Map as LeafletMap } from 'leaflet';
 import React, { useEffect, useRef, useState } from 'react';
-import { TILE_LAYER_ATTRIBUTION, TILE_LAYER_URL_PATTERN } from '../../const.ts';
+import {
+  TILE_LAYER_ATTRIBUTION,
+  TILE_LAYER_URL_PATTERN,
+} from 'components/map/const.ts';
+import { TLocation } from 'types/location.ts';
 
 type UseMapProps = {
-  location: {
-    latitude: number;
-    longitude: number;
-    zoom: number;
-  };
+  location: TLocation;
   containerRef: React.RefObject<HTMLElement | null>;
 };
 

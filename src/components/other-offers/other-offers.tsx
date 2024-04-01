@@ -1,4 +1,4 @@
-import { Link, Navigate, useParams } from 'react-router-dom';
+import { Link, Navigate } from 'react-router-dom';
 import { AppRoute } from '../../const.ts';
 import { TOfferItem } from 'types/offer-item.ts';
 
@@ -7,9 +7,7 @@ type TOtherOffersProps = {
 };
 
 function OtherOffers({ nearOffers }: TOtherOffersProps) {
-  const { id } = useParams();
-  const otherOffers = nearOffers.filter((offer) => offer.id !== id);
-  if (!otherOffers) {
+  if (!nearOffers) {
     return <Navigate to={AppRoute.NotFound} />;
   }
 
@@ -20,16 +18,16 @@ function OtherOffers({ nearOffers }: TOtherOffersProps) {
           Other places in the neighbourhood
         </h2>
         <div className="near-places__list places__list">
-          {otherOffers.slice(0, 3).map((otherOffer) => (
+          {nearOffers.map((nearOffer) => (
             <article
-              key={otherOffer.id}
+              key={nearOffer.id}
               className="near-places__card place-card"
             >
               <div className="near-places__image-wrapper place-card__image-wrapper">
-                <Link to={`${AppRoute.Offer}/${otherOffer.id}`}>
+                <Link to={`${AppRoute.Offer}/${nearOffer.id}`}>
                   <img
                     className="place-card__image"
-                    src={otherOffer.previewImage}
+                    src={nearOffer.previewImage}
                     width="260"
                     height="200"
                     alt="Place image"
@@ -40,7 +38,7 @@ function OtherOffers({ nearOffers }: TOtherOffersProps) {
                 <div className="place-card__price-wrapper">
                   <div className="place-card__price">
                     <b className="place-card__price-value">
-                      &euro;{otherOffer.price}
+                      &euro;{nearOffer.price}
                     </b>
                     <span className="place-card__price-text">
                       &#47;&nbsp;night
@@ -67,11 +65,11 @@ function OtherOffers({ nearOffers }: TOtherOffersProps) {
                   </div>
                 </div>
                 <h2 className="place-card__name">
-                  <Link to={`${AppRoute.Offer}/${otherOffer.id}`}>
-                    {otherOffer.title}
+                  <Link to={`${AppRoute.Offer}/${nearOffer.id}`}>
+                    {nearOffer.title}
                   </Link>
                 </h2>
-                <p className="place-card__type">{otherOffer.type}</p>
+                <p className="place-card__type">{nearOffer.type}</p>
               </div>
             </article>
           ))}

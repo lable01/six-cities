@@ -35,7 +35,7 @@ function OfferPage({ offers, offersDetail, reviews }: TOfferPageProps) {
 
       return result;
     }, {}),
-  );
+  ).slice(0, 3);
 
   return (
     <MainLayout header={<Header />} className={ClassName.Offer}>

@@ -104,7 +104,7 @@ function OfferDetails({ offer, reviews, nearOffers }: TOfferDetailsProps) {
                 18th century.
               </p>
               <p className="offer__text">
-                An independent House, strategically located between Rembrand
+                An independent House, strategically located between Rebrand
                 Square and National Opera, but where the bustle of the city
                 comes to rest in this alley flowery and colorful.
               </p>

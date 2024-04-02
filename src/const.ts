@@ -29,7 +29,7 @@ export const CitiesNames = {
   Dusseldorf: 'Dusseldorf',
 } as const;
 
-export const Cities = [
+export const CITIES = [
   CitiesNames.Paris,
   CitiesNames.Cologne,
   CitiesNames.Brussels,
@@ -38,6 +38,7 @@ export const Cities = [
   CitiesNames.Dusseldorf,
 ];
 
+export const QUANTITY_NEAR_OFFERS = 3;
 export const ReviewLength = {
   min: 50,
   max: 300,

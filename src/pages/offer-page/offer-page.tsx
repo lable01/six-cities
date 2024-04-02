@@ -1,6 +1,6 @@
 import MainLayout from 'layouts/main-layout';
 import Header from 'components/header';
-import { AppRoute, ClassName } from '../../const';
+import { AppRoute, ClassName, QUANTITY_NEAR_OFFERS } from '../../const';
 import { TOfferDetail } from 'types/offer-detail.ts';
 import { Navigate, useParams } from 'react-router-dom';
 import OfferDetails from 'components/offer-details';
@@ -23,19 +23,7 @@ function OfferPage({ offers, offersDetail, reviews }: TOfferPageProps) {
     return <Navigate to={AppRoute.NotFound} />;
   }
 
-  const nearOffers = Object.values(
-    offers.reduce<{ [key: string]: TOfferItem }>((result, offer) => {
-      if (offer.city.name === currentOffer.city.name) {
-        if (offer.id === id) {
-          result['0'] = offer;
-        } else {
-          result[Object.keys(result).length] = offer;
-        }
-      }
-
-      return result;
-    }, {}),
-  ).slice(0, 3);
+  const nearOffers = offers.slice(0, QUANTITY_NEAR_OFFERS);
 
   return (
     <MainLayout header={<Header />} className={ClassName.Offer}>

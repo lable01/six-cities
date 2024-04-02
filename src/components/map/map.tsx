@@ -46,7 +46,7 @@ function Map({ offers, activeOfferId, className }: MapProps) {
 
   useEffect(() => {
     if (map) {
-      markerLayer.current.clearLayers();
+      const markerLayerCurrent = markerLayer.current;
       offers.forEach((offer) => {
         leaflet
           .marker(
@@ -61,8 +61,11 @@ function Map({ offers, activeOfferId, className }: MapProps) {
                   : defaultMarkerIcon,
             },
           )
-          .addTo(markerLayer.current);
+          .addTo(markerLayerCurrent);
       });
+      return () => {
+        markerLayerCurrent.clearLayers();
+      };
     }
   }, [activeOfferId, map, offers]);
 

@@ -107,7 +107,7 @@ export const OffersDetail: TOfferDetail[] = [
   },
   {
     id: '6b9e8883-2012-485c-8454-91e130e8d19f',
-    title: 'The Pondhouse - A Magical Place',
+    title: 'The Pond house - A Magical Place',
     description:
       'I am happy to welcome you to my apartment in the city center! Three words: location, cosy and chic!',
     type: 'room',

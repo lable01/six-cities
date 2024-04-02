@@ -18,8 +18,8 @@ function FavoritesOffers({
         </div>
       </div>
       <div className="favorites__places">
-        {favoritesOffers.map((offer, index) => (
-          <FavoriteOffer offer={offer} key={index} />
+        {favoritesOffers.map((offer) => (
+          <FavoriteOffer offer={offer} key={offer.id} />
         ))}
       </div>
     </li>

@@ -1,4 +1,4 @@
-import { Cities } from '../../const';
+import { CITIES } from '../../const';
 import Tab from 'components/tab';
 
 type TabsProps = {
@@ -11,7 +11,7 @@ function Tabs({ handleCityClick, currentCity }: TabsProps) {
     <div className="tabs">
       <section className="locations container">
         <ul className="locations__list tabs__list">
-          {Cities.map((city) => (
+          {CITIES.map((city) => (
             <Tab
               city={city}
               key={city}

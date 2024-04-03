@@ -11,9 +11,11 @@ import clsx from 'clsx';
 
 type TMainPageProps = {
   offers: TOfferItem[];
+  onCardHover?: (offerId: string | null) => void;
+  activeOfferId: string | null;
 };
 
-function MainPage({ offers }: TMainPageProps) {
+function MainPage({ offers, onCardHover, activeOfferId }: TMainPageProps) {
   const [currentCity, setCurrentCity] = useState<string>(CitiesNames.Paris);
 
   function handleCityClick(selected: string) {
@@ -37,7 +39,12 @@ function MainPage({ offers }: TMainPageProps) {
         <Tabs handleCityClick={handleCityClick} currentCity={currentCity} />
         <div className="cities">
           {currentOffers.length !== 0 ? (
-            <MainFull currentOffers={currentOffers} currentCity={currentCity} />
+            <MainFull
+              currentOffers={currentOffers}
+              currentCity={currentCity}
+              onCardHover={onCardHover}
+              activeOfferId={activeOfferId}
+            />
           ) : (
             <MainEmpty />
           )}

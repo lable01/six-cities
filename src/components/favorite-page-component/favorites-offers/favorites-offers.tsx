@@ -1,13 +1,17 @@
-import FavoriteOffer from 'components/favorite-page-component/favorite-offer/';
 import { TOfferItem } from 'types/offer-item.ts';
+import CartItem from 'components/cart-item';
+
+type TFavoritesOffers = {
+  city: string;
+  favoritesOffers: TOfferItem[];
+  onCardHover?: (offerId: string | null) => void;
+};
 
 function FavoritesOffers({
   city,
   favoritesOffers,
-}: {
-  city: string;
-  favoritesOffers: TOfferItem[];
-}) {
+  onCardHover,
+}: TFavoritesOffers) {
   return (
     <li className="favorites__locations-items">
       <div className="favorites__locations locations locations--current">
@@ -19,7 +23,13 @@ function FavoritesOffers({
       </div>
       <div className="favorites__places">
         {favoritesOffers.map((offer) => (
-          <FavoriteOffer offer={offer} key={offer.id} />
+          <CartItem
+            key={offer.id}
+            offer={offer}
+            onCardHover={onCardHover}
+            typeCard="favorites"
+          />
+          // <FavoriteOffer offer={offer} key={offer.id} />
         ))}
       </div>
     </li>

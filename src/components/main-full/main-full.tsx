@@ -2,22 +2,20 @@ import CartItem from 'components/cart-item';
 import OffersSorting from 'components/offers-sorting';
 import Map from 'components/map';
 import { TOfferItem } from 'types/offer-item';
-import { useState } from 'react';
 
 type MainFullProps = {
   currentOffers: TOfferItem[];
   currentCity: string;
+  onCardHover?: (offerId: string | null) => void;
+  activeOfferId: string | null;
 };
 
-function MainFull({ currentOffers, currentCity }: MainFullProps) {
-  const [activeOfferId, setActiveOfferId] = useState<TOfferItem['id'] | null>(
-    null,
-  );
-
-  function handleCardHover(offerId: TOfferItem['id'] | null) {
-    setActiveOfferId(offerId);
-  }
-
+function MainFull({
+  currentOffers,
+  currentCity,
+  onCardHover,
+  activeOfferId,
+}: MainFullProps) {
   return (
     <div className="cities__places-container container">
       <section className="cities__places places">
@@ -30,8 +28,9 @@ function MainFull({ currentOffers, currentCity }: MainFullProps) {
           {currentOffers.map((offer) => (
             <CartItem
               key={offer.id}
-              onCardHover={handleCardHover}
+              onCardHover={onCardHover}
               offer={offer}
+              typeCard="cities"
             />
           ))}
         </div>

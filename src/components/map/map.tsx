@@ -8,7 +8,7 @@ import { URL_MARKER_ACTIVE, URL_MARKER_DEFAULT } from './const.ts';
 
 type MapProps = {
   offers: TOfferItem[];
-  activeOfferId?: string | null;
+  activeOfferId: string | null;
   className: string;
 };
 

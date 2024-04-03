@@ -13,9 +13,15 @@ type TOfferPageProps = {
   offers: TOfferItem[];
   offersDetail: TOfferDetail[];
   reviews: TReview[];
+  onCardHover?: (offerId: string | null) => void;
 };
 
-function OfferPage({ offers, offersDetail, reviews }: TOfferPageProps) {
+function OfferPage({
+  offers,
+  offersDetail,
+  reviews,
+  onCardHover,
+}: TOfferPageProps) {
   const { id } = useParams();
   const currentOffer = offersDetail.find((item) => item.id === id);
 
@@ -38,7 +44,7 @@ function OfferPage({ offers, offersDetail, reviews }: TOfferPageProps) {
           reviews={reviews}
           nearOffers={nearOffers}
         />
-        <OtherOffers nearOffers={nearOffers} />
+        <OtherOffers nearOffers={nearOffers} onCardHover={onCardHover} />
       </main>
     </MainLayout>
   );

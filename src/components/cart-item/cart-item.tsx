@@ -6,25 +6,40 @@ import { AppRoute } from '../../const';
 type TCartItemProps = {
   offer: TOfferItem;
   onCardHover?: (offerId: string | null) => void;
+  typeCard: 'cities' | 'near-places' | 'favorites';
 };
 
-function CartItem({ offer, onCardHover }: TCartItemProps) {
+const sizeCard = {
+  cities: {
+    width: 260,
+    height: 200,
+  },
+  'near-places': {
+    width: 260,
+    height: 200,
+  },
+  favorites: {
+    width: 150,
+    height: 110,
+  },
+};
+
+function CartItem({ offer, onCardHover, typeCard }: TCartItemProps) {
   const { id, isPremium, previewImage, title, price, isFavorite, type } = offer;
   const classIsFavorite = isFavorite
     ? ' place-card__bookmark-button--active'
     : '';
-
+  const size = sizeCard[typeCard];
   function handleMouseEnter() {
     onCardHover?.(id);
   }
-
   function handleMouseLeave() {
     onCardHover?.(null);
   }
 
   return (
     <article
-      className="cities__card place-card"
+      className={`${typeCard}__card place-card`}
       onMouseEnter={handleMouseEnter}
       onMouseLeave={handleMouseLeave}
     >
@@ -33,13 +48,13 @@ function CartItem({ offer, onCardHover }: TCartItemProps) {
           <span>Premium</span>
         </div>
       )}
-      <div className="cities__image-wrapper place-card__image-wrapper">
+      <div className={`${typeCard}__image-wrapper place-card__image-wrapper`}>
         <Link to={`${AppRoute.Offer}/${id}`}>
           <img
             className="place-card__image"
             src={previewImage}
-            width="260"
-            height="200"
+            width={size.width}
+            height={size.height}
             alt="Place image"
           />
         </Link>

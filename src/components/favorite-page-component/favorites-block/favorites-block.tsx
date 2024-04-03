@@ -1,8 +1,12 @@
 import FavoritesOffers from 'components/favorite-page-component/favorites-offers';
 import { TOfferItem } from 'types/offer-item.ts';
-import { TListItems } from 'types/list-items.ts';
 
-function FavoritesBlock({ offers }: TListItems) {
+type TFavoritesBlock = {
+  offers: TOfferItem[];
+  onCardHover?: (offerId: string | null) => void;
+};
+
+function FavoritesBlock({ offers, onCardHover }: TFavoritesBlock) {
   const favoriteOffersByCity = offers.reduce<{
     [key: string]: TOfferItem[];
   }>((result, offer) => {
@@ -24,9 +28,10 @@ function FavoritesBlock({ offers }: TListItems) {
       <ul className="favorites__list">
         {Object.entries(favoriteOffersByCity).map(([city, favoritesOffers]) => (
           <FavoritesOffers
+            key={city}
             city={city}
             favoritesOffers={favoritesOffers}
-            key={city}
+            onCardHover={onCardHover}
           />
         ))}
       </ul>

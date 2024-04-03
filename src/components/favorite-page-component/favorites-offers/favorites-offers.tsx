@@ -29,7 +29,6 @@ function FavoritesOffers({
             onCardHover={onCardHover}
             typeCard="favorites"
           />
-          // <FavoriteOffer offer={offer} key={offer.id} />
         ))}
       </div>
     </li>

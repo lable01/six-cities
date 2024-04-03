@@ -43,3 +43,29 @@ export const ReviewLength = {
   min: 50,
   max: 300,
 };
+
+export const SizesCards = {
+  cities: {
+    width: 260,
+    height: 200,
+  },
+  'near-places': {
+    width: 260,
+    height: 200,
+  },
+  favorites: {
+    width: 150,
+    height: 110,
+  },
+} as const;
+
+export const SizesLogo = {
+  header: {
+    width: 81,
+    height: 41,
+  },
+  footer: {
+    width: 64,
+    height: 33,
+  },
+} as const;

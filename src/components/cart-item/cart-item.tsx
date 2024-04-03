@@ -1,7 +1,7 @@
 import { Link } from 'react-router-dom';
 import { TOfferItem } from 'types/offer-item.ts';
 import clsx from 'clsx';
-import { AppRoute } from '../../const';
+import { AppRoute, SizesCards } from '../../const';
 
 type TCartItemProps = {
   offer: TOfferItem;
@@ -9,27 +9,12 @@ type TCartItemProps = {
   typeCard: 'cities' | 'near-places' | 'favorites';
 };
 
-const sizeCard = {
-  cities: {
-    width: 260,
-    height: 200,
-  },
-  'near-places': {
-    width: 260,
-    height: 200,
-  },
-  favorites: {
-    width: 150,
-    height: 110,
-  },
-};
-
 function CartItem({ offer, onCardHover, typeCard }: TCartItemProps) {
   const { id, isPremium, previewImage, title, price, isFavorite, type } = offer;
   const classIsFavorite = isFavorite
     ? ' place-card__bookmark-button--active'
     : '';
-  const size = sizeCard[typeCard];
+  const size = SizesCards[typeCard];
   function handleMouseEnter() {
     onCardHover?.(id);
   }

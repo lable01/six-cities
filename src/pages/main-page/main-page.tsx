@@ -3,31 +3,51 @@ import MainEmpty from 'components/main-empty';
 import MainLayout from 'layouts/main-layout';
 import Header from 'components/header';
 import Tabs from 'components/tabs';
-import { ClassName } from '../../const';
-import { TOfferItemType } from 'types/offer-item';
+import { CitiesNames, ClassName } from '../../const';
+import { TOfferItem } from 'types/offer-item';
 import { Helmet } from 'react-helmet-async';
+import { useState } from 'react';
+import clsx from 'clsx';
 
 type TMainPageProps = {
-  offers: TOfferItemType[];
+  offers: TOfferItem[];
+  onCardHover?: (offerId: string | null) => void;
+  activeOfferId: string | null;
 };
 
-function MainPage({ offers }: TMainPageProps) {
+function MainPage({ offers, onCardHover, activeOfferId }: TMainPageProps) {
+  const [currentCity, setCurrentCity] = useState<string>(CitiesNames.Paris);
+
+  function handleCityClick(selected: string) {
+    setCurrentCity(selected);
+  }
+
+  const currentOffers = offers.filter(
+    (offer) => offer.city.name === currentCity,
+  );
+
+  const mainClassName =
+    currentOffers.length === 0 ? 'page__main--index-empty' : '';
+
   return (
     <MainLayout header={<Header />} className={ClassName.Main}>
       <Helmet>
         <title>Six cities service for travelers - official website</title>
       </Helmet>
-      <main
-        className={
-          offers
-            ? 'page__main page__main--index'
-            : 'page__main page__main--index page__main--index-empty'
-        }
-      >
+      <main className={clsx('page__main page__main--index', mainClassName)}>
         <h1 className="visually-hidden">Cities</h1>
-        <Tabs />
+        <Tabs handleCityClick={handleCityClick} currentCity={currentCity} />
         <div className="cities">
-          {offers ? <MainFull offers={offers} /> : <MainEmpty />}
+          {currentOffers.length !== 0 ? (
+            <MainFull
+              currentOffers={currentOffers}
+              currentCity={currentCity}
+              onCardHover={onCardHover}
+              activeOfferId={activeOfferId}
+            />
+          ) : (
+            <MainEmpty />
+          )}
         </div>
       </main>
     </MainLayout>

@@ -26,8 +26,8 @@ function OffersSorting() {
       <ul
         className={clsx('places__options places__options--custom', className)}
       >
-        {OffersFilters.map((filter, index) => (
-          <li key={index} className="places__option places__option--active">
+        {OffersFilters.map((filter) => (
+          <li key={filter} className="places__option places__option--active">
             {filter}
           </li>
         ))}

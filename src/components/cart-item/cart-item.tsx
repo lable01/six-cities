@@ -1,30 +1,30 @@
 import { Link } from 'react-router-dom';
-import { TOfferItemType } from 'types/offer-item.ts';
+import { TOfferItem } from 'types/offer-item.ts';
 import clsx from 'clsx';
-import { AppRoute } from '../../const';
+import { AppRoute, SizesCards } from '../../const';
 
 type TCartItemProps = {
-  offer: TOfferItemType;
+  offer: TOfferItem;
   onCardHover?: (offerId: string | null) => void;
+  typeCard: 'cities' | 'near-places' | 'favorites';
 };
 
-function CartItem({ offer, onCardHover }: TCartItemProps) {
+function CartItem({ offer, onCardHover, typeCard }: TCartItemProps) {
   const { id, isPremium, previewImage, title, price, isFavorite, type } = offer;
   const classIsFavorite = isFavorite
     ? ' place-card__bookmark-button--active'
     : '';
-
+  const size = SizesCards[typeCard];
   function handleMouseEnter() {
     onCardHover?.(id);
   }
-
   function handleMouseLeave() {
     onCardHover?.(null);
   }
 
   return (
     <article
-      className="cities__card place-card"
+      className={`${typeCard}__card place-card`}
       onMouseEnter={handleMouseEnter}
       onMouseLeave={handleMouseLeave}
     >
@@ -33,13 +33,13 @@ function CartItem({ offer, onCardHover }: TCartItemProps) {
           <span>Premium</span>
         </div>
       )}
-      <div className="cities__image-wrapper place-card__image-wrapper">
+      <div className={`${typeCard}__image-wrapper place-card__image-wrapper`}>
         <Link to={`${AppRoute.Offer}/${id}`}>
           <img
             className="place-card__image"
             src={previewImage}
-            width="260"
-            height="200"
+            width={size.width}
+            height={size.height}
             alt="Place image"
           />
         </Link>

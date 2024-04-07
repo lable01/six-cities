@@ -2,7 +2,8 @@ import React from 'react';
 import ReactDOM from 'react-dom/client';
 import App from './app';
 import { HelmetProvider } from 'react-helmet-async';
-import { Offers } from './mocks/offers';
+import { OffersDetail } from './mocks/offers-detail.ts';
+import { Offers } from './mocks/offers.ts';
 import { Reviews } from './mocks/reviews';
 
 const root = ReactDOM.createRoot(
@@ -12,7 +13,7 @@ const root = ReactDOM.createRoot(
 root.render(
   <HelmetProvider>
     <React.StrictMode>
-      <App offers={Offers} reviews={Reviews} />
+      <App offers={Offers} offersDetail={OffersDetail} reviews={Reviews} />
     </React.StrictMode>
   </HelmetProvider>,
 );

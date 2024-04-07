@@ -1,25 +1,35 @@
 import MainLayout from 'layouts/main-layout';
 import Header from 'components/header';
-import { AppRoute, ClassName } from '../../const';
+import { AppRoute, ClassName, QUANTITY_NEAR_OFFERS } from '../../const';
 import { TOfferDetail } from 'types/offer-detail.ts';
 import { Navigate, useParams } from 'react-router-dom';
 import OfferDetails from 'components/offer-details';
 import OtherOffers from 'components/other-offers';
 import { TReview } from 'types/review.ts';
 import { Helmet } from 'react-helmet-async';
+import { TOfferItem } from 'types/offer-item.ts';
 
 type TOfferPageProps = {
-  offers: TOfferDetail[];
+  offers: TOfferItem[];
+  offersDetail: TOfferDetail[];
   reviews: TReview[];
+  onCardHover?: (offerId: string | null) => void;
 };
 
-function OfferPage({ offers, reviews }: TOfferPageProps) {
+function OfferPage({
+  offers,
+  offersDetail,
+  reviews,
+  onCardHover,
+}: TOfferPageProps) {
   const { id } = useParams();
-  const offer = offers.find((item) => item.id === id);
+  const currentOffer = offersDetail.find((item) => item.id === id);
 
-  if (!offer) {
+  if (!currentOffer) {
     return <Navigate to={AppRoute.NotFound} />;
   }
+
+  const nearOffers = offers.slice(0, QUANTITY_NEAR_OFFERS);
 
   return (
     <MainLayout header={<Header />} className={ClassName.Offer}>
@@ -29,8 +39,12 @@ function OfferPage({ offers, reviews }: TOfferPageProps) {
         </title>
       </Helmet>
       <main className="page__main page__main--offer">
-        <OfferDetails offer={offer} reviews={reviews} />
-        <OtherOffers offers={offers} />
+        <OfferDetails
+          offer={currentOffer}
+          reviews={reviews}
+          nearOffers={nearOffers}
+        />
+        <OtherOffers nearOffers={nearOffers} onCardHover={onCardHover} />
       </main>
     </MainLayout>
   );

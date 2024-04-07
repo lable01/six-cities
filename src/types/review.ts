@@ -1,4 +1,4 @@
-import { TUser } from 'types/user-type.ts';
+import { TUser } from 'types/user.ts';
 
 export type TReview = {
   id: string;

@@ -29,6 +29,7 @@
       "pages/*": ["pages/*"],
       "layouts/*": ["layouts/*"],
       "types/*": ["types/*"],
+      "hooks/*": ["hooks/*"],
     }
   },
   "include": ["src", "vite.config.ts"],

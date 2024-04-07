@@ -1,24 +1,23 @@
-import { CitiesNames } from '../../const';
-function Tabs() {
-  const cities = [
-    CitiesNames.Paris,
-    CitiesNames.Cologne,
-    CitiesNames.Brussels,
-    CitiesNames.Amsterdam,
-    CitiesNames.Hamburg,
-    CitiesNames.Dusseldorf,
-  ];
+import { CITIES } from '../../const';
+import Tab from 'components/tab';
 
+type TabsProps = {
+  handleCityClick: (city: string) => void;
+  currentCity: string;
+};
+
+function Tabs({ handleCityClick, currentCity }: TabsProps) {
   return (
     <div className="tabs">
       <section className="locations container">
         <ul className="locations__list tabs__list">
-          {cities.map((city, index) => (
-            <li key={index} className="locations__item">
-              <a className="locations__item-link tabs__item" href="#">
-                <span>{city}</span>
-              </a>
-            </li>
+          {CITIES.map((city) => (
+            <Tab
+              city={city}
+              key={city}
+              onCityClick={handleCityClick}
+              currentCity={currentCity}
+            />
           ))}
         </ul>
       </section>

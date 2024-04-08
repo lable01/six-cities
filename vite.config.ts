@@ -15,6 +15,8 @@ export default defineConfig({
       layouts: '/src/layouts',
       types: '/src/types',
       hooks: '/src/hooks',
+      mocks: '/src/mocks',
+      store: '/src/store',
     },
   },
   test: {

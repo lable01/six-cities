@@ -1,23 +1,12 @@
 import { CITIES } from '../../const';
 import Tab from 'components/tab';
-
-type TabsProps = {
-  handleCityClick: (city: string) => void;
-  currentCity: string;
-};
-
-function Tabs({ handleCityClick, currentCity }: TabsProps) {
+function Tabs() {
   return (
     <div className="tabs">
       <section className="locations container">
         <ul className="locations__list tabs__list">
           {CITIES.map((city) => (
-            <Tab
-              city={city}
-              key={city}
-              onCityClick={handleCityClick}
-              currentCity={currentCity}
-            />
+            <Tab city={city} key={city} />
           ))}
         </ul>
       </section>

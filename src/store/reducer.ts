@@ -2,6 +2,7 @@ import { Offers } from 'mocks/offers.ts';
 import { CITIES } from '../const';
 import { TOfferItem } from 'types/offer-item';
 import { TCityName } from 'types/city-name';
+import { createAction, createReducer } from '@reduxjs/toolkit';
 
 type TOffersState = {
   city: TCityName;
@@ -13,28 +14,12 @@ const initialState: TOffersState = {
   offers: Offers,
 };
 
-const enum ActionType {
-  SetCity = 'offers/setCity',
-}
+const setCity = createAction<TCityName>('offers/setCity');
 
-const setCity = (city: TCityName) => ({
-  payload: city,
-  type: ActionType.SetCity,
+const reducer = createReducer(initialState, (builder) => {
+  builder.addCase(setCity, (state, action) => {
+    state.city = action.payload;
+  });
 });
-
-function reducer(
-  state: TOffersState = initialState,
-  action: { payload: unknown; type: ActionType },
-): TOffersState {
-  switch (action.type) {
-    case ActionType.SetCity:
-      return {
-        ...state,
-        city: action.payload as TCityName,
-      };
-    default:
-      return state;
-  }
-}
 
 export { reducer, setCity };

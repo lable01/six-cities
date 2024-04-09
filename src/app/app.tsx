@@ -12,12 +12,11 @@ import { TOfferItem } from 'types/offer-item.ts';
 import { useState } from 'react';
 
 type TAppPageProps = {
-  offers: TOfferItem[];
   offersDetail: TOfferDetail[];
   reviews: TReview[];
 };
 
-function App({ offers, offersDetail, reviews }: TAppPageProps) {
+function App({ offersDetail, reviews }: TAppPageProps) {
   const [activeOfferId, setActiveOfferId] = useState<TOfferItem['id'] | null>(
     null,
   );
@@ -30,11 +29,7 @@ function App({ offers, offersDetail, reviews }: TAppPageProps) {
     {
       path: AppRoute.Main,
       element: (
-        <MainPage
-          offers={offers}
-          onCardHover={handleCardHover}
-          activeOfferId={activeOfferId}
-        />
+        <MainPage onCardHover={handleCardHover} activeOfferId={activeOfferId} />
       ),
     },
     {
@@ -45,7 +40,6 @@ function App({ offers, offersDetail, reviews }: TAppPageProps) {
       path: `${AppRoute.Offer}/:id`,
       element: (
         <OfferPage
-          offers={offers}
           offersDetail={offersDetail}
           reviews={reviews}
           onCardHover={handleCardHover}
@@ -63,7 +57,7 @@ function App({ offers, offersDetail, reviews }: TAppPageProps) {
           restrictedFor={AuthorizationStatus.NoAuth}
           redirectTo={AppRoute.Login}
         >
-          <FavoritesPage offers={offers} onCardHover={handleCardHover} />
+          <FavoritesPage onCardHover={handleCardHover} />
         </ProtectedRoute>
       ),
     },

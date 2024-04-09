@@ -3,24 +3,19 @@ import MainEmpty from 'components/main-empty';
 import MainLayout from 'layouts/main-layout';
 import Header from 'components/header';
 import Tabs from 'components/tabs';
-import { CitiesNames, ClassName } from '../../const';
-import { TOfferItem } from 'types/offer-item';
+import { ClassName } from '../../const';
 import { Helmet } from 'react-helmet-async';
-import { useState } from 'react';
 import clsx from 'clsx';
+import { useAppSelector } from 'hooks/store';
 
 type TMainPageProps = {
-  offers: TOfferItem[];
   onCardHover?: (offerId: string | null) => void;
   activeOfferId: string | null;
 };
 
-function MainPage({ offers, onCardHover, activeOfferId }: TMainPageProps) {
-  const [currentCity, setCurrentCity] = useState<string>(CitiesNames.Paris);
-
-  function handleCityClick(selected: string) {
-    setCurrentCity(selected);
-  }
+function MainPage({ onCardHover, activeOfferId }: TMainPageProps) {
+  const offers = useAppSelector((state) => state.offers);
+  const currentCity = useAppSelector((state) => state.city);
 
   const currentOffers = offers.filter(
     (offer) => offer.city.name === currentCity,
@@ -36,12 +31,11 @@ function MainPage({ offers, onCardHover, activeOfferId }: TMainPageProps) {
       </Helmet>
       <main className={clsx('page__main page__main--index', mainClassName)}>
         <h1 className="visually-hidden">Cities</h1>
-        <Tabs handleCityClick={handleCityClick} currentCity={currentCity} />
+        <Tabs />
         <div className="cities">
           {currentOffers.length !== 0 ? (
             <MainFull
               currentOffers={currentOffers}
-              currentCity={currentCity}
               onCardHover={onCardHover}
               activeOfferId={activeOfferId}
             />

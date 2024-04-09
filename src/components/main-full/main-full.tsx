@@ -2,20 +2,21 @@ import CartItem from 'components/cart-item';
 import OffersSorting from 'components/offers-sorting';
 import Map from 'components/map';
 import { TOfferItem } from 'types/offer-item';
+import { useAppSelector } from 'hooks/store';
 
 type MainFullProps = {
   currentOffers: TOfferItem[];
-  currentCity: string;
   onCardHover?: (offerId: string | null) => void;
   activeOfferId: string | null;
 };
 
 function MainFull({
   currentOffers,
-  currentCity,
   onCardHover,
   activeOfferId,
 }: MainFullProps) {
+  const currentCity = useAppSelector((state) => state.city);
+
   return (
     <div className="cities__places-container container">
       <section className="cities__places places">

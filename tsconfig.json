@@ -30,6 +30,8 @@
       "layouts/*": ["layouts/*"],
       "types/*": ["types/*"],
       "hooks/*": ["hooks/*"],
+      "mocks/*": ["mocks/*"],
+      "store/*": ["store/*"],
     }
   },
   "include": ["src", "vite.config.ts"],

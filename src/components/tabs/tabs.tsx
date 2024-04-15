@@ -1,23 +1,16 @@
 import { CITIES } from '../../const';
 import Tab from 'components/tab';
+import { useAppSelector } from 'hooks/store';
 
-type TabsProps = {
-  handleCityClick: (city: string) => void;
-  currentCity: string;
-};
+function Tabs() {
+  const currentCity = useAppSelector((state) => state.city);
 
-function Tabs({ handleCityClick, currentCity }: TabsProps) {
   return (
     <div className="tabs">
       <section className="locations container">
         <ul className="locations__list tabs__list">
           {CITIES.map((city) => (
-            <Tab
-              city={city}
-              key={city}
-              onCityClick={handleCityClick}
-              currentCity={currentCity}
-            />
+            <Tab city={city} currentCity={currentCity} key={city} />
           ))}
         </ul>
       </section>

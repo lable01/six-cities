@@ -4,13 +4,11 @@ import Footer from 'components/footer';
 import { ClassName } from '../../const';
 import { Helmet } from 'react-helmet-async';
 import FavoritesBlock from 'components/favorite-page-component/favorites-block';
-import { TOfferItem } from 'types/offer-item.ts';
+import { useAppSelector } from 'hooks/store';
 
-type TFavoritesPage = {
-  offers: TOfferItem[];
-  onCardHover?: (offerId: string | null) => void;
-};
-function FavoritesPage({ offers, onCardHover }: TFavoritesPage) {
+function FavoritesPage() {
+  const offers = useAppSelector((state) => state.offers);
+
   return (
     <>
       <MainLayout header={<Header />} className={ClassName.Favorites}>
@@ -21,7 +19,7 @@ function FavoritesPage({ offers, onCardHover }: TFavoritesPage) {
         </Helmet>
         <main className="page__main page__main--favorites">
           <div className="page__favorites-container container">
-            <FavoritesBlock offers={offers} onCardHover={onCardHover} />
+            <FavoritesBlock offers={offers} />
           </div>
         </main>
       </MainLayout>

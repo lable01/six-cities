@@ -7,22 +7,16 @@ import OfferDetails from 'components/offer-details';
 import OtherOffers from 'components/other-offers';
 import { TReview } from 'types/review.ts';
 import { Helmet } from 'react-helmet-async';
-import { TOfferItem } from 'types/offer-item.ts';
+import { useAppSelector } from 'hooks/store';
 
 type TOfferPageProps = {
-  offers: TOfferItem[];
   offersDetail: TOfferDetail[];
   reviews: TReview[];
-  onCardHover?: (offerId: string | null) => void;
 };
 
-function OfferPage({
-  offers,
-  offersDetail,
-  reviews,
-  onCardHover,
-}: TOfferPageProps) {
+function OfferPage({ offersDetail, reviews }: TOfferPageProps) {
   const { id } = useParams();
+  const offers = useAppSelector((state) => state.offers);
   const currentOffer = offersDetail.find((item) => item.id === id);
 
   if (!currentOffer) {
@@ -44,7 +38,7 @@ function OfferPage({
           reviews={reviews}
           nearOffers={nearOffers}
         />
-        <OtherOffers nearOffers={nearOffers} onCardHover={onCardHover} />
+        <OtherOffers nearOffers={nearOffers} />
       </main>
     </MainLayout>
   );

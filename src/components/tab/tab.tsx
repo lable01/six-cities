@@ -1,21 +1,26 @@
 import clsx from 'clsx';
+import { useAppDispatch } from 'hooks/store';
+import { setCity } from 'store/reducer.ts';
+import { TCityName } from 'types/city-name.ts';
 
 type TabProps = {
-  city: string;
-  onCityClick: (city: string) => void;
-  currentCity: string;
+  city: TCityName;
+  currentCity: TCityName;
 };
 
-function Tab({ city, onCityClick, currentCity }: TabProps) {
-  function handleClick() {
-    onCityClick(city);
-  }
-
+function Tab({ city, currentCity }: TabProps) {
+  const dispatch = useAppDispatch();
   const isActiveTab =
     currentCity === city ? 'tabs__item--active' : 'tabs__item';
 
   return (
-    <li onClick={handleClick} className="locations__item">
+    <li
+      onClick={(evt) => {
+        evt.preventDefault();
+        dispatch(setCity(city));
+      }}
+      className="locations__item"
+    >
       <a className={clsx('locations__item-link', isActiveTab)} href="#">
         <span>{city}</span>
       </a>

@@ -8,8 +8,6 @@ import OfferPage from 'pages/offer-page';
 import ProtectedRoute from 'components/protected-route';
 import { TOfferDetail } from 'types/offer-detail.ts';
 import { TReview } from 'types/review.ts';
-import { TOfferItem } from 'types/offer-item.ts';
-import { useState } from 'react';
 
 type TAppPageProps = {
   offersDetail: TOfferDetail[];
@@ -17,20 +15,10 @@ type TAppPageProps = {
 };
 
 function App({ offersDetail, reviews }: TAppPageProps) {
-  const [activeOfferId, setActiveOfferId] = useState<TOfferItem['id'] | null>(
-    null,
-  );
-
-  function handleCardHover(offerId: TOfferItem['id'] | null) {
-    setActiveOfferId(offerId);
-  }
-
   const router = createBrowserRouter([
     {
       path: AppRoute.Main,
-      element: (
-        <MainPage onCardHover={handleCardHover} activeOfferId={activeOfferId} />
-      ),
+      element: <MainPage />,
     },
     {
       path: AppRoute.Login,
@@ -38,13 +26,7 @@ function App({ offersDetail, reviews }: TAppPageProps) {
     },
     {
       path: `${AppRoute.Offer}/:id`,
-      element: (
-        <OfferPage
-          offersDetail={offersDetail}
-          reviews={reviews}
-          onCardHover={handleCardHover}
-        />
-      ),
+      element: <OfferPage offersDetail={offersDetail} reviews={reviews} />,
     },
     {
       path: AppRoute.NotFound,
@@ -57,7 +39,7 @@ function App({ offersDetail, reviews }: TAppPageProps) {
           restrictedFor={AuthorizationStatus.NoAuth}
           redirectTo={AppRoute.Login}
         >
-          <FavoritesPage onCardHover={handleCardHover} />
+          <FavoritesPage />
         </ProtectedRoute>
       ),
     },

@@ -6,11 +6,9 @@ import { Helmet } from 'react-helmet-async';
 import FavoritesBlock from 'components/favorite-page-component/favorites-block';
 import { useAppSelector } from 'hooks/store';
 
-type TFavoritesPage = {
-  onCardHover?: (offerId: string | null) => void;
-};
-function FavoritesPage({ onCardHover }: TFavoritesPage) {
+function FavoritesPage() {
   const offers = useAppSelector((state) => state.offers);
+
   return (
     <>
       <MainLayout header={<Header />} className={ClassName.Favorites}>
@@ -21,7 +19,7 @@ function FavoritesPage({ onCardHover }: TFavoritesPage) {
         </Helmet>
         <main className="page__main page__main--favorites">
           <div className="page__favorites-container container">
-            <FavoritesBlock offers={offers} onCardHover={onCardHover} />
+            <FavoritesBlock offers={offers} />
           </div>
         </main>
       </MainLayout>

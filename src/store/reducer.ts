@@ -1,4 +1,4 @@
-import { Offers } from 'mocks/offers.ts';
+import { offers } from 'mocks/offers.ts';
 import { CITIES } from '../const';
 import { TOfferItem } from 'types/offer-item';
 import { TCityName } from 'types/city-name';
@@ -11,7 +11,7 @@ type TOffersState = {
 
 const initialState: TOffersState = {
   city: CITIES[0],
-  offers: Offers,
+  offers,
 };
 
 const setCity = createAction<TCityName>('offers/setCity');

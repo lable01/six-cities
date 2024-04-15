@@ -5,10 +5,9 @@ import CartItem from 'components/cart-item';
 
 type TOtherOffersProps = {
   nearOffers: TOfferItem[];
-  onCardHover?: (OfferId: string | null) => void;
 };
 
-function OtherOffers({ nearOffers, onCardHover }: TOtherOffersProps) {
+function OtherOffers({ nearOffers }: TOtherOffersProps) {
   if (!nearOffers) {
     return <Navigate to={AppRoute.NotFound} />;
   }
@@ -24,7 +23,6 @@ function OtherOffers({ nearOffers, onCardHover }: TOtherOffersProps) {
             <CartItem
               key={nearOffer.id}
               offer={nearOffer}
-              onCardHover={onCardHover}
               typeCard="near-places"
             />
           ))}

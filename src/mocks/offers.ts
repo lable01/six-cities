@@ -1,6 +1,6 @@
 import { TOfferItem } from 'types/offer-item.ts';
 
-export const Offers: TOfferItem[] = [
+export const offers: TOfferItem[] = [
   {
     id: '7b0aaac0-6cd6-4fc0-bb7f-2d8c473f8ab5',
     title: 'House in countryside',

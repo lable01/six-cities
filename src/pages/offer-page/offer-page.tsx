@@ -12,10 +12,9 @@ import { useAppSelector } from 'hooks/store';
 type TOfferPageProps = {
   offersDetail: TOfferDetail[];
   reviews: TReview[];
-  onCardHover?: (offerId: string | null) => void;
 };
 
-function OfferPage({ offersDetail, reviews, onCardHover }: TOfferPageProps) {
+function OfferPage({ offersDetail, reviews }: TOfferPageProps) {
   const { id } = useParams();
   const offers = useAppSelector((state) => state.offers);
   const currentOffer = offersDetail.find((item) => item.id === id);
@@ -39,7 +38,7 @@ function OfferPage({ offersDetail, reviews, onCardHover }: TOfferPageProps) {
           reviews={reviews}
           nearOffers={nearOffers}
         />
-        <OtherOffers nearOffers={nearOffers} onCardHover={onCardHover} />
+        <OtherOffers nearOffers={nearOffers} />
       </main>
     </MainLayout>
   );

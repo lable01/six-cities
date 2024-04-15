@@ -4,14 +4,9 @@ import CartItem from 'components/cart-item';
 type TFavoritesOffers = {
   city: string;
   favoritesOffers: TOfferItem[];
-  onCardHover?: (offerId: string | null) => void;
 };
 
-function FavoritesOffers({
-  city,
-  favoritesOffers,
-  onCardHover,
-}: TFavoritesOffers) {
+function FavoritesOffers({ city, favoritesOffers }: TFavoritesOffers) {
   return (
     <li className="favorites__locations-items">
       <div className="favorites__locations locations locations--current">
@@ -23,12 +18,7 @@ function FavoritesOffers({
       </div>
       <div className="favorites__places">
         {favoritesOffers.map((offer) => (
-          <CartItem
-            key={offer.id}
-            offer={offer}
-            onCardHover={onCardHover}
-            typeCard="favorites"
-          />
+          <CartItem key={offer.id} offer={offer} typeCard="favorites" />
         ))}
       </div>
     </li>

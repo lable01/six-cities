@@ -1,15 +1,14 @@
 import clsx from 'clsx';
-import { useAppDispatch, useAppSelector } from 'hooks/store';
+import { useAppDispatch } from 'hooks/store';
 import { setCity } from 'store/reducer.ts';
 import { TCityName } from 'types/city-name.ts';
 
 type TabProps = {
   city: TCityName;
+  currentCity: TCityName;
 };
 
-function Tab({ city }: TabProps) {
-  const currentCity = useAppSelector((state) => state.city);
-
+function Tab({ city, currentCity }: TabProps) {
   const dispatch = useAppDispatch();
   const isActiveTab =
     currentCity === city ? 'tabs__item--active' : 'tabs__item';

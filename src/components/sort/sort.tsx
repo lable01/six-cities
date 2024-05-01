@@ -2,38 +2,38 @@ import clsx from 'clsx';
 import { SORT_OPTIONS } from './const';
 import useBoolean from 'hooks/use-boolean';
 import { useEffect } from 'react';
+import { useAppDispatch } from 'hooks/store';
+import { setSort } from 'store/reducer.ts';
 
 type SortProps = {
   current: number;
-  setter: (option: number) => void;
 };
 
-function Sort({ current, setter }: SortProps) {
+function Sort({ current }: SortProps) {
   const { isOn, off, toggle } = useBoolean(false);
+  const dispatch = useAppDispatch();
 
   useEffect(() => {
-    if (isOn) {
-      const onEscKeyDown = (evt: KeyboardEvent) => {
-        if (evt.key === 'Escape') {
-          evt.preventDefault();
-          off();
-        }
-      };
+    const onEscKeyDown = (evt: KeyboardEvent) => {
+      if (evt.key === 'Escape') {
+        evt.preventDefault();
+        off();
+      }
+    };
 
-      document.addEventListener('keydown', onEscKeyDown);
+    document.addEventListener('keydown', onEscKeyDown);
 
-      return () => {
-        document.removeEventListener('keydown', onEscKeyDown);
-      };
-    }
-  }, [isOn, off]);
+    return () => {
+      document.removeEventListener('keydown', onEscKeyDown);
+    };
+  }, [off]);
 
   const selectedFilter = SORT_OPTIONS[current];
 
   return (
-    <form className="places__sorting" action="#" method="get" onClick={toggle}>
+    <form className="places__sorting" action="#" method="get">
       <span className="places__sorting-caption">Sort by</span>
-      <span className="places__sorting-type" tabIndex={0}>
+      <span className="places__sorting-type" onClick={toggle} tabIndex={0}>
         {selectedFilter}
         <svg className="places__sorting-arrow" width="7" height="4">
           <use xlinkHref="#icon-arrow-select"></use>
@@ -51,7 +51,10 @@ function Sort({ current, setter }: SortProps) {
             className={clsx('places__option ', {
               'places__option--active': selectedFilter === filter,
             })}
-            onClick={() => setter(index)}
+            onClick={() => {
+              dispatch(setSort(index));
+              off();
+            }}
             tabIndex={0}
           >
             {filter}

@@ -3,8 +3,8 @@ import Sort from 'components/sort';
 import Map from 'components/map';
 import { TOfferItem } from 'types/offer-item';
 import { useAppSelector } from 'hooks/store';
-import { useState } from 'react';
 import { SortOption } from 'components/sort/const.ts';
+import { getSortedOffers } from '../../utils/function.ts';
 
 type MainFullProps = {
   currentOffers: TOfferItem[];
@@ -18,22 +18,9 @@ function MainFull({
   activeOfferId,
 }: MainFullProps) {
   const currentCity = useAppSelector((state) => state.city);
+  const currentSort: SortOption = useAppSelector((state) => state.sort);
 
-  const [activeSort, setActiveSort] = useState(SortOption.Popular);
-
-  let sortedOffers = currentOffers;
-
-  if (activeSort === SortOption.PriceLowToHigh) {
-    sortedOffers = [...currentOffers].sort((a, b) => a.price - b.price);
-  }
-
-  if (activeSort === SortOption.PriceHighToLow) {
-    sortedOffers = [...currentOffers].sort((a, b) => b.price - a.price);
-  }
-
-  if (activeSort === SortOption.TopRatedFirst) {
-    sortedOffers = [...currentOffers].sort((a, b) => b.rating - a.rating);
-  }
+  const sortedOffers = getSortedOffers(currentOffers, currentSort);
 
   return (
     <div className="cities__places-container container">
@@ -42,7 +29,7 @@ function MainFull({
         <b className="places__found">
           {currentOffers.length} places to stay in {currentCity}
         </b>
-        <Sort current={activeSort} setter={setActiveSort} />
+        <Sort current={currentSort} />
         <div className="cities__places-list places__list tabs__content">
           {sortedOffers.map((offer) => (
             <CartItem

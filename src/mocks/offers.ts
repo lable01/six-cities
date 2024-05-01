@@ -5,7 +5,7 @@ export const offers: TOfferItem[] = [
     id: '7b0aaac0-6cd6-4fc0-bb7f-2d8c473f8ab5',
     title: 'House in countryside',
     previewImage: 'https://14.design.htmlacademy.pro/static/hotel/14.jpg',
-    type: 'house',
+    type: 'House',
     price: 896,
     city: {
       name: 'Paris',
@@ -27,7 +27,7 @@ export const offers: TOfferItem[] = [
   {
     id: '345666c0-6cd6-4fc0-bb7f-2d8c473f8ab5',
     title: 'House in countryside',
-    type: 'house',
+    type: 'House',
     price: 789797,
     previewImage: 'https://14.design.htmlacademy.pro/static/hotel/8.jpg',
     city: {
@@ -51,7 +51,7 @@ export const offers: TOfferItem[] = [
     id: '6b9e8883-2012-485c-8454-91e130e8d19f',
     title: 'The Pond house - A Magical Place',
     previewImage: 'https://14.design.htmlacademy.pro/static/hotel/1.jpg',
-    type: 'room',
+    type: 'Room',
     price: 296,
     city: {
       name: 'Paris',
@@ -74,7 +74,7 @@ export const offers: TOfferItem[] = [
     id: '2778a0e7-7e4a-404f-a00b-9160d691aac0',
     title: 'Perfectly located Castro',
     previewImage: 'https://14.design.htmlacademy.pro/static/hotel/7.jpg',
-    type: 'hotel',
+    type: 'Hotel',
     price: 280,
     city: {
       name: 'Paris',
@@ -97,7 +97,7 @@ export const offers: TOfferItem[] = [
     id: '5562610-5562610-5562610-5562610-5562610',
     title: 'Nice, cozy, warm big bed apartment',
     previewImage: 'https://14.design.htmlacademy.pro/static/hotel/11.jpg',
-    type: 'apartment',
+    type: 'Apartment',
     price: 199,
     city: {
       name: 'Paris',
@@ -120,7 +120,7 @@ export const offers: TOfferItem[] = [
     id: '56733-5562610-5562610-2344-34567',
     title: 'Nice, cozy, warm big bed apartment',
     previewImage: 'https://14.design.htmlacademy.pro/static/hotel/17.jpg',
-    type: 'apartment',
+    type: 'Apartment',
     price: 555,
     city: {
       name: 'Amsterdam',
@@ -143,7 +143,7 @@ export const offers: TOfferItem[] = [
     id: '5464574-5562610-5562610-5562610-5562610',
     title: 'Nice, cozy, warm big bed apartment',
     previewImage: 'https://14.design.htmlacademy.pro/static/hotel/1.jpg',
-    type: 'apartment',
+    type: 'Apartment',
     price: 144,
     city: {
       name: 'Amsterdam',
@@ -166,7 +166,7 @@ export const offers: TOfferItem[] = [
     id: '35352535-5562610-5562610-5562610-5562610',
     title: 'Nice, cozy, warm big bed apartment',
     previewImage: 'https://14.design.htmlacademy.pro/static/hotel/4.jpg',
-    type: 'apartment',
+    type: 'Apartment',
     price: 543,
     city: {
       name: 'Amsterdam',
@@ -189,7 +189,7 @@ export const offers: TOfferItem[] = [
     id: '5562610-1232134-5562610-5562610-5562610',
     title: 'Nice, cozy, warm big bed apartment',
     previewImage: 'https://14.design.htmlacademy.pro/static/hotel/12.jpg',
-    type: 'apartment',
+    type: 'Apartment',
     price: 234,
     city: {
       name: 'Amsterdam',
@@ -212,7 +212,7 @@ export const offers: TOfferItem[] = [
     id: '32476867-1232134-5562610-5562610-5562610',
     title: 'Nice, cozy, warm big bed apartment',
     previewImage: 'https://14.design.htmlacademy.pro/static/hotel/3.jpg',
-    type: 'apartment',
+    type: 'Apartment',
     price: 234,
     city: {
       name: 'Amsterdam',

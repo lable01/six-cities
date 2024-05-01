@@ -1,13 +1,19 @@
-import { useState } from 'react';
+import { useCallback, useMemo, useState } from 'react';
 
 export function useBoolean(initialValue = false) {
   const [isOn, setIsOn] = useState(initialValue);
 
-  return {
-    isOn,
-    off: () => setIsOn(false),
-    toggle: () => setIsOn((prev) => !prev),
-  };
+  const off = useCallback(() => setIsOn(false), []);
+  const toggle = useCallback(() => setIsOn((prev) => !prev), []);
+
+  return useMemo(
+    () => ({
+      isOn,
+      off,
+      toggle,
+    }),
+    [isOn, off, toggle],
+  );
 }
 
 export default useBoolean;

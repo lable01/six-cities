@@ -22,12 +22,13 @@ const setCity = createAction<TCityName>('offers/setCity');
 const setSort = createAction<number>('offers/setSort');
 
 const reducer = createReducer(initialState, (builder) => {
-  builder.addCase(setCity, (state, action) => {
-    state.city = action.payload;
-  });
-  builder.addCase(setSort, (state, action) => {
-    state.sort = action.payload;
-  });
+  builder
+    .addCase(setCity, (state, action) => {
+      state.city = action.payload;
+    })
+    .addCase(setSort, (state, action) => {
+      state.sort = action.payload;
+    });
 });
 
 export { reducer, setCity, setSort };

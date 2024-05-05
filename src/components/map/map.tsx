@@ -14,13 +14,13 @@ type MapProps = {
 
 const defaultMarkerIcon = leaflet.icon({
   iconUrl: URL_MARKER_DEFAULT,
-  iconSize: [40, 40],
+  iconSize: [27, 39],
   iconAnchor: [20, 40],
 });
 
 const activeMarkerIcon = leaflet.icon({
   iconUrl: URL_MARKER_ACTIVE,
-  iconSize: [40, 40],
+  iconSize: [27, 39],
   iconAnchor: [20, 40],
 });
 

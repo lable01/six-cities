@@ -6,7 +6,7 @@ export const OffersDetail: TOfferDetail[] = [
     title: 'House in countryside',
     description:
       'I am happy to welcome you to my apartment in the city center! Three words: location, cosy and chic!',
-    type: 'house',
+    type: 'House',
     price: 896,
     images: [
       'https://14.design.htmlacademy.pro/static/hotel/2.jpg',
@@ -58,7 +58,7 @@ export const OffersDetail: TOfferDetail[] = [
     title: 'House in countryside',
     description:
       'I am happy to welcome you to my apartment in the city center! Three words: location, cosy and chic!',
-    type: 'house',
+    type: 'House',
     price: 789797,
     images: [
       'https://14.design.htmlacademy.pro/static/hotel/16.jpg',
@@ -110,7 +110,7 @@ export const OffersDetail: TOfferDetail[] = [
     title: 'The Pond house - A Magical Place',
     description:
       'I am happy to welcome you to my apartment in the city center! Three words: location, cosy and chic!',
-    type: 'room',
+    type: 'Room',
     price: 296,
     images: [
       'https://14.design.htmlacademy.pro/static/hotel/19.jpg',
@@ -165,7 +165,7 @@ export const OffersDetail: TOfferDetail[] = [
     title: 'Perfectly located Castro',
     description:
       'Discover daily local life in city center, friendly neighborhood, clandestine casino, karaoke, old-style artisans, art gallery and artist studio downstairs.',
-    type: 'hotel',
+    type: 'Hotel',
     price: 280,
     images: [
       'https://14.design.htmlacademy.pro/static/hotel/7.jpg',
@@ -216,7 +216,7 @@ export const OffersDetail: TOfferDetail[] = [
     title: 'Nice, cozy, warm big bed apartment',
     description:
       'A new spacious villa, one floor. All commodities, jacuzzi and beautiful scenery. Ideal for families or friends.',
-    type: 'apartment',
+    type: 'Apartment',
     price: 199,
     images: [
       'https://14.design.htmlacademy.pro/static/hotel/11.jpg',
@@ -265,7 +265,7 @@ export const OffersDetail: TOfferDetail[] = [
     title: 'Nice, cozy, warm big bed apartment',
     description:
       'A new spacious villa, one floor. All commodities, jacuzzi and beautiful scenery. Ideal for families or friends.',
-    type: 'apartment',
+    type: 'Apartment',
     price: 555,
     images: [
       'https://14.design.htmlacademy.pro/static/hotel/17.jpg',
@@ -310,7 +310,7 @@ export const OffersDetail: TOfferDetail[] = [
     title: 'Nice, cozy, warm big bed apartment',
     description:
       'A new spacious villa, one floor. All commodities, jacuzzi and beautiful scenery. Ideal for families or friends.',
-    type: 'apartment',
+    type: 'Apartment',
     price: 144,
     images: [
       'https://14.design.htmlacademy.pro/static/hotel/1.jpg',
@@ -356,7 +356,7 @@ export const OffersDetail: TOfferDetail[] = [
     title: 'Nice, cozy, warm big bed apartment',
     description:
       'A new spacious villa, one floor. All commodities, jacuzzi and beautiful scenery. Ideal for families or friends.',
-    type: 'apartment',
+    type: 'Apartment',
     price: 543,
     images: [
       'https://14.design.htmlacademy.pro/static/hotel/24.jpg',
@@ -402,7 +402,7 @@ export const OffersDetail: TOfferDetail[] = [
     title: 'Nice, cozy, warm big bed apartment',
     description:
       'A new spacious villa, one floor. All commodities, jacuzzi and beautiful scenery. Ideal for families or friends.',
-    type: 'apartment',
+    type: 'Apartment',
     price: 234,
     images: [
       'https://14.design.htmlacademy.pro/static/hotel/27.jpg',

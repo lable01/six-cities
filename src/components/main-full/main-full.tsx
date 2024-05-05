@@ -1,8 +1,10 @@
 import CartItem from 'components/cart-item';
-import OffersSorting from 'components/offers-sorting';
+import Sort from 'components/sort';
 import Map from 'components/map';
 import { TOfferItem } from 'types/offer-item';
 import { useAppSelector } from 'hooks/store';
+import { SortOption } from 'components/sort/const.ts';
+import { getSortedOffers } from '../../utils/function.ts';
 
 type MainFullProps = {
   currentOffers: TOfferItem[];
@@ -16,6 +18,9 @@ function MainFull({
   activeOfferId,
 }: MainFullProps) {
   const currentCity = useAppSelector((state) => state.city);
+  const currentSort: SortOption = useAppSelector((state) => state.sort);
+
+  const sortedOffers = getSortedOffers(currentOffers, currentSort);
 
   return (
     <div className="cities__places-container container">
@@ -24,9 +29,9 @@ function MainFull({
         <b className="places__found">
           {currentOffers.length} places to stay in {currentCity}
         </b>
-        <OffersSorting />
+        <Sort current={currentSort} />
         <div className="cities__places-list places__list tabs__content">
-          {currentOffers.map((offer) => (
+          {sortedOffers.map((offer) => (
             <CartItem
               key={offer.id}
               onCardHover={onCardHover}

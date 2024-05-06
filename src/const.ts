@@ -69,3 +69,23 @@ export const SizesLogo = {
     height: 33,
   },
 } as const;
+
+export const Default = {
+  BaseURL: 'https://15.design.htmlacademy.pro/six-cities',
+  Timeout: 5000,
+} as const;
+
+export const RequestStatus = {
+  Idle: 'Idle',
+  Loading: 'Loading',
+  Success: 'Success',
+  Failed: 'Failed',
+} as const;
+
+export const EndPoint = {
+  Comments: '/comments',
+  Favorite: '/favorite',
+  Login: '/login',
+  Logout: '/logout',
+  Offers: '/offers',
+} as const;

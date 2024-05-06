@@ -32,6 +32,7 @@
       "hooks/*": ["hooks/*"],
       "mocks/*": ["mocks/*"],
       "store/*": ["store/*"],
+      "services/*": ["services/*"],
     }
   },
   "include": ["src", "vite.config.ts"],

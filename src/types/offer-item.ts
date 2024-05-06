@@ -6,10 +6,10 @@ export type TOfferItem = {
   title: string;
   type: string;
   price: number;
+  previewImage: string;
   city: TCity;
   location: TLocation;
   isFavorite: boolean;
   isPremium: boolean;
   rating: number;
-  previewImage: string;
 };

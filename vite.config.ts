@@ -17,6 +17,7 @@ export default defineConfig({
       hooks: '/src/hooks',
       mocks: '/src/mocks',
       store: '/src/store',
+      services: '/src/services',
     },
   },
   test: {

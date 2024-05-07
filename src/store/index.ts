@@ -1,9 +1,11 @@
 import { configureStore } from '@reduxjs/toolkit';
-import { reducer } from './reducer';
 import { createAPI } from 'services/api.ts';
+import { offersSlice } from 'store/slices/offers.ts';
 
 export const store = configureStore({
   middleware: (getDefaultMiddleware) =>
     getDefaultMiddleware({ thunk: { extraArgument: createAPI() } }),
-  reducer,
+  reducer: {
+    [offersSlice.name]: offersSlice.reducer,
+  },
 });

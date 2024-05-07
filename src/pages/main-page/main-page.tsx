@@ -9,13 +9,14 @@ import clsx from 'clsx';
 import { useAppSelector } from 'hooks/store';
 import { useState } from 'react';
 import { TOfferItem } from 'types/offer-item.ts';
+import { selectCity, selectOffers } from 'store/selectors/offers';
 
 function MainPage() {
   const [activeOfferId, setActiveOfferId] = useState<TOfferItem['id'] | null>(
     null,
   );
-  const offers = useAppSelector((state) => state.offers);
-  const currentCity = useAppSelector((state) => state.city);
+  const offers = useAppSelector(selectOffers);
+  const currentCity = useAppSelector(selectCity);
   const currentOffers = offers.filter(
     (offer) => offer.city.name === currentCity,
   );

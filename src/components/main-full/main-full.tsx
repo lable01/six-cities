@@ -4,7 +4,7 @@ import Map from 'components/map';
 import { TOfferItem } from 'types/offer-item';
 import { useAppSelector } from 'hooks/store';
 import { getSortedOffers } from '../../utils/function';
-import { selectCity, selectSort } from 'store/selectors/offers';
+import { offersSelectors } from 'store/slices/offers';
 
 type MainFullProps = {
   currentOffers: TOfferItem[];
@@ -17,8 +17,8 @@ function MainFull({
   onCardHover,
   activeOfferId,
 }: MainFullProps) {
-  const currentCity = useAppSelector(selectCity);
-  const currentSort = useAppSelector(selectSort);
+  const currentCity = useAppSelector(offersSelectors.city);
+  const currentSort = useAppSelector(offersSelectors.sort);
 
   const sortedOffers = getSortedOffers(currentOffers, currentSort);
 

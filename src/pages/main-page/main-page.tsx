@@ -3,20 +3,27 @@ import MainEmpty from 'components/main-empty';
 import MainLayout from 'layouts/main-layout';
 import Header from 'components/header';
 import Tabs from 'components/tabs';
-import { ClassName } from '../../const';
+import { ClassName, RequestStatus } from '../../const';
 import { Helmet } from 'react-helmet-async';
 import clsx from 'clsx';
-import { useAppSelector } from 'hooks/store';
-import { useState } from 'react';
+import { useAppDispatch, useAppSelector } from 'hooks/store';
+import { useEffect, useState } from 'react';
 import { TOfferItem } from 'types/offer-item.ts';
-import { selectCity, selectOffers } from 'store/selectors/offers';
+import { offersSelectors } from 'store/slices/offers';
+import { fetchAllOffers } from 'store/thunks/offers.ts';
 
 function MainPage() {
   const [activeOfferId, setActiveOfferId] = useState<TOfferItem['id'] | null>(
     null,
   );
-  const offers = useAppSelector(selectOffers);
-  const currentCity = useAppSelector(selectCity);
+  const dispatch = useAppDispatch();
+
+  useEffect(() => {
+    dispatch(fetchAllOffers());
+  }, [dispatch]);
+
+  const offers = useAppSelector(offersSelectors.offers);
+  const currentCity = useAppSelector(offersSelectors.city);
   const currentOffers = offers.filter(
     (offer) => offer.city.name === currentCity,
   );
@@ -25,6 +32,12 @@ function MainPage() {
 
   function handleCardHover(offerId: TOfferItem['id'] | null) {
     setActiveOfferId(offerId);
+  }
+
+  const status = useAppSelector(offersSelectors.status);
+
+  if (status === RequestStatus.Loading) {
+    return <div>Loading</div>;
   }
 
   return (

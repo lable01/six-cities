@@ -1,10 +1,10 @@
 import { CITIES } from '../../const';
 import Tab from 'components/tab';
 import { useAppSelector } from 'hooks/store';
-import { selectCity } from 'store/selectors/offers';
+import { offersSelectors } from 'store/slices/offers';
 
 function Tabs() {
-  const currentCity = useAppSelector(selectCity);
+  const currentCity = useAppSelector(offersSelectors.city);
 
   return (
     <div className="tabs">

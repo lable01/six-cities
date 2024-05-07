@@ -8,7 +8,7 @@ import OtherOffers from 'components/other-offers';
 import { TReview } from 'types/review.ts';
 import { Helmet } from 'react-helmet-async';
 import { useAppSelector } from 'hooks/store';
-import { selectOffers } from 'store/selectors/offers';
+import { offersSelectors } from 'store/slices/offers';
 
 type TOfferPageProps = {
   offersDetail: TOfferDetail[];
@@ -17,7 +17,7 @@ type TOfferPageProps = {
 
 function OfferPage({ offersDetail, reviews }: TOfferPageProps) {
   const { id } = useParams();
-  const offers = useAppSelector(selectOffers);
+  const offers = useAppSelector(offersSelectors.offers);
   const currentOffer = offersDetail.find((item) => item.id === id);
 
   if (!currentOffer) {

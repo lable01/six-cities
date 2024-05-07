@@ -75,12 +75,12 @@ export const Default = {
   Timeout: 5000,
 } as const;
 
-export const RequestStatus = {
-  Idle: 'Idle',
-  Loading: 'Loading',
-  Success: 'Success',
-  Failed: 'Failed',
-} as const;
+export const enum RequestStatus {
+  Idle,
+  Loading,
+  Success,
+  Failed,
+}
 
 export const EndPoint = {
   Comments: '/comments',

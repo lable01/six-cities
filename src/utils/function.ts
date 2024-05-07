@@ -26,16 +26,18 @@ function randomBoolean() {
 function getSortedOffers(offers: TOfferItem[], currentSort: SortOption) {
   let sortedOffers = offers;
 
-  if (currentSort === SortOption.PriceLowToHigh) {
-    sortedOffers = [...offers].sort((a, b) => a.price - b.price);
-  }
-
-  if (currentSort === SortOption.PriceHighToLow) {
-    sortedOffers = [...offers].sort((a, b) => b.price - a.price);
-  }
-
-  if (currentSort === SortOption.TopRatedFirst) {
-    sortedOffers = [...offers].sort((a, b) => b.rating - a.rating);
+  switch (currentSort) {
+    case SortOption.PriceLowToHigh:
+      sortedOffers = [...offers].sort((a, b) => a.price - b.price);
+      break;
+    case SortOption.PriceHighToLow:
+      sortedOffers = [...offers].sort((a, b) => b.price - a.price);
+      break;
+    case SortOption.TopRatedFirst:
+      sortedOffers = [...offers].sort((a, b) => b.rating - a.rating);
+      break;
+    default:
+      break;
   }
 
   return sortedOffers;

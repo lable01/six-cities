@@ -3,7 +3,6 @@ import Sort from 'components/sort';
 import Map from 'components/map';
 import { TOfferItem } from 'types/offer-item';
 import { useAppSelector } from 'hooks/store';
-import { SortOption } from 'components/sort/const.ts';
 import { getSortedOffers } from '../../utils/function.ts';
 
 type MainFullProps = {
@@ -18,7 +17,7 @@ function MainFull({
   activeOfferId,
 }: MainFullProps) {
   const currentCity = useAppSelector((state) => state.city);
-  const currentSort: SortOption = useAppSelector((state) => state.sort);
+  const currentSort = useAppSelector((state) => state.sort);
 
   const sortedOffers = getSortedOffers(currentOffers, currentSort);
 

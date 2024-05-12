@@ -20,18 +20,6 @@ const initialState: TOffersState = {
 };
 
 const offersSlice = createSlice({
-  extraReducers: (builder) =>
-    builder
-      .addCase(fetchAllOffers.pending, (state) => {
-        state.status = RequestStatus.Loading;
-      })
-      .addCase(fetchAllOffers.fulfilled, (state, action) => {
-        state.status = RequestStatus.Success;
-        state.offers = action.payload;
-      })
-      .addCase(fetchAllOffers.rejected, (state) => {
-        state.status = RequestStatus.Failed;
-      }),
   initialState,
   name: 'offers',
   reducers: {
@@ -48,6 +36,18 @@ const offersSlice = createSlice({
     sort: (state) => state.sort,
     status: (state) => state.status,
   },
+  extraReducers: (builder) =>
+    builder
+      .addCase(fetchAllOffers.pending, (state) => {
+        state.status = RequestStatus.Loading;
+      })
+      .addCase(fetchAllOffers.fulfilled, (state, action) => {
+        state.status = RequestStatus.Success;
+        state.offers = action.payload;
+      })
+      .addCase(fetchAllOffers.rejected, (state) => {
+        state.status = RequestStatus.Failed;
+      }),
 });
 
 const offersAction = offersSlice.actions;

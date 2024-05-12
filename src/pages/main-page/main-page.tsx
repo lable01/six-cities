@@ -11,18 +11,24 @@ import { useEffect, useState } from 'react';
 import { TOfferItem } from 'types/offer-item.ts';
 import { offersSelectors } from 'store/slices/offers';
 import { fetchAllOffers } from 'store/thunks/offers.ts';
+import Loader from 'components/loader';
+import { isArrayEmpty } from '../../utils/function.ts';
 
 function MainPage() {
   const [activeOfferId, setActiveOfferId] = useState<TOfferItem['id'] | null>(
     null,
   );
   const dispatch = useAppDispatch();
+  const status = useAppSelector(offersSelectors.status);
+  const loadingStatuses = [RequestStatus.Idle, RequestStatus.Loading];
+  const offers = useAppSelector(offersSelectors.offers);
 
   useEffect(() => {
-    dispatch(fetchAllOffers());
-  }, [dispatch]);
+    if (isArrayEmpty(offers)) {
+      dispatch(fetchAllOffers());
+    }
+  }, []);
 
-  const offers = useAppSelector(offersSelectors.offers);
   const currentCity = useAppSelector(offersSelectors.city);
   const currentOffers = offers.filter(
     (offer) => offer.city.name === currentCity,
@@ -34,10 +40,8 @@ function MainPage() {
     setActiveOfferId(offerId);
   }
 
-  const status = useAppSelector(offersSelectors.status);
-
-  if (status === RequestStatus.Loading) {
-    return <div>Loading</div>;
+  if (loadingStatuses.includes(status)) {
+    return <Loader />;
   }
 
   return (

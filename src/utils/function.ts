@@ -43,4 +43,14 @@ function getSortedOffers(offers: TOfferItem[], currentSort: SortOption) {
   return sortedOffers;
 }
 
-export { getCurrentDate, getStarsWidth, randomBoolean, getSortedOffers };
+function isArrayEmpty(arr: any[]) {
+  return arr.length === 0;
+}
+
+export {
+  getCurrentDate,
+  getStarsWidth,
+  randomBoolean,
+  getSortedOffers,
+  isArrayEmpty,
+};

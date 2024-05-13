@@ -10,7 +10,6 @@ const initialState: TOffersState = {
   offers: [],
   sort: SortOption.Popular,
   status: RequestStatus.Idle,
-  error: '',
 };
 
 const offersSlice = createSlice({
@@ -29,22 +28,18 @@ const offersSlice = createSlice({
     offers: (state) => state.offers,
     sort: (state) => state.sort,
     status: (state) => state.status,
-    error: (state) => state.error,
   },
   extraReducers: (builder) =>
     builder
       .addCase(fetchAllOffers.pending, (state) => {
         state.status = RequestStatus.Loading;
-        state.error = '';
       })
       .addCase(fetchAllOffers.fulfilled, (state, action) => {
         state.status = RequestStatus.Success;
         state.offers = action.payload;
-        state.error = '';
       })
-      .addCase(fetchAllOffers.rejected, (state, action) => {
+      .addCase(fetchAllOffers.rejected, (state) => {
         state.status = RequestStatus.Failed;
-        state.error = action.error.message || 'Failed to fetch offers';
       }),
 });
 

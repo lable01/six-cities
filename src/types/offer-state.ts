@@ -7,5 +7,4 @@ export type TOffersState = {
   offers: TOfferItem[];
   sort: number;
   status: RequestStatus;
-  error: string;
 };

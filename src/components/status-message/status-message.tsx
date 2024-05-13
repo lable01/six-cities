@@ -1,12 +1,13 @@
 import { TCityName } from 'types/city-name.ts';
+import { RequestStatus } from '../../const.ts';
 
 type TStatusMessageProps = {
-  error: string;
+  status: RequestStatus;
   currentCity: TCityName;
 };
 
-function StatusMessage({ error, currentCity }: TStatusMessageProps) {
-  if (error) {
+function StatusMessage({ status, currentCity }: TStatusMessageProps) {
+  if (status === RequestStatus.Failed) {
     return (
       <>
         <b className="cities__status">Network problem</b>

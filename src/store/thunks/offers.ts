@@ -8,8 +8,13 @@ const fetchAllOffers = createAsyncThunk<
   void,
   { extra: AxiosInstance }
 >('fetchOffers/all', async (_arg, { extra: api }) => {
-  const response = await api.get<TOfferItem[]>(EndPoint.Offers);
-  return response.data;
+  try {
+    const response = await api.get<TOfferItem[]>(EndPoint.Offers);
+    return response.data;
+  } catch (error) {
+    console.error('Error fetching offers:', error);
+    throw error;
+  }
 });
 
 export { fetchAllOffers };

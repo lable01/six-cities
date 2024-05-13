@@ -19,9 +19,10 @@ function MainPage() {
     null,
   );
   const dispatch = useAppDispatch();
+  const offers = useAppSelector(offersSelectors.offers);
   const status = useAppSelector(offersSelectors.status);
   const loadingStatuses = [RequestStatus.Idle, RequestStatus.Loading];
-  const offers = useAppSelector(offersSelectors.offers);
+  const currentCity = useAppSelector(offersSelectors.city);
 
   useEffect(() => {
     if (isArrayEmpty(offers)) {
@@ -29,7 +30,6 @@ function MainPage() {
     }
   }, []);
 
-  const currentCity = useAppSelector(offersSelectors.city);
   const currentOffers = offers.filter(
     (offer) => offer.city.name === currentCity,
   );

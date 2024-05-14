@@ -5,9 +5,10 @@ import { ClassName } from '../../const';
 import { Helmet } from 'react-helmet-async';
 import FavoritesBlock from 'components/favorite-page-component/favorites-block';
 import { useAppSelector } from 'hooks/store';
+import { offersSelectors } from 'store/slices/offers';
 
 function FavoritesPage() {
-  const offers = useAppSelector((state) => state.offers);
+  const offers = useAppSelector(offersSelectors.offers);
 
   return (
     <>

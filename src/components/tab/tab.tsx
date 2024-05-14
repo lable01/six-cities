@@ -1,7 +1,7 @@
 import clsx from 'clsx';
 import { useAppDispatch } from 'hooks/store';
-import { setCity } from 'store/reducer.ts';
 import { TCityName } from 'types/city-name.ts';
+import { offersAction } from 'store/slices/offers.ts';
 
 type TabProps = {
   city: TCityName;
@@ -17,7 +17,7 @@ function Tab({ city, currentCity }: TabProps) {
     <li
       onClick={(evt) => {
         evt.preventDefault();
-        dispatch(setCity(city));
+        dispatch(offersAction.setCity(city));
       }}
       className="locations__item"
     >

@@ -3,7 +3,7 @@ import { SORT_OPTIONS } from './const';
 import useBoolean from 'hooks/use-boolean';
 import { useEffect } from 'react';
 import { useAppDispatch } from 'hooks/store';
-import { setSort } from 'store/reducer.ts';
+import { offersAction } from 'store/slices/offers.ts';
 
 type SortProps = {
   current: number;
@@ -52,7 +52,7 @@ function Sort({ current }: SortProps) {
               'places__option--active': selectedFilter === filter,
             })}
             onClick={() => {
-              dispatch(setSort(index));
+              dispatch(offersAction.setSort(index));
               off();
             }}
             tabIndex={0}

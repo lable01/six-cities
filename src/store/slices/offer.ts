@@ -4,13 +4,13 @@ import { RequestStatus } from '../../const.ts';
 import { createSlice } from '@reduxjs/toolkit';
 import { fetchNearOffers, fetchOffer } from 'store/thunks/offers.ts';
 
-type OfferState = {
+type TOfferState = {
   info: TOfferDetail | null;
   nearby: TOfferItem[];
   status: RequestStatus;
 };
 
-const initialState: OfferState = {
+const initialState: TOfferState = {
   info: null,
   nearby: [],
   status: RequestStatus.Idle,
@@ -26,21 +26,21 @@ const offerSlice = createSlice({
     },
   },
   selectors: {
-    nearByOffers: (state: OfferState) => state.nearby,
-    offer: (state: OfferState) => state.info,
-    offerStatus: (state: OfferState) => state.status,
+    nearByOffers: (state: TOfferState) => state.nearby,
+    offer: (state: TOfferState) => state.info,
+    offerStatus: (state: TOfferState) => state.status,
   },
   extraReducers: (builder) =>
     builder
+      .addCase(fetchOffer.pending, (state) => {
+        state.status = RequestStatus.Loading;
+      })
       .addCase(fetchOffer.fulfilled, (state, action) => {
         state.info = action.payload;
         state.status = RequestStatus.Success;
       })
       .addCase(fetchOffer.rejected, (state) => {
         state.status = RequestStatus.Failed;
-      })
-      .addCase(fetchOffer.pending, (state) => {
-        state.status = RequestStatus.Loading;
       })
       .addCase(fetchNearOffers.fulfilled, (state, action) => {
         state.nearby = action.payload;

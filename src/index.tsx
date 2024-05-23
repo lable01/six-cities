@@ -2,8 +2,6 @@ import React from 'react';
 import ReactDOM from 'react-dom/client';
 import App from './app';
 import { HelmetProvider } from 'react-helmet-async';
-import { OffersDetail } from 'mocks/offers-detail';
-import { Reviews } from 'mocks/reviews';
 import { store } from 'store';
 import { Provider } from 'react-redux';
 
@@ -15,7 +13,7 @@ root.render(
   <HelmetProvider>
     <React.StrictMode>
       <Provider store={store}>
-        <App offersDetail={OffersDetail} reviews={Reviews} />
+        <App />
       </Provider>
     </React.StrictMode>
   </HelmetProvider>,

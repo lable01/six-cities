@@ -28,7 +28,7 @@ function MainPage() {
     if (isArrayEmpty(offers)) {
       dispatch(fetchAllOffers());
     }
-  }, []);
+  }, [dispatch, offers]);
 
   const currentOffers = offers.filter(
     (offer) => offer.city.name === currentCity,

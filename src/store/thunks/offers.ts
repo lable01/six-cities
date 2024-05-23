@@ -3,6 +3,7 @@ import { TOfferItem } from 'types/offer-item.ts';
 import { AxiosInstance } from 'axios';
 import { EndPoint } from '../../const.ts';
 import { TOfferDetail } from 'types/offer-detail.ts';
+import { useAppDispatch } from 'hooks/store';
 
 const fetchAllOffers = createAsyncThunk<
   TOfferItem[],

@@ -33,4 +33,4 @@ const postComment = createAsyncThunk<
   return response.data;
 });
 
-export const commentsThunks = { fetchComments, postComment };
+export { fetchComments, postComment };

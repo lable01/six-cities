@@ -32,9 +32,6 @@ const offerSlice = createSlice({
   },
   extraReducers: (builder) =>
     builder
-      .addCase(fetchOffer.pending, (state) => {
-        state.status = RequestStatus.Loading;
-      })
       .addCase(fetchOffer.fulfilled, (state, action) => {
         state.info = action.payload;
         state.status = RequestStatus.Success;
@@ -42,12 +39,15 @@ const offerSlice = createSlice({
       .addCase(fetchOffer.rejected, (state) => {
         state.status = RequestStatus.Failed;
       })
+      .addCase(fetchOffer.pending, (state) => {
+        state.status = RequestStatus.Loading;
+      })
       .addCase(fetchNearOffers.fulfilled, (state, action) => {
         state.nearby = action.payload;
       }),
 });
 
-const offerAction = offerSlice.actions;
+const offerAction = { ...offerSlice.actions, fetchNearOffers, fetchOffer };
 const offerSelectors = offerSlice.selectors;
 
 export { offerAction, offerSelectors, offerSlice };

@@ -19,6 +19,7 @@ const reviewSlice = createSlice({
   reducers: {},
   selectors: {
     reviews: (state: ReviewState) => state.items,
+    reviewsStatus: (state: ReviewState) => state.status,
   },
   extraReducers: (builder) =>
     builder
@@ -43,7 +44,7 @@ const reviewSlice = createSlice({
       }),
 });
 
-const reviewsActions = reviewSlice.actions;
+const reviewsActions = { ...reviewSlice.actions, fetchComments };
 
 const reviewsSelectors = reviewSlice.selectors;
 

@@ -6,52 +6,36 @@ import OfferDetails from 'components/offer-details';
 import OtherOffers from 'components/other-offers';
 import { Helmet } from 'react-helmet-async';
 import { useAppDispatch, useAppSelector } from 'hooks/store';
-import { offerSelectors } from 'store/slices/offer.ts';
+import { offerAction, offerSelectors } from 'store/slices/offer.ts';
 import { useEffect } from 'react';
-import { fetchNearOffers, fetchOffer } from 'store/thunks/offers.ts';
-import { fetchComments } from 'store/thunks/comments.ts';
-import { reviewsSelectors } from 'store/slices/reviews.ts';
-import { offersSelectors } from 'store/slices/offers.ts';
+import { reviewsActions, reviewsSelectors } from 'store/slices/reviews.ts';
 import Loader from 'components/loader';
-import { isArrayEmpty } from '../../utils/function.ts';
+import MainEmpty from 'components/main-empty';
 
 function OfferPage() {
   const dispatch = useAppDispatch();
   const { id } = useParams();
+
   const currentOffer = useAppSelector(offerSelectors.offer);
   const reviews = useAppSelector(reviewsSelectors.reviews);
   const nearOffers = useAppSelector(offerSelectors.nearByOffers);
-  const status = useAppSelector(offersSelectors.status);
+  const status = useAppSelector(offerSelectors.offerStatus);
   const loadingStatuses = [RequestStatus.Idle, RequestStatus.Loading];
 
   useEffect(() => {
-    if (currentOffer === null) {
-      dispatch(fetchOffer(id as string));
-    }
-  }, [dispatch, currentOffer, id]);
-
-  useEffect(() => {
-    if (isArrayEmpty(nearOffers)) {
-      dispatch(fetchNearOffers(id as string));
-    }
-  }, [dispatch, nearOffers, id]);
-
-  useEffect(() => {
-    if (isArrayEmpty(reviews)) {
-      dispatch(fetchComments(id as string));
-    }
-  }, [dispatch, reviews, id]);
-
-  // useEffect(() => {
-  //   Promise.all([
-  //     dispatch(fetchOffer(id as string)),
-  //     dispatch(fetchNearOffers(id as string)),
-  //     dispatch(fetchComments(id as string)),
-  //   ]);
-  // }, [dispatch, id, currentOffer]);
+    Promise.all([
+      dispatch(offerAction.fetchOffer(id as string)),
+      dispatch(offerAction.fetchNearOffers(id as string)),
+      dispatch(reviewsActions.fetchComments(id as string)),
+    ]);
+  }, [dispatch, id]);
 
   if (loadingStatuses.includes(status)) {
     return <Loader />;
+  }
+
+  if (status === RequestStatus.Failed || !currentOffer) {
+    return <MainEmpty />;
   }
 
   return (

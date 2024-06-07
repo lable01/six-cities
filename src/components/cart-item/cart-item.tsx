@@ -1,7 +1,8 @@
 import { Link } from 'react-router-dom';
 import { TOfferItem } from 'types/offer-item.ts';
-import clsx from 'clsx';
-import { AppRoute, SizesCards } from '../../const';
+import { AppRoute, ClassNameOffer, SizesCards } from '../../const';
+import OfferBadge from 'components/offer-badge';
+import OfferBookmark from 'components/offer-bookmark';
 
 type TCartItemProps = {
   offer: TOfferItem;
@@ -11,9 +12,6 @@ type TCartItemProps = {
 
 function CartItem({ offer, onCardHover, typeCard }: TCartItemProps) {
   const { id, isPremium, previewImage, title, price, isFavorite, type } = offer;
-  const classIsFavorite = isFavorite
-    ? ' place-card__bookmark-button--active'
-    : '';
   const size = SizesCards[typeCard];
   function handleMouseEnter() {
     onCardHover?.(id);
@@ -28,11 +26,7 @@ function CartItem({ offer, onCardHover, typeCard }: TCartItemProps) {
       onMouseEnter={handleMouseEnter}
       onMouseLeave={handleMouseLeave}
     >
-      {isPremium && (
-        <div className="place-card__mark">
-          <span>Premium</span>
-        </div>
-      )}
+      <OfferBadge className={ClassNameOffer.Main} isPremium={isPremium} />
       <div className={`${typeCard}__image-wrapper place-card__image-wrapper`}>
         <Link to={`${AppRoute.Offer}/${id}`}>
           <img
@@ -50,18 +44,11 @@ function CartItem({ offer, onCardHover, typeCard }: TCartItemProps) {
             <b className="place-card__price-value">&euro;{price}</b>
             <span className="place-card__price-text">&#47;&nbsp;night</span>
           </div>
-          <button
-            className={clsx(
-              'place-card__bookmark-button button',
-              classIsFavorite,
-            )}
-            type="button"
-          >
-            <svg className="place-card__bookmark-icon" width="18" height="19">
-              <use xlinkHref="#icon-bookmark"></use>
-            </svg>
-            <span className="visually-hidden">To bookmarks</span>
-          </button>
+          <OfferBookmark
+            className={ClassNameOffer.Main}
+            type="offers"
+            isFavorite={isFavorite}
+          />
         </div>
         <div className="place-card__rating rating">
           <div className="place-card__stars rating__stars">

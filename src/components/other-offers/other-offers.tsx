@@ -1,5 +1,3 @@
-import { Navigate } from 'react-router-dom';
-import { AppRoute } from '../../const.ts';
 import { TOfferItem } from 'types/offer-item.ts';
 import CartItem from 'components/cart-item';
 
@@ -8,10 +6,6 @@ type TOtherOffersProps = {
 };
 
 function OtherOffers({ nearOffers }: TOtherOffersProps) {
-  if (!nearOffers) {
-    return <Navigate to={AppRoute.NotFound} />;
-  }
-
   return (
     <div className="container">
       <section className="near-places places">

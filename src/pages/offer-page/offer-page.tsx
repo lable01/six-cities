@@ -1,16 +1,20 @@
 import MainLayout from 'layouts/main-layout';
 import Header from 'components/header';
-import { ClassName, RequestStatus } from '../../const';
+import { ClassName } from '../../const';
 import { useParams } from 'react-router-dom';
 import OfferDetails from 'components/offer-details';
 import OtherOffers from 'components/other-offers';
 import { Helmet } from 'react-helmet-async';
 import { useAppDispatch, useAppSelector } from 'hooks/store';
-import { offerAction, offerSelectors } from 'store/slices/offer.ts';
+import {
+  offerAction,
+  offerSelectors,
+  selectNearByStatuses,
+  selectOfferStatuses,
+} from 'store/slices/offer.ts';
 import { useEffect } from 'react';
 import { reviewsActions, reviewsSelectors } from 'store/slices/reviews.ts';
 import Loader from 'components/loader';
-import MainEmpty from 'components/main-empty';
 
 function OfferPage() {
   const dispatch = useAppDispatch();
@@ -19,24 +23,24 @@ function OfferPage() {
   const currentOffer = useAppSelector(offerSelectors.offer);
   const reviews = useAppSelector(reviewsSelectors.reviews);
   const nearOffers = useAppSelector(offerSelectors.nearByOffers);
-  const status = useAppSelector(offerSelectors.offerStatus);
-  const loadingStatuses = [RequestStatus.Idle, RequestStatus.Loading];
+  const status = useAppSelector(selectOfferStatuses);
+  const nearByStatus = useAppSelector(selectNearByStatuses);
 
   useEffect(() => {
-    Promise.all([
-      dispatch(offerAction.fetchOffer(id as string)),
-      dispatch(offerAction.fetchNearOffers(id as string)),
-      dispatch(reviewsActions.fetchComments(id as string)),
-    ]);
+    if (id) {
+      dispatch(offerAction.fetchOffer(id));
+      dispatch(offerAction.fetchNearOffers(id));
+      dispatch(reviewsActions.fetchComments(id));
+    }
   }, [dispatch, id]);
 
-  if (loadingStatuses.includes(status)) {
+  if (status.isLoading || nearByStatus.isLoading || !currentOffer) {
     return <Loader />;
   }
 
-  if (status === RequestStatus.Failed || !currentOffer) {
-    return <MainEmpty />;
-  }
+  // if () {
+  //   return <MainEmpty />;
+  // }
 
   return (
     <MainLayout header={<Header />} className={ClassName.Offer}>

@@ -1,30 +1,46 @@
 import MainLayout from 'layouts/main-layout';
 import Header from 'components/header';
-import { AppRoute, ClassName, QUANTITY_NEAR_OFFERS } from '../../const';
-import { TOfferDetail } from 'types/offer-detail.ts';
-import { Navigate, useParams } from 'react-router-dom';
+import { ClassName } from '../../const';
+import { useParams } from 'react-router-dom';
 import OfferDetails from 'components/offer-details';
 import OtherOffers from 'components/other-offers';
-import { TReview } from 'types/review.ts';
 import { Helmet } from 'react-helmet-async';
-import { useAppSelector } from 'hooks/store';
-import { offersSelectors } from 'store/slices/offers';
+import { useAppDispatch, useAppSelector } from 'hooks/store';
+import {
+  offerAction,
+  offerSelectors,
+  selectNearByStatuses,
+  selectOfferStatuses,
+} from 'store/slices/offer.ts';
+import { useEffect } from 'react';
+import { reviewsActions, reviewsSelectors } from 'store/slices/reviews.ts';
+import Loader from 'components/loader';
 
-type TOfferPageProps = {
-  offersDetail: TOfferDetail[];
-  reviews: TReview[];
-};
-
-function OfferPage({ offersDetail, reviews }: TOfferPageProps) {
+function OfferPage() {
+  const dispatch = useAppDispatch();
   const { id } = useParams();
-  const offers = useAppSelector(offersSelectors.offers);
-  const currentOffer = offersDetail.find((item) => item.id === id);
 
-  if (!currentOffer) {
-    return <Navigate to={AppRoute.NotFound} />;
+  const currentOffer = useAppSelector(offerSelectors.offer);
+  const reviews = useAppSelector(reviewsSelectors.reviews);
+  const nearOffers = useAppSelector(offerSelectors.nearByOffers);
+  const status = useAppSelector(selectOfferStatuses);
+  const nearByStatus = useAppSelector(selectNearByStatuses);
+
+  useEffect(() => {
+    if (id) {
+      dispatch(offerAction.fetchOffer(id));
+      dispatch(offerAction.fetchNearOffers(id));
+      dispatch(reviewsActions.fetchComments(id));
+    }
+  }, [dispatch, id]);
+
+  if (status.isLoading || nearByStatus.isLoading || !currentOffer) {
+    return <Loader />;
   }
 
-  const nearOffers = offers.slice(0, QUANTITY_NEAR_OFFERS);
+  // if () {
+  //   return <MainEmpty />;
+  // }
 
   return (
     <MainLayout header={<Header />} className={ClassName.Offer}>

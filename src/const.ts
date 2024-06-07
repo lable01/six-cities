@@ -14,11 +14,16 @@ export const ClassName = {
   Offer: '',
 } as const;
 
-export const AuthorizationStatus = {
-  Auth: 'AUTH',
-  NoAuth: 'NO_AUTH',
-  Unknown: 'UNKNOWN',
+export const ClassNameOffer = {
+  Main: 'place-card',
+  Offer: 'offer',
 } as const;
+
+export const enum AuthorizationStatus {
+  Auth = 'AUTH',
+  NoAuth = 'NO_AUTH',
+  Unknown = 'UNKNOWN',
+}
 
 export const CitiesNames = {
   Paris: 'Paris',
@@ -67,6 +72,17 @@ export const SizesLogo = {
   footer: {
     width: 64,
     height: 33,
+  },
+} as const;
+
+export const SizesBookmark = {
+  offerDetail: {
+    width: 31,
+    height: 33,
+  },
+  offers: {
+    width: 18,
+    height: 19,
   },
 } as const;
 

@@ -1,6 +1,6 @@
 import { Link } from 'react-router-dom';
 import { TOfferItem } from 'types/offer-item.ts';
-import { AppRoute, ClassNameOffer, SizesCards } from '../../const';
+import { AppRoute, ClassNamePages, SizesCards } from '../../const';
 import OfferBadge from 'components/offer-badge';
 import OfferBookmark from 'components/offer-bookmark';
 
@@ -26,7 +26,7 @@ function CartItem({ offer, onCardHover, typeCard }: TCartItemProps) {
       onMouseEnter={handleMouseEnter}
       onMouseLeave={handleMouseLeave}
     >
-      <OfferBadge className={ClassNameOffer.Main} isPremium={isPremium} />
+      <OfferBadge className={ClassNamePages.Main} isPremium={isPremium} />
       <div className={`${typeCard}__image-wrapper place-card__image-wrapper`}>
         <Link to={`${AppRoute.Offer}/${id}`}>
           <img
@@ -45,7 +45,7 @@ function CartItem({ offer, onCardHover, typeCard }: TCartItemProps) {
             <span className="place-card__price-text">&#47;&nbsp;night</span>
           </div>
           <OfferBookmark
-            className={ClassNameOffer.Main}
+            className={ClassNamePages.Main}
             type="offers"
             isFavorite={isFavorite}
           />

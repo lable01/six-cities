@@ -1,24 +1,16 @@
-import { AuthorizationStatus } from '../../const';
 import { Navigate } from 'react-router-dom';
 import { ReactNode } from 'react';
+import { useAuth } from 'hooks/use-auth/use-auth.tsx';
 
 type TPrivateRouteProps = {
   children: ReactNode;
   redirectTo: string;
-  restrictedFor: string | ReactNode;
 };
 
-function ProtectedRoute({
-  restrictedFor,
-  redirectTo,
-  children,
-}: TPrivateRouteProps) {
-  const authorizationStatus = AuthorizationStatus.Auth;
-  return restrictedFor === authorizationStatus ? (
-    <Navigate to={redirectTo} />
-  ) : (
-    children
-  );
+function ProtectedRoute({ redirectTo, children }: TPrivateRouteProps) {
+  const authorizationStatus = useAuth();
+  console.log(authorizationStatus);
+  return authorizationStatus ? <Navigate to={redirectTo} /> : children;
 }
 
 export default ProtectedRoute;

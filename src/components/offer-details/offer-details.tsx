@@ -7,7 +7,7 @@ import OfferGallery from 'components/offer-gallery';
 import OfferBadge from 'components/offer-badge';
 import OfferBookmark from 'components/offer-bookmark';
 import OfferFeatures from 'components/offer-features';
-import { ClassNameOffer } from '../../const.ts';
+import { ClassNamePages } from '../../const.ts';
 import OfferHost from 'components/offer-host';
 
 type TOfferDetailsProps = {
@@ -31,7 +31,6 @@ function OfferDetails({ offer, reviews, nearOffers }: TOfferDetailsProps) {
     rating,
     host,
   } = offer;
-  console.log(offer);
 
   return (
     <section className="offer">
@@ -40,11 +39,11 @@ function OfferDetails({ offer, reviews, nearOffers }: TOfferDetailsProps) {
       </div>
       <div className="offer__container container">
         <div className="offer__wrapper">
-          <OfferBadge className={ClassNameOffer.Offer} isPremium={isPremium} />
+          <OfferBadge className={ClassNamePages.Offer} isPremium={isPremium} />
           <div className="offer__name-wrapper">
             <h1 className="offer__name">{title}</h1>
             <OfferBookmark
-              className={ClassNameOffer.Offer}
+              className={ClassNamePages.Offer}
               type="offerDetail"
               isFavorite={isFavorite}
             />

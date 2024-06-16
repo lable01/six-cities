@@ -38,10 +38,6 @@ function OfferPage() {
     return <Loader />;
   }
 
-  // if () {
-  //   return <MainEmpty />;
-  // }
-
   return (
     <MainLayout header={<Header />} className={ClassName.Offer}>
       <Helmet>

@@ -11,12 +11,14 @@ export const ClassName = {
   Main: 'page--gray page--main',
   MainEmpty: 'page__main page__main--index page__main--index-empty',
   Favorites: '',
+  FavoritesEmpty: 'page page--favorites-empty',
   Offer: '',
 } as const;
 
-export const ClassNameOffer = {
+export const ClassNamePages = {
   Main: 'place-card',
   Offer: 'offer',
+  FavoritesEmpty: 'page__main--favorites-empty',
 } as const;
 
 export const enum AuthorizationStatus {

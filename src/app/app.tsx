@@ -11,6 +11,8 @@ import { isArrayEmpty } from '../utils/function.ts';
 import { fetchAllOffers } from 'store/thunks/offers.ts';
 import { useAppDispatch, useAppSelector } from 'hooks/store';
 import { offersSelectors } from 'store/slices/offers.ts';
+import { getToken } from 'services/token.ts';
+import { checkAuth } from 'store/thunks/auth.ts';
 
 function App() {
   const dispatch = useAppDispatch();
@@ -21,6 +23,14 @@ function App() {
     }
   }, [dispatch, offers]);
 
+  const token = getToken();
+
+  useEffect(() => {
+    if (token) {
+      dispatch(checkAuth());
+    }
+  }, [token, dispatch]);
+
   const router = createBrowserRouter([
     {
       path: AppRoute.Main,
@@ -28,7 +38,12 @@ function App() {
     },
     {
       path: AppRoute.Login,
-      element: <LoginPage />,
+
+      element: (
+        <ProtectedRoute onlyUnAuth>
+          <LoginPage />
+        </ProtectedRoute>
+      ),
     },
     {
       path: `${AppRoute.Offer}/:id`,
@@ -41,7 +56,7 @@ function App() {
     {
       path: AppRoute.Favorites,
       element: (
-        <ProtectedRoute redirectTo={AppRoute.Login}>
+        <ProtectedRoute>
           <FavoritesPage />
         </ProtectedRoute>
       ),

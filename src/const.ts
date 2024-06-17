@@ -45,7 +45,6 @@ export const CITIES = [
   CitiesNames.Dusseldorf,
 ];
 
-export const QUANTITY_NEAR_OFFERS = 3;
 export const ReviewLength = {
   min: 50,
   max: 300,

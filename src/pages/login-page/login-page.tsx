@@ -2,8 +2,36 @@ import MainLayout from 'layouts/main-layout';
 import Header from 'components/header';
 import { ClassName } from '../../const';
 import { Helmet } from 'react-helmet-async';
+import { FormEvent, ReactEventHandler, useState } from 'react';
+import { useAppDispatch } from 'hooks/store';
+import { login } from 'store/thunks/auth.ts';
+
+type HTMLLoginForm = HTMLFormElement & {
+  email: HTMLInputElement;
+  password: HTMLInputElement;
+};
+
+type ChangeHandler = ReactEventHandler<HTMLInputElement | HTMLTextAreaElement>;
 
 function LoginPage() {
+  const dispatch = useAppDispatch();
+  const [formData, setFormData] = useState({
+    email: '',
+    password: '',
+  });
+  const handleChange: ChangeHandler = (evt) => {
+    const { name, value } = evt.currentTarget;
+    setFormData({
+      ...formData,
+      [name]: value,
+    });
+  };
+
+  function handleSubmit(event: FormEvent<HTMLLoginForm>) {
+    event.preventDefault();
+    dispatch(login(formData));
+  }
+
   return (
     <MainLayout header={<Header />} className={ClassName.Login}>
       <Helmet>
@@ -13,7 +41,12 @@ function LoginPage() {
         <div className="page__login-container container">
           <section className="login">
             <h1 className="login__title">Sign in</h1>
-            <form className="login__form form" action="#" method="post">
+            <form
+              className="login__form form"
+              action="#"
+              method="post"
+              onSubmit={handleSubmit}
+            >
               <div className="login__input-wrapper form__input-wrapper">
                 <label className="visually-hidden">E-mail</label>
                 <input
@@ -21,6 +54,7 @@ function LoginPage() {
                   type="email"
                   name="email"
                   placeholder="Email"
+                  onChange={handleChange}
                 />
               </div>
               <div className="login__input-wrapper form__input-wrapper">
@@ -30,6 +64,7 @@ function LoginPage() {
                   type="password"
                   name="password"
                   placeholder="Password"
+                  onChange={handleChange}
                 />
               </div>
               <button

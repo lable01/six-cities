@@ -1,5 +1,7 @@
 export type TUser = {
-  isPro: boolean;
   name: string;
   avatarUrl: string;
+  isPro: boolean;
+  email: string;
+  token: string;
 };

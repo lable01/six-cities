@@ -36,8 +36,6 @@ function FavoritesPage() {
     ? ClassNamePages.FavoritesEmpty
     : '';
 
-  console.log(classNameMainFavorites);
-
   return (
     <>
       <MainLayout header={<Header />} className={classNameLayoutFavorites}>

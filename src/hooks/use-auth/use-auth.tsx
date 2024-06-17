@@ -4,6 +4,6 @@ import { AuthorizationStatus } from '../../const.ts';
 
 export function useAuth() {
   const status = useAppSelector(userSelectors.status);
-  console.log(status);
-  return status !== AuthorizationStatus.Auth;
+
+  return status === AuthorizationStatus.Auth;
 }

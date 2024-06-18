@@ -48,6 +48,7 @@ function CartItem({ offer, onCardHover, typeCard }: TCartItemProps) {
             className={ClassNamePages.Main}
             type="offers"
             isFavorite={isFavorite}
+            offerId={id}
           />
         </div>
         <div className="place-card__rating rating">

@@ -106,3 +106,8 @@ export const EndPoint = {
   Logout: '/logout',
   Offers: '/offers',
 } as const;
+
+export const FavoriteStatus = {
+  Added: 1,
+  Removed: 0,
+};

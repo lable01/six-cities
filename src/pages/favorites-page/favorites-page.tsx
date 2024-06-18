@@ -5,15 +5,15 @@ import { ClassName, ClassNamePages } from '../../const';
 import { Helmet } from 'react-helmet-async';
 import FavoritesBlock from 'components/favorite-page-component/favorites-block';
 import { useAppSelector } from 'hooks/store';
-import { offersSelectors } from 'store/slices/offers';
 import { TOfferItem } from 'types/offer-item.ts';
 import clsx from 'clsx';
 import FavoritesEmpty from 'components/favorite-page-component/favorites-empty';
+import { favoritesSelectors } from 'store/slices/favorites.ts';
 
 function FavoritesPage() {
-  const offers = useAppSelector(offersSelectors.offers);
+  const favoriteOffers = useAppSelector(favoritesSelectors.favorites);
 
-  const favoriteOffersByCity = offers.reduce<{
+  const favoriteOffersByCity = favoriteOffers.reduce<{
     [key: string]: TOfferItem[];
   }>((result, offer) => {
     if (offer.isFavorite) {
@@ -27,10 +27,10 @@ function FavoritesPage() {
     }
     return result;
   }, {});
-
+  console.log(favoriteOffersByCity);
   const classNameLayoutFavorites = favoriteOffersByCity
-    ? ClassName.FavoritesEmpty
-    : ClassName.Favorites;
+    ? ClassName.Favorites
+    : ClassName.FavoritesEmpty;
 
   const classNameMainFavorites = favoriteOffersByCity
     ? ClassNamePages.FavoritesEmpty
@@ -52,9 +52,9 @@ function FavoritesPage() {
         >
           <div className="page__favorites-container container">
             {favoriteOffersByCity ? (
-              <FavoritesEmpty />
-            ) : (
               <FavoritesBlock favoriteOffersByCity={favoriteOffersByCity} />
+            ) : (
+              <FavoritesEmpty />
             )}
           </div>
         </main>

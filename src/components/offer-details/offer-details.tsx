@@ -46,6 +46,7 @@ function OfferDetails({ offer, reviews, nearOffers }: TOfferDetailsProps) {
               className={ClassNamePages.Offer}
               type="offerDetail"
               isFavorite={isFavorite}
+              offerId={id}
             />
           </div>
           <div className="offer__rating rating">

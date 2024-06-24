@@ -7,7 +7,6 @@ import NotFound from 'pages/not-found';
 import OfferPage from 'pages/offer-page';
 import ProtectedRoute from 'components/protected-route';
 import { useEffect } from 'react';
-import { isArrayEmpty } from '../utils/function.ts';
 import { fetchAllOffers } from 'store/thunks/offers.ts';
 import { useAppDispatch, useAppSelector } from 'hooks/store';
 import { offersSelectors } from 'store/slices/offers.ts';
@@ -17,13 +16,13 @@ import { checkAuth } from 'store/thunks/auth.ts';
 function App() {
   const dispatch = useAppDispatch();
   const offers = useAppSelector(offersSelectors.offers);
+
+  const token = getToken();
   useEffect(() => {
-    if (isArrayEmpty(offers)) {
+    if (offers.length === 0) {
       dispatch(fetchAllOffers());
     }
   }, [dispatch, offers]);
-
-  const token = getToken();
 
   useEffect(() => {
     if (token) {
@@ -38,7 +37,6 @@ function App() {
     },
     {
       path: AppRoute.Login,
-
       element: (
         <ProtectedRoute onlyUnAuth>
           <LoginPage />

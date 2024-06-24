@@ -13,7 +13,6 @@ function HeaderNav() {
   const info = useAppSelector(userSelectors.info);
   const textSignAuth = authorizationStatus ? TextSignAuth.Out : TextSignAuth.In;
   const favoriteCount = useFavoriteCount();
-
   const handleLogout = () => {
     dispatch(logout());
   };
@@ -21,22 +20,21 @@ function HeaderNav() {
   return (
     <nav className="header__nav">
       <ul className="header__nav-list">
-        <li className="header__nav-item user">
-          <a className="header__nav-link header__nav-link--profile" href="#">
-            <div
-              className="header__avatar-wrapper user__avatar-wrapper"
-              style={{ backgroundImage: `url(${info?.avatarUrl})` }}
-            ></div>
-            {authorizationStatus && info && (
-              <>
-                <span className="header__user-name user__name">
-                  {info.email}
-                </span>
-                <span className="header__favorite-count">{favoriteCount}</span>
-              </>
-            )}
-          </a>
-        </li>
+        {authorizationStatus && info && (
+          <li className="header__nav-item user">
+            <a
+              className="header__nav-link header__nav-link--profile"
+              href={AppRoute.Favorites}
+            >
+              <div
+                className="header__avatar-wrapper user__avatar-wrapper"
+                style={{ backgroundImage: `url(${info?.avatarUrl})` }}
+              ></div>
+              <span className="header__user-name user__name">{info.email}</span>
+              <span className="header__favorite-count">{favoriteCount}</span>
+            </a>
+          </li>
+        )}
         <li className="header__nav-item">
           {authorizationStatus ? (
             <a className="header__nav-link" onClick={handleLogout}>

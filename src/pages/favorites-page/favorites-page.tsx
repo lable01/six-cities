@@ -27,12 +27,14 @@ function FavoritesPage() {
     }
     return result;
   }, {});
-  console.log(favoriteOffersByCity);
-  const classNameLayoutFavorites = favoriteOffersByCity
-    ? ClassName.Favorites
-    : ClassName.FavoritesEmpty;
 
-  const classNameMainFavorites = favoriteOffersByCity
+  const hasFavorites = Object.keys(favoriteOffersByCity).length > 0;
+
+  const classNameLayoutFavorites = hasFavorites
+    ? ClassName.FavoritesEmpty
+    : ClassName.Favorites;
+
+  const classNameMainFavorites = hasFavorites
     ? ClassNamePages.FavoritesEmpty
     : '';
 

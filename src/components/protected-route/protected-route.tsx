@@ -1,8 +1,9 @@
-import { ReactNode } from 'react';
+import { ReactNode, useEffect } from 'react';
 import { Navigate, useLocation } from 'react-router-dom';
-import { useAppSelector } from 'hooks/store';
+import { AppRoute, RequestStatus } from '../../const.ts';
+import { useAppDispatch, useAppSelector } from 'hooks/store';
 import { userSelectors } from 'store/slices/user.ts';
-import { AppRoute, AuthorizationStatus } from '../../const.ts';
+import { checkAuth } from 'store/thunks/auth.ts';
 import Loader from 'components/loader';
 
 type TPrivateRouteProps = {
@@ -11,11 +12,16 @@ type TPrivateRouteProps = {
 };
 
 function ProtectedRoute({ children, onlyUnAuth }: TPrivateRouteProps) {
+  const dispatch = useAppDispatch();
   const location = useLocation();
   const user = useAppSelector(userSelectors.info);
-  const status = useAppSelector(userSelectors.status);
+  const requestStatus = useAppSelector(userSelectors.requestStatus);
 
-  if (status !== AuthorizationStatus.Auth) {
+  useEffect(() => {
+    dispatch(checkAuth());
+  }, [dispatch]);
+
+  if (requestStatus === RequestStatus.Loading) {
     return <Loader />;
   }
 

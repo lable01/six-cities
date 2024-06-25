@@ -37,11 +37,13 @@ const favoritesSlice = createSlice({
         switch (action.payload.status) {
           case FavoriteStatus.Added:
             state.items.push(action.payload.offer);
+            state.status = RequestStatus.Success;
             break;
           case FavoriteStatus.Removed:
             state.items = state.items.filter(
               ({ id }) => id !== action.payload.offer.id,
             );
+            state.status = RequestStatus.Success;
         }
       })
       .addCase(changeFavorite.rejected, (state) => {

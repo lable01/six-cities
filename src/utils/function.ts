@@ -19,10 +19,6 @@ function getStarsWidth(stars: number) {
   return `${width}%`;
 }
 
-function randomBoolean() {
-  return Math.random() >= 0.5;
-}
-
 function getSortedOffers(offers: TOfferItem[], currentSort: SortOption) {
   let sortedOffers = offers;
 
@@ -43,4 +39,21 @@ function getSortedOffers(offers: TOfferItem[], currentSort: SortOption) {
   return sortedOffers;
 }
 
-export { getCurrentDate, getStarsWidth, randomBoolean, getSortedOffers };
+function groupOffersByCity(offers: TOfferItem[]) {
+  return offers.reduce<{
+    [key: string]: TOfferItem[];
+  }>((result, offer) => {
+    if (offer.isFavorite) {
+      const city = offer.city.name;
+      if (!result[city]) {
+        result[city] = [];
+      }
+
+      const cityOffers = result[city];
+      cityOffers.push(offer);
+    }
+    return result;
+  }, {});
+}
+
+export { getCurrentDate, getStarsWidth, getSortedOffers, groupOffersByCity };

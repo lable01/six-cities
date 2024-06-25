@@ -1,8 +1,11 @@
 import clsx from 'clsx';
-import { SizesBookmark } from '../../const.ts';
-import { useAppDispatch } from 'hooks/store';
+import { AppRoute, AuthorizationStatus, SizesBookmark } from '../../const.ts';
+import { useAppDispatch, useAppSelector } from 'hooks/store';
 import { changeFavorite } from 'store/thunks/favorites.ts';
 import { useCallback, useState } from 'react';
+import { useNavigate } from 'react-router-dom';
+import { userSelectors } from 'store/slices/user.ts';
+import { TFavoriteStatus } from 'types/favorite-status.ts';
 
 type BookmarkType = keyof typeof SizesBookmark;
 
@@ -20,18 +23,29 @@ function OfferBookmark({
   offerId,
 }: TOfferBookmark) {
   const dispatch = useAppDispatch();
+  const navigate = useNavigate();
   const [isFavorite, setIsFavorite] = useState(initialIsFavorite);
   const size = SizesBookmark[type];
-  const classIsFavorite = isFavorite
-    ? ' place-card__bookmark-button--active'
-    : '';
-  const isFavoriteText = isFavorite ? 'In bookmarks' : 'To bookmarks';
+  const userStatus = useAppSelector(userSelectors.status);
+  const classIsFavorite =
+    userStatus === AuthorizationStatus.Auth && isFavorite
+      ? ' place-card__bookmark-button--active'
+      : '';
+  const isFavoriteText =
+    userStatus === AuthorizationStatus.Auth && isFavorite
+      ? 'In bookmarks'
+      : 'To bookmarks';
 
   const handleClick = useCallback(() => {
-    const newStatus = !isFavorite;
-    setIsFavorite(newStatus);
-    dispatch(changeFavorite({ offerId, status: Number(!isFavorite) }));
-  }, [dispatch, isFavorite, offerId]);
+    if (userStatus === AuthorizationStatus.Auth) {
+      const newStatus = !isFavorite;
+      setIsFavorite(newStatus);
+      const favoriteStatus: TFavoriteStatus = newStatus ? 1 : 0;
+      dispatch(changeFavorite({ offerId, status: favoriteStatus }));
+    } else {
+      navigate(AppRoute.Login);
+    }
+  }, [dispatch, isFavorite, offerId, userStatus, navigate]);
 
   return (
     <button

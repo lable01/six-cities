@@ -110,4 +110,9 @@ export const EndPoint = {
 export const FavoriteStatus = {
   Added: 1,
   Removed: 0,
-};
+} as const;
+
+export const enum FavoriteStatusCode {
+  AddedOk = 200,
+  RemovedOk = 201,
+}

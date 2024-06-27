@@ -1,4 +1,4 @@
-import CartItem from 'components/cart-item';
+import CartItem from 'components/offer-components/cart-item';
 import Sort from 'components/sort';
 import Map from 'components/map';
 import { TOfferItem } from 'types/offer-item';

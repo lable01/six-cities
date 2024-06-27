@@ -25,6 +25,7 @@ function App() {
   }, [dispatch, offers]);
 
   useEffect(() => {
+    // проверка токена при обновлении страницы
     if (token) {
       dispatch(checkAuth());
     }

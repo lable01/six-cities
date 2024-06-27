@@ -1,12 +1,12 @@
 import MainLayout from 'layouts/main-layout';
-import Header from 'components/header';
+import Header from 'components/header-components/header';
 import { ClassName } from '../../const';
 import { Helmet } from 'react-helmet-async';
 import LoginForm from 'components/login-form';
 
 function LoginPage() {
   return (
-    <MainLayout header={<Header />} className={ClassName.Login}>
+    <MainLayout header={<Header withNav={false} />} className={ClassName.Login}>
       <Helmet>
         <title>Login six cities service for travelers - official website</title>
       </Helmet>

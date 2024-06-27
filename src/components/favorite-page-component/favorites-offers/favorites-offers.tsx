@@ -1,5 +1,5 @@
 import { TOfferItem } from 'types/offer-item.ts';
-import CartItem from 'components/cart-item';
+import CartItem from 'components/offer-components/cart-item';
 
 type TFavoritesOffers = {
   city: string;

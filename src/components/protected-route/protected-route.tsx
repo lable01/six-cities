@@ -20,11 +20,14 @@ function ProtectedRoute({ children, onlyUnAuth }: TPrivateRouteProps) {
   }
 
   if (onlyUnAuth && user) {
+    // если будут ошибки по ts то переустанови плиз зависимости npm, хз в чем проблема здесь у меня все ок, может какую нить зависимость накатывал в ходе проекта, хз
+    // редирект на главную после успешной авторизации плюс страница только для не авторизированных пользователей
     const from = location.state?.from || { pathname: AppRoute.Main };
     return <Navigate to={from} />;
   }
 
   if (!onlyUnAuth && !user) {
+    // момент навигации на предыдущую страницу после авторизации
     return <Navigate state={{ from: location }} to={AppRoute.Login} />;
   }
 

@@ -54,11 +54,6 @@ const favoritesSlice = createSlice({
       }),
 });
 
-const favoritesActions = {
-  ...favoritesSlice.actions,
-  changeFavorite,
-  fetchFavorites,
-};
 const favoritesSelectors = favoritesSlice.selectors;
 
-export { favoritesSlice, favoritesActions, favoritesSelectors };
+export { favoritesSlice, favoritesSelectors };

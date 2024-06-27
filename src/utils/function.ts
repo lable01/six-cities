@@ -56,4 +56,15 @@ function groupOffersByCity(offers: TOfferItem[]) {
   }, {});
 }
 
-export { getCurrentDate, getStarsWidth, getSortedOffers, groupOffersByCity };
+function capitalizeFirstLetter(string: string) {
+  if (!string) return ''; // Проверка на пустую строку или undefined/null
+  return string.charAt(0).toUpperCase() + string.slice(1);
+}
+
+export {
+  getCurrentDate,
+  getStarsWidth,
+  getSortedOffers,
+  groupOffersByCity,
+  capitalizeFirstLetter,
+};

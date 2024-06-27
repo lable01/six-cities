@@ -1,7 +1,7 @@
 import MainFull from 'components/main-full';
 import MainEmpty from 'components/main-empty';
 import MainLayout from 'layouts/main-layout';
-import Header from 'components/header';
+import Header from 'components/header-components/header';
 import Tabs from 'components/tabs';
 import { ClassName, RequestStatus } from '../../const';
 import { Helmet } from 'react-helmet-async';

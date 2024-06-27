@@ -1,5 +1,5 @@
 import MainLayout from 'layouts/main-layout';
-import Header from 'components/header';
+import Header from 'components/header-components/header';
 import Footer from 'components/footer';
 import { ClassName, ClassNamePages, RequestStatus } from '../../const';
 import { Helmet } from 'react-helmet-async';

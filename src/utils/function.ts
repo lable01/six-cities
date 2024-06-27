@@ -61,10 +61,59 @@ function capitalizeFirstLetter(string: string) {
   return string.charAt(0).toUpperCase() + string.slice(1);
 }
 
+type FormData = {
+  email: string;
+  password: string;
+};
+
+type FormErrors = {
+  email: string;
+  password: string;
+};
+
+function validateForm(
+  formData: FormData,
+  setErrors: (errors: FormErrors) => void,
+): boolean {
+  const newErrors: FormErrors = {
+    email: '',
+    password: '',
+  };
+
+  let isValid = true;
+
+  if (!formData.email) {
+    newErrors.email = 'Email is required';
+    isValid = false;
+  } else if (!/\S+@\S+\.\S+/.test(formData.email)) {
+    newErrors.email = 'Email is invalid';
+    isValid = false;
+  }
+
+  if (!formData.password) {
+    newErrors.password = 'Password is required';
+    isValid = false;
+  } else if (formData.password.length < 6) {
+    newErrors.password = 'Password must be at least 6 characters long';
+    isValid = false;
+  } else if (
+    !/[A-Za-z]/.test(formData.password) ||
+    !/\d/.test(formData.password)
+  ) {
+    newErrors.password =
+      'Password must contain at least one letter and one number';
+    isValid = false;
+  }
+
+  setErrors(newErrors);
+  return isValid;
+}
+
 export {
   getCurrentDate,
   getStarsWidth,
   getSortedOffers,
   groupOffersByCity,
   capitalizeFirstLetter,
+  validateForm,
 };

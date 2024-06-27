@@ -2,6 +2,7 @@ import { FormEvent, ReactEventHandler, useState } from 'react';
 import { login } from 'store/thunks/auth.ts';
 import { useAppDispatch } from 'hooks/store';
 import styles from './styles.module.scss';
+import { validateForm } from '../../utils/function.ts';
 
 type HTMLLoginForm = HTMLFormElement & {
   email: HTMLInputElement;
@@ -32,43 +33,9 @@ function LoginForm() {
     });
   };
 
-  function validateForm() {
-    const newErrors = {
-      email: '',
-      password: '',
-    };
-    let isValid = true;
-
-    if (!formData.email) {
-      newErrors.email = 'Email is required';
-      isValid = false;
-    } else if (!/\S+@\S+\.\S+/.test(formData.email)) {
-      newErrors.email = 'Email is invalid';
-      isValid = false;
-    }
-
-    if (!formData.password) {
-      newErrors.password = 'Password is required';
-      isValid = false;
-    } else if (formData.password.length < 6) {
-      newErrors.password = 'Password must be at least 6 characters long';
-      isValid = false;
-    } else if (
-      !/[A-Za-z]/.test(formData.password) ||
-      !/\d/.test(formData.password)
-    ) {
-      newErrors.password =
-        'Password must contain at least one letter and one number';
-      isValid = false;
-    }
-
-    setErrors(newErrors);
-    return isValid;
-  }
-
   function handleSubmit(event: FormEvent<HTMLLoginForm>) {
     event.preventDefault();
-    if (validateForm()) {
+    if (validateForm(formData, setErrors)) {
       dispatch(login(formData));
     }
   }

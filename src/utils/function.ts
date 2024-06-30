@@ -61,52 +61,36 @@ function capitalizeFirstLetter(string: string) {
   return string.charAt(0).toUpperCase() + string.slice(1);
 }
 
-type FormData = {
+type FormValidate = {
   email: string;
   password: string;
 };
 
-type FormErrors = {
-  email: string;
-  password: string;
-};
-
-function validateForm(
-  formData: FormData,
-  setErrors: (errors: FormErrors) => void,
-): boolean {
-  const newErrors: FormErrors = {
+function validateForm(formData: FormValidate) {
+  const errors: FormValidate = {
     email: '',
     password: '',
   };
 
-  let isValid = true;
-
   if (!formData.email) {
-    newErrors.email = 'Email is required';
-    isValid = false;
+    errors.email = 'Email is required';
   } else if (!/\S+@\S+\.\S+/.test(formData.email)) {
-    newErrors.email = 'Email is invalid';
-    isValid = false;
+    errors.email = 'Email is invalid';
   }
 
   if (!formData.password) {
-    newErrors.password = 'Password is required';
-    isValid = false;
+    errors.password = 'Password is required';
   } else if (formData.password.length < 6) {
-    newErrors.password = 'Password must be at least 6 characters long';
-    isValid = false;
+    errors.password = 'Password must be at least 6 characters long';
   } else if (
     !/[A-Za-z]/.test(formData.password) ||
     !/\d/.test(formData.password)
   ) {
-    newErrors.password =
+    errors.password =
       'Password must contain at least one letter and one number';
-    isValid = false;
   }
 
-  setErrors(newErrors);
-  return isValid;
+  return errors;
 }
 
 export {

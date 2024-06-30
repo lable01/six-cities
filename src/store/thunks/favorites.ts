@@ -4,15 +4,7 @@ import { AxiosInstance } from 'axios';
 import { EndPoint, FavoriteStatusCode } from '../../const.ts';
 import { TFavoriteStatus } from 'types/favorite-status.ts';
 import { offersAction } from 'store/slices/offers.ts';
-
-const fetchFavorites = createAsyncThunk<
-  TOfferItem[],
-  undefined,
-  { extra: AxiosInstance }
->('favorite/fetchAll', async (_arg, { extra: api }) => {
-  const response = await api.get<TOfferItem[]>(EndPoint.Favorite);
-  return response.data;
-});
+import { toast } from 'react-toastify';
 
 type ChangeProps = {
   offerId: string;
@@ -24,24 +16,44 @@ type ChangeResponse = {
   status: TFavoriteStatus;
 };
 
+const fetchFavorites = createAsyncThunk<
+  TOfferItem[],
+  undefined,
+  { extra: AxiosInstance }
+>('favorite/fetchAll', async (_arg, { extra: api }) => {
+  try {
+    const response = await api.get<TOfferItem[]>(EndPoint.Favorite);
+
+    return response.data;
+  } catch (error) {
+    toast.error('server error loading favorites offers, please try again');
+    throw error;
+  }
+});
+
 const changeFavorite = createAsyncThunk<
   ChangeResponse,
   ChangeProps,
   { extra: AxiosInstance }
 >('favorite/change', async ({ offerId, status }, { extra: api, dispatch }) => {
-  const response = await api.post<TOfferItem>(
-    `${EndPoint.Favorite}/${offerId}/${status}`,
-  );
+  try {
+    const response = await api.post<TOfferItem>(
+      `${EndPoint.Favorite}/${offerId}/${status}`,
+    );
 
-  if (
-    [FavoriteStatusCode.AddedOk, FavoriteStatusCode.RemovedOk].includes(
-      response.status,
-    )
-  ) {
-    dispatch(offersAction.updateOffer(response.data));
+    if (
+      [FavoriteStatusCode.AddedOk, FavoriteStatusCode.RemovedOk].includes(
+        response.status,
+      )
+    ) {
+      dispatch(offersAction.updateOffer(response.data));
+    }
+
+    return { offer: response.data, status };
+  } catch (error) {
+    toast.error('server error change favorites offers, please try again');
+    throw error;
   }
-
-  return { offer: response.data, status };
 });
 
 export { changeFavorite, fetchFavorites };

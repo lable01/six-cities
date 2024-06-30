@@ -1,8 +1,8 @@
 import { FormEvent, ReactEventHandler, useState } from 'react';
 import { login } from 'store/thunks/auth.ts';
 import { useAppDispatch } from 'hooks/store';
-import styles from './styles.module.scss';
 import { validateForm } from '../../utils/function.ts';
+import { toast } from 'react-toastify';
 
 type HTMLLoginForm = HTMLFormElement & {
   email: HTMLInputElement;
@@ -17,26 +17,33 @@ function LoginForm() {
     email: '',
     password: '',
   });
-  const [errors, setErrors] = useState({
-    email: '',
-    password: '',
-  });
+
   const handleChange: ChangeHandler = (evt) => {
     const { name, value } = evt.currentTarget;
     setFormData({
       ...formData,
       [name]: value,
     });
-    setErrors({
-      ...errors,
-      [name]: '',
-    });
   };
 
   function handleSubmit(event: FormEvent<HTMLLoginForm>) {
     event.preventDefault();
-    if (validateForm(formData, setErrors)) {
+
+    const validationErrors = validateForm(formData);
+    const validateEmail = () =>
+      validationErrors.email && toast.error(validationErrors.email);
+    const validatePassword = () =>
+      validationErrors.password && toast.error(validationErrors.password);
+
+    if (
+      Object.keys(validationErrors).every(
+        (key) => !validationErrors[key as keyof typeof validationErrors],
+      )
+    ) {
       dispatch(login(formData));
+    } else {
+      validateEmail();
+      validatePassword();
     }
   }
 
@@ -58,7 +65,6 @@ function LoginForm() {
           value={formData.email}
           required
         />
-        {errors.email && <span className={styles.error}>{errors.email}</span>}
       </div>
       <div className="login__input-wrapper form__input-wrapper">
         <label className="visually-hidden">Password</label>
@@ -72,9 +78,6 @@ function LoginForm() {
           required
           minLength={6}
         />
-        {errors.password && (
-          <span className={styles.error}>{errors.password}</span>
-        )}
       </div>
       <button className="login__submit form__submit button" type="submit">
         Sign in

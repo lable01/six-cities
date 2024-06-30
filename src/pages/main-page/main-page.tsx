@@ -3,27 +3,38 @@ import MainEmpty from 'components/main-empty';
 import MainLayout from 'layouts/main-layout';
 import Header from 'components/header-components/header';
 import Tabs from 'components/tabs';
-import { ClassName, RequestStatus } from '../../const';
+import { ClassName, RequestStatus, ServicePageType } from '../../const';
 import { Helmet } from 'react-helmet-async';
 import clsx from 'clsx';
-import { useAppSelector } from 'hooks/store';
-import { useState } from 'react';
+import { useAppDispatch, useAppSelector } from 'hooks/store';
+import { useEffect, useState } from 'react';
 import { TOfferItem } from 'types/offer-item.ts';
 import { offersSelectors } from 'store/slices/offers';
 import Loader from 'components/loader';
+import { fetchAllOffers } from 'store/thunks/offers.ts';
+import ServicePage from 'pages/service-page';
 
 function MainPage() {
+  const dispatch = useAppDispatch();
+
   const [activeOfferId, setActiveOfferId] = useState<TOfferItem['id'] | null>(
     null,
   );
   const offers = useAppSelector(offersSelectors.offers);
-  const status = useAppSelector(offersSelectors.status);
+  const offersStatus = useAppSelector(offersSelectors.status);
   const loadingStatuses = [RequestStatus.Idle, RequestStatus.Loading];
   const currentCity = useAppSelector(offersSelectors.city);
 
   const currentOffers = offers.filter(
     (offer) => offer.city.name === currentCity,
   );
+
+  useEffect(() => {
+    if (offers.length === 0) {
+      dispatch(fetchAllOffers());
+    }
+  }, [dispatch, offers]);
+
   const mainClassName =
     currentOffers.length === 0 ? 'page__main--index-empty' : '';
 
@@ -31,7 +42,10 @@ function MainPage() {
     setActiveOfferId(offerId);
   }
 
-  if (loadingStatuses.includes(status)) {
+  if (offersStatus === RequestStatus.Failed) {
+    return <ServicePage type={ServicePageType.Error} />;
+  }
+  if (loadingStatuses.includes(offersStatus)) {
     return <Loader />;
   }
 

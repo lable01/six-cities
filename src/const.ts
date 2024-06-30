@@ -116,3 +116,8 @@ export const enum FavoriteStatusCode {
   AddedOk = 200,
   RemovedOk = 201,
 }
+
+export const enum ServicePageType {
+  NotFound = 'Unfortunately, you ended up on a non-existing page',
+  Error = 'Unfortunately, there are problems with the server, please try again later',
+}

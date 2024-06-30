@@ -1,31 +1,24 @@
 import { createBrowserRouter, RouterProvider } from 'react-router-dom';
-import { AppRoute } from '../const.ts';
+import { AppRoute, ServicePageType } from '../const.ts';
 import MainPage from 'pages/main-page';
 import LoginPage from 'pages/login-page';
 import FavoritesPage from 'pages/favorites-page';
-import NotFound from 'pages/not-found';
+import ServicePage from 'pages/service-page';
 import OfferPage from 'pages/offer-page';
 import ProtectedRoute from 'components/protected-route';
+import { ToastContainer } from 'react-toastify';
+import 'react-toastify/dist/ReactToastify.css';
 import { useEffect } from 'react';
-import { fetchAllOffers } from 'store/thunks/offers.ts';
-import { useAppDispatch, useAppSelector } from 'hooks/store';
-import { offersSelectors } from 'store/slices/offers.ts';
-import { getToken } from 'services/token.ts';
 import { checkAuth } from 'store/thunks/auth.ts';
+import { getToken } from 'services/token.ts';
+import { useAppDispatch } from 'hooks/store';
 
 function App() {
   const dispatch = useAppDispatch();
-  const offers = useAppSelector(offersSelectors.offers);
-
   const token = getToken();
-  useEffect(() => {
-    if (offers.length === 0) {
-      dispatch(fetchAllOffers());
-    }
-  }, [dispatch, offers]);
 
   useEffect(() => {
-    // проверка токена при обновлении страницы
+    // проверка токена при обновлении страницы, без этого токен не считывается и приложение разлогинивается
     if (token) {
       dispatch(checkAuth());
     }
@@ -50,7 +43,7 @@ function App() {
     },
     {
       path: AppRoute.NotFound,
-      element: <NotFound />,
+      element: <ServicePage type={ServicePageType.NotFound} />,
     },
     {
       path: AppRoute.Favorites,
@@ -62,7 +55,12 @@ function App() {
     },
   ]);
 
-  return <RouterProvider router={router} />;
+  return (
+    <>
+      <ToastContainer />
+      <RouterProvider router={router} />
+    </>
+  );
 }
 
 export default App;

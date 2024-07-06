@@ -1,8 +1,8 @@
 import { FormEvent, ReactEventHandler, useState } from 'react';
 import { login } from 'store/thunks/auth.ts';
 import { useAppDispatch } from 'hooks/store';
-import { validateForm } from '../../utils/function.ts';
 import { toast } from 'react-toastify';
+import { validateloginForm } from '../../utils/function.ts';
 
 type HTMLLoginForm = HTMLFormElement & {
   email: HTMLInputElement;
@@ -29,7 +29,7 @@ function LoginForm() {
   function handleSubmit(event: FormEvent<HTMLLoginForm>) {
     event.preventDefault();
 
-    const validationErrors = validateForm(formData);
+    const validationErrors = validateloginForm(formData);
     const validateEmail = () =>
       validationErrors.email && toast.error(validationErrors.email);
     const validatePassword = () =>

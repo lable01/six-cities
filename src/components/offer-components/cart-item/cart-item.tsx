@@ -4,6 +4,7 @@ import { AppRoute, ClassNamePages, SizesCards } from '../../../const.ts';
 import OfferBadge from 'components/offer-components/offer-badge';
 import OfferBookmark from 'components/offer-components/offer-bookmark';
 import { capitalizeFirstLetter } from '../../../utils/function.ts';
+import RatingStars from 'components/rating-stars';
 
 type TCartItemProps = {
   offer: TOfferItem;
@@ -12,7 +13,8 @@ type TCartItemProps = {
 };
 
 function CartItem({ offer, onCardHover, typeCard }: TCartItemProps) {
-  const { id, isPremium, previewImage, title, price, isFavorite } = offer;
+  const { id, isPremium, previewImage, title, price, isFavorite, rating } =
+    offer;
   const type = capitalizeFirstLetter(offer.type);
   const size = SizesCards[typeCard];
   function handleMouseEnter() {
@@ -54,12 +56,7 @@ function CartItem({ offer, onCardHover, typeCard }: TCartItemProps) {
             offerId={id}
           />
         </div>
-        <div className="place-card__rating rating">
-          <div className="place-card__stars rating__stars">
-            <span style={{ width: '80%' }}></span>
-            <span className="visually-hidden">Rating</span>
-          </div>
-        </div>
+        <RatingStars type={ClassNamePages.Main} rating={rating} />
         <h2 className="place-card__name">
           <Link to={`${AppRoute.Offer}/${id}`}>{title}</Link>
         </h2>

@@ -14,7 +14,7 @@ function getStarsWidth(stars: number) {
   if (stars === 0) {
     return `${stars}%`;
   }
-  const width = (100 / 5) * stars;
+  const width = (100 / 5) * Math.round(stars);
 
   return `${width}%`;
 }
@@ -66,7 +66,7 @@ type FormValidate = {
   password: string;
 };
 
-function validateForm(formData: FormValidate) {
+function validateloginForm(formData: FormValidate) {
   const errors: FormValidate = {
     email: '',
     password: '',
@@ -99,5 +99,5 @@ export {
   getSortedOffers,
   groupOffersByCity,
   capitalizeFirstLetter,
-  validateForm,
+  validateloginForm,
 };

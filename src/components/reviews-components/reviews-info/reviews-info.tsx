@@ -1,5 +1,7 @@
 import { TReview } from 'types/review.ts';
-import { getCurrentDate, getStarsWidth } from '../../../utils/function.ts';
+import { getCurrentDate } from '../../../utils/function.ts';
+import RatingStars from 'components/rating-stars';
+import { ClassNamePages } from '../../../const.ts';
 
 type TReviewsInfo = {
   review: TReview;
@@ -12,7 +14,6 @@ function ReviewsInfo({ review }: TReviewsInfo) {
     comment,
     rating,
   } = review;
-  const starWidth = getStarsWidth(rating);
 
   return (
     <li className="reviews__item">
@@ -30,10 +31,7 @@ function ReviewsInfo({ review }: TReviewsInfo) {
       </div>
       <div className="reviews__info">
         <div className="reviews__rating rating">
-          <div className="reviews__stars rating__stars">
-            <span style={{ width: `${starWidth}` }}></span>
-            <span className="visually-hidden">Rating</span>
-          </div>
+          <RatingStars type={ClassNamePages.Reviews} rating={rating} />
         </div>
         <p className="reviews__text">{comment}</p>
         <time className="reviews__time" dateTime={getCurrentDate(date)}>

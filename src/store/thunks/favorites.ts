@@ -48,9 +48,9 @@ const changeFavorite = createAsyncThunk<
     ) {
       dispatch(offersAction.updateOffer(response.data));
     }
-
     return { offer: response.data, status };
   } catch (error) {
+    console.dir(error);
     toast.error('server error change favorites offers, please try again');
     throw error;
   }

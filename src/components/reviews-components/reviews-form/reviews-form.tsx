@@ -1,36 +1,51 @@
-import { ReactEventHandler, useState } from 'react';
+import { FormEvent, ReactEventHandler, useState } from 'react';
 import { Fragment } from 'react';
 import { ReviewLength } from '../../../const.ts';
+import { rating } from 'components/login-form/const.ts';
+import { useAppDispatch } from 'hooks/store';
+import { postComment } from 'store/thunks/comments.ts';
 
 type TChangeHandler = ReactEventHandler<HTMLInputElement | HTMLTextAreaElement>;
 
-const rating = [
-  { value: 5, title: 'perfect' },
-  { value: 4, title: 'good' },
-  { value: 3, title: 'not bad' },
-  { value: 2, title: 'badly' },
-  { value: 1, title: 'terribly' },
-];
+type HTMLReviewForm = HTMLFormElement & {
+  comment: HTMLInputElement;
+  rating: HTMLInputElement;
+};
 
-function ReviewsForm() {
+type TReviewsForm = {
+  activeOfferId: string;
+};
+
+function ReviewsForm({ activeOfferId }: TReviewsForm) {
+  const dispatch = useAppDispatch();
   const [review, setReview] = useState({
+    comment: '',
     rating: 0,
-    review: '',
   });
 
   const isValidReviews =
-    review.review.length < ReviewLength.min ||
-    review.review.length > ReviewLength.max ||
+    review.comment.length < ReviewLength.min ||
+    review.comment.length > ReviewLength.max ||
     review.rating === 0;
 
   const handleFieldChange: TChangeHandler = (event) => {
     const target = event.target as HTMLInputElement | HTMLTextAreaElement;
     const { name, value } = target;
-    setReview({ ...review, [name]: value });
+    setReview({ ...review, [name]: name === 'rating' ? Number(value) : value });
   };
 
+  function handleSubmit(event: FormEvent<HTMLReviewForm>) {
+    event.preventDefault();
+    dispatch(postComment({ body: review, offerId: activeOfferId }));
+  }
+
   return (
-    <form className="reviews__form form" action="#" method="post">
+    <form
+      className="reviews__form form"
+      action="#"
+      method="post"
+      onSubmit={handleSubmit}
+    >
       <label className="reviews__label form__label" htmlFor="review">
         Your review
       </label>
@@ -60,7 +75,7 @@ function ReviewsForm() {
       <textarea
         className="reviews__textarea form__textarea"
         id="review"
-        name="review"
+        name="comment"
         onChange={handleFieldChange}
         placeholder="Tell how was your stay, what you like and what can be improved"
       ></textarea>

@@ -4,9 +4,10 @@ import { TReview } from 'types/review.ts';
 
 type TReviewsBlock = {
   reviews: TReview[];
+  activeOfferId: string;
 };
 
-function ReviewsBlock({ reviews }: TReviewsBlock) {
+function ReviewsBlock({ reviews, activeOfferId }: TReviewsBlock) {
   return (
     <section className="offer__reviews reviews">
       <h2 className="reviews__title">
@@ -18,7 +19,7 @@ function ReviewsBlock({ reviews }: TReviewsBlock) {
           <ReviewsInfo key={review.id} review={review} />
         ))}
       </ul>
-      <ReviewsForm />
+      <ReviewsForm activeOfferId={activeOfferId} />
     </section>
   );
 }

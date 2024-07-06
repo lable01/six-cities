@@ -19,6 +19,7 @@ export const ClassNamePages = {
   Main: 'place-card',
   Offer: 'offer',
   FavoritesEmpty: 'page__main--favorites-empty',
+  Reviews: 'reviews',
 } as const;
 
 export const enum AuthorizationStatus {

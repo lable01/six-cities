@@ -10,6 +10,7 @@ import OfferFeatures from 'components/offer-components/offer-features';
 import { ClassNamePages } from '../../../const.ts';
 import OfferHost from 'components/offer-components/offer-host';
 import { capitalizeFirstLetter } from '../../../utils/function.ts';
+import RatingStars from 'components/rating-stars';
 
 type TOfferDetailsProps = {
   offer: TOfferDetail;
@@ -32,6 +33,7 @@ function OfferDetails({ offer, reviews, nearOffers }: TOfferDetailsProps) {
     host,
   } = offer;
   const type = capitalizeFirstLetter(offer.type);
+  console.log(rating);
 
   return (
     <section className="offer">
@@ -51,10 +53,7 @@ function OfferDetails({ offer, reviews, nearOffers }: TOfferDetailsProps) {
             />
           </div>
           <div className="offer__rating rating">
-            <div className="offer__stars rating__stars">
-              <span style={{ width: '80%' }}></span>
-              <span className="visually-hidden">Rating</span>
-            </div>
+            <RatingStars type={ClassNamePages.Offer} rating={rating} />
             <span className="offer__rating-value rating__value">{rating}</span>
           </div>
           <OfferFeatures
@@ -77,7 +76,7 @@ function OfferDetails({ offer, reviews, nearOffers }: TOfferDetailsProps) {
             </ul>
           </div>
           <OfferHost host={host} />
-          <ReviewsBlock reviews={reviews} />
+          <ReviewsBlock activeOfferId={id} reviews={reviews} />
         </div>
       </div>
       <Map className="offer__map" offers={nearOffers} activeOfferId={id} />

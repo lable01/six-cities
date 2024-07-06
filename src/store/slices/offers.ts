@@ -4,6 +4,7 @@ import { SortOption } from 'components/sort/const';
 import { createSlice, PayloadAction } from '@reduxjs/toolkit';
 import { fetchAllOffers } from 'store/thunks/offers.ts';
 import { TOffersState } from 'types/offer-state.ts';
+import { TOfferItem } from 'types/offer-item.ts';
 
 const initialState: TOffersState = {
   city: CITIES[0],
@@ -21,6 +22,12 @@ const offersSlice = createSlice({
     },
     setSort: (state, action: PayloadAction<number>) => {
       state.sort = action.payload;
+    },
+    updateOffer: (state, action: PayloadAction<TOfferItem>) => {
+      const index = state.offers.findIndex(
+        (offer) => offer.id === action.payload.id,
+      );
+      state.offers[index].isFavorite = action.payload.isFavorite;
     },
   },
   selectors: {

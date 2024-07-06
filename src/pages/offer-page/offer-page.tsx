@@ -1,9 +1,9 @@
 import MainLayout from 'layouts/main-layout';
-import Header from 'components/header';
+import Header from 'components/header-components/header';
 import { ClassName } from '../../const';
 import { useParams } from 'react-router-dom';
-import OfferDetails from 'components/offer-details';
-import OtherOffers from 'components/other-offers';
+import OfferDetails from 'components/offer-components/offer-details';
+import OtherOffers from 'components/offer-components/other-offers';
 import { Helmet } from 'react-helmet-async';
 import { useAppDispatch, useAppSelector } from 'hooks/store';
 import {
@@ -37,10 +37,6 @@ function OfferPage() {
   if (status.isLoading || nearByStatus.isLoading || !currentOffer) {
     return <Loader />;
   }
-
-  // if () {
-  //   return <MainEmpty />;
-  // }
 
   return (
     <MainLayout header={<Header />} className={ClassName.Offer}>

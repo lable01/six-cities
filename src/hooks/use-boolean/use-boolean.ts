@@ -1,6 +1,6 @@
 import { useCallback, useMemo, useState } from 'react';
 
-export function useBoolean(initialValue = false) {
+function useBoolean(initialValue = false) {
   const [isOn, setIsOn] = useState(initialValue);
 
   const off = useCallback(() => setIsOn(false), []);

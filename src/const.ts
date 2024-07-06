@@ -11,12 +11,15 @@ export const ClassName = {
   Main: 'page--gray page--main',
   MainEmpty: 'page__main page__main--index page__main--index-empty',
   Favorites: '',
+  FavoritesEmpty: 'page page--favorites-empty',
   Offer: '',
 } as const;
 
-export const ClassNameOffer = {
+export const ClassNamePages = {
   Main: 'place-card',
   Offer: 'offer',
+  FavoritesEmpty: 'page__main--favorites-empty',
+  Reviews: 'reviews',
 } as const;
 
 export const enum AuthorizationStatus {
@@ -43,7 +46,6 @@ export const CITIES = [
   CitiesNames.Dusseldorf,
 ];
 
-export const QUANTITY_NEAR_OFFERS = 3;
 export const ReviewLength = {
   min: 50,
   max: 300,
@@ -105,3 +107,18 @@ export const EndPoint = {
   Logout: '/logout',
   Offers: '/offers',
 } as const;
+
+export const FavoriteStatus = {
+  Added: 1,
+  Removed: 0,
+} as const;
+
+export const enum FavoriteStatusCode {
+  AddedOk = 200,
+  RemovedOk = 201,
+}
+
+export const enum ServicePageType {
+  NotFound = 'Unfortunately, you ended up on a non-existing page',
+  Error = 'Unfortunately, there are problems with the server, please try again later',
+}

@@ -1,26 +1,56 @@
 import MainLayout from 'layouts/main-layout';
-import Header from 'components/header';
+import Header from 'components/header-components/header';
 import Footer from 'components/footer';
-import { ClassName } from '../../const';
+import { ClassName, ClassNamePages, RequestStatus } from '../../const';
 import { Helmet } from 'react-helmet-async';
 import FavoritesBlock from 'components/favorite-page-component/favorites-block';
 import { useAppSelector } from 'hooks/store';
-import { offersSelectors } from 'store/slices/offers';
+import clsx from 'clsx';
+import FavoritesEmpty from 'components/favorite-page-component/favorites-empty';
+import { favoritesSelectors } from 'store/slices/favorites.ts';
+import Loader from 'components/loader';
+import { groupOffersByCity } from '../../utils/function.ts';
 
 function FavoritesPage() {
-  const offers = useAppSelector(offersSelectors.offers);
+  const favoriteOffers = useAppSelector(favoritesSelectors.favorites);
+  const requestStatus = useAppSelector(favoritesSelectors.favoriteStatus);
+
+  const favoriteOffersByCity = groupOffersByCity(favoriteOffers);
+
+  const hasFavorites = Object.keys(favoriteOffersByCity).length > 0;
+
+  const classNameLayoutFavorites = hasFavorites
+    ? ClassName.Favorites
+    : ClassName.FavoritesEmpty;
+
+  const classNameMainFavorites = hasFavorites
+    ? ''
+    : ClassNamePages.FavoritesEmpty;
+
+  if (requestStatus === RequestStatus.Loading) {
+    return <Loader />;
+  }
 
   return (
     <>
-      <MainLayout header={<Header />} className={ClassName.Favorites}>
+      <MainLayout header={<Header />} className={classNameLayoutFavorites}>
         <Helmet>
           <title>
             Favorite page six cities service for travelers - official website
           </title>
         </Helmet>
-        <main className="page__main page__main--favorites">
+        <main
+          className={clsx(
+            'page__main page__main--favorites',
+            classNameMainFavorites,
+          )}
+        >
           <div className="page__favorites-container container">
-            <FavoritesBlock offers={offers} />
+            {hasFavorites ? (
+              <FavoritesBlock favoriteOffersByCity={favoriteOffersByCity} />
+            ) : (
+              <FavoritesEmpty />
+            )}
           </div>
         </main>
       </MainLayout>

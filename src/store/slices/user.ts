@@ -30,11 +30,15 @@ function processLoading(state: UserState) {
   state.requestStatus = RequestStatus.Loading;
 }
 
-export const UserSlice = createSlice({
+const userSlice = createSlice({
   initialState,
   name: 'user',
   reducers: {},
-  selectors: {},
+  selectors: {
+    info: (state) => state.info,
+    requestStatus: (state) => state.requestStatus,
+    status: (state) => state.status,
+  },
   extraReducers: (builder) => {
     builder
       .addCase(checkAuth.fulfilled, processSuccess)
@@ -49,3 +53,7 @@ export const UserSlice = createSlice({
       });
   },
 });
+
+const userSelectors = userSlice.selectors;
+
+export { userSlice, userSelectors };

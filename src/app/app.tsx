@@ -1,13 +1,29 @@
 import { createBrowserRouter, RouterProvider } from 'react-router-dom';
-import { AppRoute, AuthorizationStatus } from '../const.ts';
+import { AppRoute, ServicePageType } from '../const.ts';
 import MainPage from 'pages/main-page';
 import LoginPage from 'pages/login-page';
 import FavoritesPage from 'pages/favorites-page';
-import NotFound from 'pages/not-found';
+import ServicePage from 'pages/service-page';
 import OfferPage from 'pages/offer-page';
 import ProtectedRoute from 'components/protected-route';
+import { ToastContainer } from 'react-toastify';
+import 'react-toastify/dist/ReactToastify.css';
+import { useEffect } from 'react';
+import { checkAuth } from 'store/thunks/auth.ts';
+import { getToken } from 'services/token.ts';
+import { useAppDispatch } from 'hooks/store';
 
 function App() {
+  const dispatch = useAppDispatch();
+  const token = getToken();
+
+  useEffect(() => {
+    // проверка токена при обновлении страницы, без этого токен не считывается и приложение разлогинивается
+    if (token) {
+      dispatch(checkAuth());
+    }
+  }, [token, dispatch]);
+
   const router = createBrowserRouter([
     {
       path: AppRoute.Main,
@@ -15,7 +31,11 @@ function App() {
     },
     {
       path: AppRoute.Login,
-      element: <LoginPage />,
+      element: (
+        <ProtectedRoute onlyUnAuth>
+          <LoginPage />
+        </ProtectedRoute>
+      ),
     },
     {
       path: `${AppRoute.Offer}/:id`,
@@ -23,22 +43,24 @@ function App() {
     },
     {
       path: AppRoute.NotFound,
-      element: <NotFound />,
+      element: <ServicePage type={ServicePageType.NotFound} />,
     },
     {
       path: AppRoute.Favorites,
       element: (
-        <ProtectedRoute
-          restrictedFor={AuthorizationStatus.NoAuth}
-          redirectTo={AppRoute.Login}
-        >
+        <ProtectedRoute>
           <FavoritesPage />
         </ProtectedRoute>
       ),
     },
   ]);
 
-  return <RouterProvider router={router} />;
+  return (
+    <>
+      <ToastContainer />
+      <RouterProvider router={router} />
+    </>
+  );
 }
 
 export default App;

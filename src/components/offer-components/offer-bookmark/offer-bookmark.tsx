@@ -6,7 +6,7 @@ import {
 } from '../../../const.ts';
 import { useAppDispatch, useAppSelector } from 'hooks/store';
 import { changeFavorite } from 'store/thunks/favorites.ts';
-import { useCallback, useState } from 'react';
+import { useCallback, useMemo, useState, memo } from 'react';
 import { useNavigate } from 'react-router-dom';
 import { userSelectors } from 'store/slices/user.ts';
 import { TFavoriteStatus } from 'types/favorite-status.ts';
@@ -31,10 +31,14 @@ function OfferBookmark({
   const [isFavorite, setIsFavorite] = useState(initialIsFavorite);
   const size = SizesBookmark[type];
   const userStatus = useAppSelector(userSelectors.status);
-  const isFavoriteText =
-    userStatus === AuthorizationStatus.Auth && isFavorite
-      ? 'In bookmarks'
-      : 'To bookmarks';
+
+  const isFavoriteText = useMemo(
+    () =>
+      userStatus === AuthorizationStatus.Auth && isFavorite
+        ? 'In bookmarks'
+        : 'To bookmarks',
+    [userStatus, isFavorite],
+  );
 
   const handleClick = useCallback(() => {
     if (userStatus === AuthorizationStatus.Auth) {
@@ -67,4 +71,4 @@ function OfferBookmark({
     </button>
   );
 }
-export default OfferBookmark;
+export default memo(OfferBookmark);

@@ -5,7 +5,7 @@ import { logout } from 'store/thunks/auth';
 import { TUser } from 'types/user.ts';
 import { favoritesSelectors } from 'store/slices/favorites.ts';
 import { userSelectors } from 'store/slices/user.ts';
-import { useEffect } from 'react';
+import { useEffect, memo, useCallback } from 'react';
 import { fetchFavorites } from 'store/thunks/favorites.ts';
 
 type TNavLoginProps = {
@@ -27,9 +27,9 @@ function NavLogin({ info }: TNavLoginProps) {
     }
   }, [favoriteStatus, userStatus, dispatch]);
 
-  const handleLogout = () => {
+  const handleLogout = useCallback(() => {
     dispatch(logout());
-  };
+  }, [dispatch]);
 
   return (
     <>
@@ -55,4 +55,4 @@ function NavLogin({ info }: TNavLoginProps) {
   );
 }
 
-export default NavLogin;
+export default memo(NavLogin);

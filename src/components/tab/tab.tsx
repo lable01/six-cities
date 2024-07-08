@@ -2,6 +2,7 @@ import clsx from 'clsx';
 import { useAppDispatch } from 'hooks/store';
 import { TCityName } from 'types/city-name.ts';
 import { offersAction } from 'store/slices/offers.ts';
+import { useMemo, memo } from 'react';
 
 type TabProps = {
   city: TCityName;
@@ -10,8 +11,10 @@ type TabProps = {
 
 function Tab({ city, currentCity }: TabProps) {
   const dispatch = useAppDispatch();
-  const isActiveTab =
-    currentCity === city ? 'tabs__item--active' : 'tabs__item';
+  const isActiveTab = useMemo(
+    () => (currentCity === city ? 'tabs__item--active' : 'tabs__item'),
+    [currentCity, city],
+  );
 
   return (
     <li
@@ -28,4 +31,4 @@ function Tab({ city, currentCity }: TabProps) {
   );
 }
 
-export default Tab;
+export default memo(Tab);

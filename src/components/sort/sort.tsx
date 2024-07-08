@@ -1,7 +1,7 @@
 import clsx from 'clsx';
 import { SORT_OPTIONS } from './const';
 import useBoolean from 'hooks/use-boolean';
-import { useEffect } from 'react';
+import { useEffect, memo } from 'react';
 import { useAppDispatch } from 'hooks/store';
 import { offersAction } from 'store/slices/offers.ts';
 
@@ -65,4 +65,4 @@ function Sort({ current }: SortProps) {
   );
 }
 
-export default Sort;
+export default memo(Sort);

@@ -11,6 +11,7 @@ import { ClassNamePages } from '../../../const.ts';
 import OfferHost from 'components/offer-components/offer-host';
 import { capitalizeFirstLetter } from '../../../utils/function.ts';
 import RatingStars from 'components/rating-stars';
+import { useMemo, memo } from 'react';
 
 type TOfferDetailsProps = {
   offer: TOfferDetail;
@@ -32,8 +33,7 @@ function OfferDetails({ offer, reviews, nearOffers }: TOfferDetailsProps) {
     rating,
     host,
   } = offer;
-  const type = capitalizeFirstLetter(offer.type);
-  console.log(rating);
+  const type = useMemo(() => capitalizeFirstLetter(offer.type), [offer.type]);
 
   return (
     <section className="offer">
@@ -84,4 +84,4 @@ function OfferDetails({ offer, reviews, nearOffers }: TOfferDetailsProps) {
   );
 }
 
-export default OfferDetails;
+export default memo(OfferDetails);

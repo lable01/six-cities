@@ -2,6 +2,7 @@ import { CITIES } from '../../const';
 import Tab from 'components/tab';
 import { useAppSelector } from 'hooks/store';
 import { offersSelectors } from 'store/slices/offers';
+import { memo } from 'react';
 
 function Tabs() {
   const currentCity = useAppSelector(offersSelectors.city);
@@ -19,4 +20,4 @@ function Tabs() {
   );
 }
 
-export default Tabs;
+export default memo(Tabs);

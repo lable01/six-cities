@@ -1,6 +1,7 @@
 import ReviewsInfo from 'components/reviews-components/reviews-info';
 import ReviewsForm from 'components/reviews-components/reviews-form';
 import { TReview } from 'types/review.ts';
+import { memo } from 'react';
 
 type TReviewsBlock = {
   reviews: TReview[];
@@ -24,4 +25,4 @@ function ReviewsBlock({ reviews, activeOfferId }: TReviewsBlock) {
   );
 }
 
-export default ReviewsBlock;
+export default memo(ReviewsBlock);

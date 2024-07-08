@@ -1,3 +1,5 @@
+import { memo } from 'react';
+
 type TOfferBadgeProps = {
   isPremium: boolean;
   className: 'place-card' | 'offer';
@@ -13,4 +15,4 @@ function OfferBadge({ isPremium, className }: TOfferBadgeProps) {
   );
 }
 
-export default OfferBadge;
+export default memo(OfferBadge);

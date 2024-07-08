@@ -12,7 +12,7 @@ import {
   selectNearByStatuses,
   selectOfferStatuses,
 } from 'store/slices/offer.ts';
-import { useEffect } from 'react';
+import { useEffect, memo, useCallback } from 'react';
 import { reviewsActions, reviewsSelectors } from 'store/slices/reviews.ts';
 import Loader from 'components/loader';
 
@@ -26,13 +26,17 @@ function OfferPage() {
   const status = useAppSelector(selectOfferStatuses);
   const nearByStatus = useAppSelector(selectNearByStatuses);
 
-  useEffect(() => {
+  const fetchOfferData = useCallback(() => {
     if (id) {
       dispatch(offerAction.fetchOffer(id));
       dispatch(offerAction.fetchNearOffers(id));
       dispatch(reviewsActions.fetchComments(id));
     }
   }, [dispatch, id]);
+
+  useEffect(() => {
+    fetchOfferData();
+  }, [fetchOfferData]);
 
   if (status.isLoading || nearByStatus.isLoading || !currentOffer) {
     return <Loader />;
@@ -57,4 +61,4 @@ function OfferPage() {
   );
 }
 
-export default OfferPage;
+export default memo(OfferPage);

@@ -1,5 +1,6 @@
 import { TCityName } from 'types/city-name.ts';
 import { RequestStatus } from '../../const.ts';
+import { memo } from 'react';
 
 type TStatusMessageProps = {
   status: RequestStatus;
@@ -24,4 +25,4 @@ function StatusMessage({ status, currentCity }: TStatusMessageProps) {
     </>
   );
 }
-export default StatusMessage;
+export default memo(StatusMessage);

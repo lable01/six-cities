@@ -8,7 +8,7 @@ import OfferPage from 'pages/offer-page';
 import ProtectedRoute from 'components/protected-route';
 import { ToastContainer } from 'react-toastify';
 import 'react-toastify/dist/ReactToastify.css';
-import { useEffect } from 'react';
+import { useEffect, memo } from 'react';
 import { checkAuth } from 'store/thunks/auth.ts';
 import { getToken } from 'services/token.ts';
 import { useAppDispatch } from 'hooks/store';
@@ -63,4 +63,4 @@ function App() {
   );
 }
 
-export default App;
+export default memo(App);

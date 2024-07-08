@@ -1,6 +1,7 @@
 import styles from './styles.module.scss';
 import { Helmet } from 'react-helmet-async';
 import { ServicePageType } from '../../const.ts';
+import { memo } from 'react';
 
 type TServicePageProps = {
   type: ServicePageType;
@@ -19,4 +20,4 @@ function ServicePage({ type }: TServicePageProps) {
   );
 }
 
-export default ServicePage;
+export default memo(ServicePage);

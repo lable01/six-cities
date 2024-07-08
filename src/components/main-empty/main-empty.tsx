@@ -1,6 +1,7 @@
 import { useAppSelector } from 'hooks/store';
 import { offersSelectors } from 'store/slices/offers.ts';
 import StatusMessage from 'components/status-message';
+import { memo } from 'react';
 
 function MainEmpty() {
   const currentCity = useAppSelector(offersSelectors.city);
@@ -18,4 +19,4 @@ function MainEmpty() {
   );
 }
 
-export default MainEmpty;
+export default memo(MainEmpty);

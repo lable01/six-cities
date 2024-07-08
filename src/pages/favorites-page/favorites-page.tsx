@@ -10,14 +10,21 @@ import FavoritesEmpty from 'components/favorite-page-component/favorites-empty';
 import { favoritesSelectors } from 'store/slices/favorites.ts';
 import Loader from 'components/loader';
 import { groupOffersByCity } from '../../utils/function.ts';
+import { useMemo, memo } from 'react';
 
 function FavoritesPage() {
   const favoriteOffers = useAppSelector(favoritesSelectors.favorites);
   const requestStatus = useAppSelector(favoritesSelectors.favoriteStatus);
 
-  const favoriteOffersByCity = groupOffersByCity(favoriteOffers);
+  const favoriteOffersByCity = useMemo(
+    () => groupOffersByCity(favoriteOffers),
+    [favoriteOffers],
+  );
 
-  const hasFavorites = Object.keys(favoriteOffersByCity).length > 0;
+  const hasFavorites = useMemo(
+    () => Object.keys(favoriteOffersByCity).length > 0,
+    [favoriteOffersByCity],
+  );
 
   const classNameLayoutFavorites = hasFavorites
     ? ClassName.Favorites
@@ -59,4 +66,4 @@ function FavoritesPage() {
   );
 }
 
-export default FavoritesPage;
+export default memo(FavoritesPage);

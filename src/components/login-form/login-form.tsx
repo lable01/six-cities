@@ -1,4 +1,4 @@
-import { FormEvent, ReactEventHandler, useState } from 'react';
+import { ChangeEvent, FormEvent, useState } from 'react';
 import { login } from 'store/thunks/auth.ts';
 import { useAppDispatch } from 'hooks/store';
 import { toast } from 'react-toastify';
@@ -9,8 +9,6 @@ type HTMLLoginForm = HTMLFormElement & {
   password: HTMLInputElement;
 };
 
-type ChangeHandler = ReactEventHandler<HTMLInputElement | HTMLTextAreaElement>;
-
 function LoginForm() {
   const dispatch = useAppDispatch();
   const [formData, setFormData] = useState({
@@ -18,14 +16,15 @@ function LoginForm() {
     password: '',
   });
 
-  const handleChange: ChangeHandler = (evt) => {
-    const { name, value } = evt.currentTarget;
+  function handleChange(
+    event: ChangeEvent<HTMLInputElement | HTMLTextAreaElement>,
+  ) {
+    const { name, value } = event.currentTarget;
     setFormData({
       ...formData,
       [name]: value,
     });
-  };
-
+  }
   function handleSubmit(event: FormEvent<HTMLLoginForm>) {
     event.preventDefault();
 

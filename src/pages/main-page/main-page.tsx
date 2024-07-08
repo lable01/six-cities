@@ -7,7 +7,7 @@ import { ClassName, RequestStatus, ServicePageType } from '../../const';
 import { Helmet } from 'react-helmet-async';
 import clsx from 'clsx';
 import { useAppDispatch, useAppSelector } from 'hooks/store';
-import { useEffect, useState } from 'react';
+import { useEffect, useState, memo, useMemo, useCallback } from 'react';
 import { TOfferItem } from 'types/offer-item.ts';
 import { offersSelectors } from 'store/slices/offers';
 import Loader from 'components/loader';
@@ -25,8 +25,9 @@ function MainPage() {
   const loadingStatuses = [RequestStatus.Idle, RequestStatus.Loading];
   const currentCity = useAppSelector(offersSelectors.city);
 
-  const currentOffers = offers.filter(
-    (offer) => offer.city.name === currentCity,
+  const currentOffers = useMemo(
+    () => offers.filter((offer) => offer.city.name === currentCity),
+    [offers, currentCity],
   );
 
   useEffect(() => {
@@ -38,9 +39,9 @@ function MainPage() {
   const mainClassName =
     currentOffers.length === 0 ? 'page__main--index-empty' : '';
 
-  function handleCardHover(offerId: TOfferItem['id'] | null) {
+  const handleCardHover = useCallback((offerId: TOfferItem['id'] | null) => {
     setActiveOfferId(offerId);
-  }
+  }, []);
 
   if (offersStatus === RequestStatus.Failed) {
     return <ServicePage type={ServicePageType.Error} />;
@@ -73,4 +74,4 @@ function MainPage() {
   );
 }
 
-export default MainPage;
+export default memo(MainPage);

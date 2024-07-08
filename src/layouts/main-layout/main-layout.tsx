@@ -1,5 +1,6 @@
 import { ReactNode } from 'react';
 import clsx from 'clsx';
+import { memo } from 'react';
 
 type TMainLayoutProps = {
   children: ReactNode;
@@ -16,4 +17,4 @@ function MainLayout({ children, header, className }: TMainLayoutProps) {
   );
 }
 
-export default MainLayout;
+export default memo(MainLayout);

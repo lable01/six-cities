@@ -1,9 +1,18 @@
-import { FormEvent, ReactEventHandler, useState } from 'react';
+import {
+  FormEvent,
+  ReactEventHandler,
+  useCallback,
+  useState,
+  memo,
+} from 'react';
 import { Fragment } from 'react';
-import { ReviewLength } from '../../../const.ts';
+import { AppRoute, AuthorizationStatus, ReviewLength } from '../../../const.ts';
 import { rating } from 'components/login-form/const.ts';
-import { useAppDispatch } from 'hooks/store';
+import { useAppDispatch, useAppSelector } from 'hooks/store';
 import { postComment } from 'store/thunks/comments.ts';
+import { userSelectors } from 'store/slices/user.ts';
+import { useNavigate } from 'react-router-dom';
+import { toast } from 'react-toastify';
 
 type TChangeHandler = ReactEventHandler<HTMLInputElement | HTMLTextAreaElement>;
 
@@ -22,6 +31,8 @@ function ReviewsForm({ activeOfferId }: TReviewsForm) {
     comment: '',
     rating: 0,
   });
+  const userStatus = useAppSelector(userSelectors.status);
+  const navigate = useNavigate();
 
   const isValidReviews =
     review.comment.length < ReviewLength.min ||
@@ -34,10 +45,21 @@ function ReviewsForm({ activeOfferId }: TReviewsForm) {
     setReview({ ...review, [name]: name === 'rating' ? Number(value) : value });
   };
 
-  function handleSubmit(event: FormEvent<HTMLReviewForm>) {
-    event.preventDefault();
-    dispatch(postComment({ body: review, offerId: activeOfferId }));
-  }
+  const handleSubmit = useCallback(
+    (event: FormEvent<HTMLReviewForm>) => {
+      event.preventDefault();
+
+      if (userStatus === AuthorizationStatus.Auth) {
+        dispatch(postComment({ body: review, offerId: activeOfferId }));
+      } else {
+        toast.error(
+          'sending reviews is possible only to authorized users, please log in',
+        );
+        navigate(AppRoute.Login);
+      }
+    },
+    [review, activeOfferId, dispatch, userStatus, navigate],
+  );
 
   return (
     <form
@@ -98,4 +120,4 @@ function ReviewsForm({ activeOfferId }: TReviewsForm) {
   );
 }
 
-export default ReviewsForm;
+export default memo(ReviewsForm);

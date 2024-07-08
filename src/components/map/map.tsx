@@ -1,6 +1,6 @@
 import clsx from 'clsx';
 import { TOfferItem } from 'types/offer-item.ts';
-import { useEffect, useRef } from 'react';
+import { useEffect, useRef, memo, useCallback } from 'react';
 import leaflet, { LayerGroup } from 'leaflet';
 import 'leaflet/dist/leaflet.css';
 import useMap from 'hooks/use-map';
@@ -44,7 +44,7 @@ function Map({ offers, activeOfferId, className }: MapProps) {
     }
   }, [currentCityLocation, map]);
 
-  useEffect(() => {
+  const addMarkers = useCallback(() => {
     if (map) {
       const markerLayerCurrent = markerLayer.current;
       offers.forEach((offer) => {
@@ -69,9 +69,13 @@ function Map({ offers, activeOfferId, className }: MapProps) {
     }
   }, [activeOfferId, map, offers]);
 
+  useEffect(() => {
+    addMarkers();
+  }, [addMarkers]);
+
   return (
     <section className={clsx('map', className)} ref={mapContainerRef}></section>
   );
 }
 
-export default Map;
+export default memo(Map);

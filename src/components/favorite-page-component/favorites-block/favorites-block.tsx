@@ -1,5 +1,6 @@
 import FavoritesOffers from 'components/favorite-page-component/favorites-offers';
 import { TOfferItem } from 'types/offer-item.ts';
+import { memo } from 'react';
 
 type TFavoritesBlockProps = {
   favoriteOffersByCity: {
@@ -24,4 +25,4 @@ function FavoritesBlock({ favoriteOffersByCity }: TFavoritesBlockProps) {
   );
 }
 
-export default FavoritesBlock;
+export default memo(FavoritesBlock);

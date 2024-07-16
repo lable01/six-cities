@@ -1,5 +1,5 @@
 import { TUser } from 'types/user.ts';
-import { AuthorizationStatus, RequestStatus } from '../../const.ts';
+import { AuthorizationStatus, RequestStatus } from 'const/const.ts';
 import { createSlice, PayloadAction } from '@reduxjs/toolkit';
 import { checkAuth, login, logout } from 'store/thunks/auth.ts';
 

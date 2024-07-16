@@ -1,7 +1,7 @@
 import { createAsyncThunk } from '@reduxjs/toolkit';
 import { TOfferItem } from 'types/offer-item.ts';
 import { AxiosInstance } from 'axios';
-import { EndPoint } from '../../const.ts';
+import { EndPoint, ErrorToast } from 'const/const.ts';
 import { TOfferDetail } from 'types/offer-detail.ts';
 import { toast } from 'react-toastify';
 
@@ -14,7 +14,7 @@ const fetchAllOffers = createAsyncThunk<
     const response = await api.get<TOfferItem[]>(EndPoint.Offers);
     return response.data;
   } catch (err) {
-    toast.error('server error loading offers, please try again');
+    toast.error(ErrorToast.FetchAllOffers);
     throw err;
   }
 });
@@ -31,7 +31,7 @@ const fetchOffer = createAsyncThunk<
 
     return response.data;
   } catch (error) {
-    toast.error('server error loading offer, please try again');
+    toast.error(ErrorToast.FetchOffer);
     throw error;
   }
 });
@@ -43,12 +43,12 @@ const fetchNearOffers = createAsyncThunk<
 >('fetchOffers/near', async (offerId, { extra: api }) => {
   try {
     const response = await api.get<TOfferItem[]>(
-      `${EndPoint.Offers}/${offerId}/nearby`,
+      `${EndPoint.Offers}/${offerId}${EndPoint.Nearby}`,
     );
 
     return response.data;
   } catch (error) {
-    toast.error('server error loading nearby offers, please try again');
+    toast.error(ErrorToast.FetchNearOffers);
     throw error;
   }
 });

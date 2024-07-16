@@ -12,7 +12,7 @@ function HeaderNav() {
   return (
     <nav className="header__nav">
       <ul className="header__nav-list">
-        {info && authorizationStatus ? <NavLogin info={info} /> : <NavLogout />}
+        {info && authorizationStatus ? <NavLogout info={info} /> : <NavLogin />}
       </ul>
     </nav>
   );

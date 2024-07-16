@@ -1,42 +1,16 @@
 import MainLayout from 'layouts/main-layout';
 import Header from 'components/header-components/header';
-import { ClassName } from '../../const';
-import { useParams } from 'react-router-dom';
+import { ClassName } from 'const/const.ts';
 import OfferDetails from 'components/offer-components/offer-details';
 import OtherOffers from 'components/offer-components/other-offers';
 import { Helmet } from 'react-helmet-async';
-import { useAppDispatch, useAppSelector } from 'hooks/store';
-import {
-  offerAction,
-  offerSelectors,
-  selectNearByStatuses,
-  selectOfferStatuses,
-} from 'store/slices/offer.ts';
-import { useEffect, memo, useCallback } from 'react';
-import { reviewsActions, reviewsSelectors } from 'store/slices/reviews.ts';
+import { memo } from 'react';
 import Loader from 'components/loader';
+import useOffersData from 'hooks/use-offers-data';
 
 function OfferPage() {
-  const dispatch = useAppDispatch();
-  const { id } = useParams();
-
-  const currentOffer = useAppSelector(offerSelectors.offer);
-  const reviews = useAppSelector(reviewsSelectors.reviews);
-  const nearOffers = useAppSelector(offerSelectors.nearByOffers);
-  const status = useAppSelector(selectOfferStatuses);
-  const nearByStatus = useAppSelector(selectNearByStatuses);
-
-  const fetchOfferData = useCallback(() => {
-    if (id) {
-      dispatch(offerAction.fetchOffer(id));
-      dispatch(offerAction.fetchNearOffers(id));
-      dispatch(reviewsActions.fetchComments(id));
-    }
-  }, [dispatch, id]);
-
-  useEffect(() => {
-    fetchOfferData();
-  }, [fetchOfferData]);
+  const { currentOffer, reviews, nearCurrentOffers, status, nearByStatus } =
+    useOffersData();
 
   if (status.isLoading || nearByStatus.isLoading || !currentOffer) {
     return <Loader />;
@@ -53,9 +27,9 @@ function OfferPage() {
         <OfferDetails
           offer={currentOffer}
           reviews={reviews}
-          nearOffers={nearOffers}
+          nearOffers={nearCurrentOffers}
         />
-        <OtherOffers nearOffers={nearOffers} />
+        <OtherOffers nearOffers={nearCurrentOffers} />
       </main>
     </MainLayout>
   );

@@ -7,9 +7,9 @@ import OfferGallery from 'components/offer-components/offer-gallery';
 import OfferBadge from 'components/offer-components/offer-badge';
 import OfferBookmark from 'components/offer-components/offer-bookmark';
 import OfferFeatures from 'components/offer-components/offer-features';
-import { ClassNamePages } from '../../../const.ts';
+import { ClassNamePages } from 'const/const.ts';
 import OfferHost from 'components/offer-components/offer-host';
-import { capitalizeFirstLetter } from '../../../utils/function.ts';
+import { capitalizeFirstLetter } from 'utils/function.ts';
 import RatingStars from 'components/rating-stars';
 import { useMemo, memo } from 'react';
 
@@ -34,6 +34,7 @@ function OfferDetails({ offer, reviews, nearOffers }: TOfferDetailsProps) {
     host,
   } = offer;
   const type = useMemo(() => capitalizeFirstLetter(offer.type), [offer.type]);
+  const nearOffersByMap = [offer, ...nearOffers];
 
   return (
     <section className="offer">
@@ -79,7 +80,7 @@ function OfferDetails({ offer, reviews, nearOffers }: TOfferDetailsProps) {
           <ReviewsBlock activeOfferId={id} reviews={reviews} />
         </div>
       </div>
-      <Map className="offer__map" offers={nearOffers} activeOfferId={id} />
+      <Map className="offer__map" offers={nearOffersByMap} activeOfferId={id} />
     </section>
   );
 }

@@ -1,50 +1,18 @@
-import { ChangeEvent, FormEvent, useState } from 'react';
-import { login } from 'store/thunks/auth.ts';
-import { useAppDispatch } from 'hooks/store';
-import { toast } from 'react-toastify';
-import { validateloginForm } from '../../utils/function.ts';
-
-type HTMLLoginForm = HTMLFormElement & {
-  email: HTMLInputElement;
-  password: HTMLInputElement;
-};
+import { useState } from 'react';
+import useFieldChange from 'hooks/use-field-change';
+import {
+  InitialLoginState,
+  PasswordMinLength,
+} from 'components/login-form/const.ts';
+import { useLoginForm } from 'hooks/use-login-form/use-login-form.ts';
 
 function LoginForm() {
-  const dispatch = useAppDispatch();
-  const [formData, setFormData] = useState({
-    email: '',
-    password: '',
+  const [formData, setFormData] = useState(InitialLoginState);
+  const handleChange = useFieldChange({
+    state: formData,
+    setState: setFormData,
   });
-
-  function handleChange(
-    event: ChangeEvent<HTMLInputElement | HTMLTextAreaElement>,
-  ) {
-    const { name, value } = event.currentTarget;
-    setFormData({
-      ...formData,
-      [name]: value,
-    });
-  }
-  function handleSubmit(event: FormEvent<HTMLLoginForm>) {
-    event.preventDefault();
-
-    const validationErrors = validateloginForm(formData);
-    const validateEmail = () =>
-      validationErrors.email && toast.error(validationErrors.email);
-    const validatePassword = () =>
-      validationErrors.password && toast.error(validationErrors.password);
-
-    if (
-      Object.keys(validationErrors).every(
-        (key) => !validationErrors[key as keyof typeof validationErrors],
-      )
-    ) {
-      dispatch(login(formData));
-    } else {
-      validateEmail();
-      validatePassword();
-    }
-  }
+  const { handleSubmit } = useLoginForm(formData);
 
   return (
     <form
@@ -75,7 +43,7 @@ function LoginForm() {
           onChange={handleChange}
           value={formData.password}
           required
-          minLength={6}
+          minLength={PasswordMinLength}
         />
       </div>
       <button className="login__submit form__submit button" type="submit">

@@ -5,9 +5,10 @@ import leaflet, { LayerGroup } from 'leaflet';
 import 'leaflet/dist/leaflet.css';
 import useMap from 'hooks/use-map';
 import { URL_MARKER_ACTIVE, URL_MARKER_DEFAULT } from './const.ts';
+import { TOfferDetail } from 'types/offer-detail.ts';
 
 type MapProps = {
-  offers: TOfferItem[];
+  offers: (TOfferItem | TOfferDetail)[];
   activeOfferId: string | null;
   className: string;
 };

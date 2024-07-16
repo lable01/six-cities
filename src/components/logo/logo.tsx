@@ -1,6 +1,7 @@
-import { AppRoute, SizesLogo } from '../../const.ts';
+import { AppRoute } from 'const/const.ts';
 import { Link } from 'react-router-dom';
 import { memo } from 'react';
+import { SizesLogo } from './const.ts';
 
 type LogoProps = {
   type: 'header' | 'footer';

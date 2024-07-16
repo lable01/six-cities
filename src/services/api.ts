@@ -1,6 +1,6 @@
 import type { AxiosInstance } from 'axios';
 import axios from 'axios';
-import { Default } from '../const.ts';
+import { Default } from '../const/const.ts';
 import { getToken } from 'services/token.ts';
 
 export const createAPI = (): AxiosInstance => {

@@ -1,5 +1,5 @@
 import { createBrowserRouter, RouterProvider } from 'react-router-dom';
-import { AppRoute, ServicePageType } from '../const.ts';
+import { AppRoute, ServicePageType } from '../const/const.ts';
 import MainPage from 'pages/main-page';
 import LoginPage from 'pages/login-page';
 import FavoritesPage from 'pages/favorites-page';

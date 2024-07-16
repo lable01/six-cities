@@ -1,4 +1,4 @@
-import { CITIES } from '../../const';
+import { CITIES } from 'const/const.ts';
 import Tab from 'components/tab';
 import { useAppSelector } from 'hooks/store';
 import { offersSelectors } from 'store/slices/offers';

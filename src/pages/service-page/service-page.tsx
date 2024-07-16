@@ -1,6 +1,6 @@
 import styles from './styles.module.scss';
 import { Helmet } from 'react-helmet-async';
-import { ServicePageType } from '../../const.ts';
+import { ServicePageType } from 'const/const.ts';
 import { memo } from 'react';
 
 type TServicePageProps = {

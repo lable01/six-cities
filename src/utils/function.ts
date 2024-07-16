@@ -1,5 +1,4 @@
 import dayjs from 'dayjs';
-import { SortOption } from 'components/sort/const.ts';
 import { TOfferItem } from 'types/offer-item.ts';
 
 function getCurrentDate(date: Date, isDay = true) {
@@ -17,26 +16,6 @@ function getStarsWidth(stars: number) {
   const width = (100 / 5) * Math.round(stars);
 
   return `${width}%`;
-}
-
-function getSortedOffers(offers: TOfferItem[], currentSort: SortOption) {
-  let sortedOffers = offers;
-
-  switch (currentSort) {
-    case SortOption.PriceLowToHigh:
-      sortedOffers = [...offers].sort((a, b) => a.price - b.price);
-      break;
-    case SortOption.PriceHighToLow:
-      sortedOffers = [...offers].sort((a, b) => b.price - a.price);
-      break;
-    case SortOption.TopRatedFirst:
-      sortedOffers = [...offers].sort((a, b) => b.rating - a.rating);
-      break;
-    default:
-      break;
-  }
-
-  return sortedOffers;
 }
 
 function groupOffersByCity(offers: TOfferItem[]) {
@@ -66,7 +45,7 @@ type FormValidate = {
   password: string;
 };
 
-function validateloginForm(formData: FormValidate) {
+function validateLoginForm(formData: FormValidate) {
   const errors: FormValidate = {
     email: '',
     password: '',
@@ -96,8 +75,7 @@ function validateloginForm(formData: FormValidate) {
 export {
   getCurrentDate,
   getStarsWidth,
-  getSortedOffers,
   groupOffersByCity,
   capitalizeFirstLetter,
-  validateloginForm,
+  validateLoginForm,
 };

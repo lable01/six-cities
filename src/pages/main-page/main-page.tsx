@@ -3,7 +3,7 @@ import MainEmpty from 'components/main-empty';
 import MainLayout from 'layouts/main-layout';
 import Header from 'components/header-components/header';
 import Tabs from 'components/tabs';
-import { ClassName, RequestStatus, ServicePageType } from '../../const';
+import { ClassName, RequestStatus, ServicePageType } from 'const/const.ts';
 import { Helmet } from 'react-helmet-async';
 import clsx from 'clsx';
 import { useAppDispatch, useAppSelector } from 'hooks/store';

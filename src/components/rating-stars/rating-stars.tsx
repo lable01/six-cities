@@ -1,5 +1,5 @@
-import { getStarsWidth } from '../../utils/function.ts';
-import { ClassNamePages } from '../../const.ts';
+import { getStarsWidth } from 'utils/function.ts';
+import { ClassNamePages } from 'const/const.ts';
 import clsx from 'clsx';
 import { memo, useMemo } from 'react';
 

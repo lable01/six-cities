@@ -1,9 +1,10 @@
 import clsx from 'clsx';
 import { SORT_OPTIONS } from './const';
 import useBoolean from 'hooks/use-boolean';
-import { useEffect, memo } from 'react';
+import { useEffect, memo, useRef, useCallback, useMemo } from 'react';
 import { useAppDispatch } from 'hooks/store';
 import { offersAction } from 'store/slices/offers.ts';
+import useOnClickOutside from 'hooks/use-on-click-outside';
 
 type SortProps = {
   current: number;
@@ -12,6 +13,11 @@ type SortProps = {
 function Sort({ current }: SortProps) {
   const { isOn, off, toggle } = useBoolean(false);
   const dispatch = useAppDispatch();
+  const sortContainerRef = useRef<HTMLUListElement>(null);
+
+  const handleClickOutside = useCallback(() => {
+    off();
+  }, [off]);
 
   useEffect(() => {
     const onEscKeyDown = (evt: KeyboardEvent) => {
@@ -28,11 +34,12 @@ function Sort({ current }: SortProps) {
     };
   }, [off]);
 
-  const selectedFilter = SORT_OPTIONS[current];
+  const selectedFilter = useMemo(() => SORT_OPTIONS[current], [current]);
+  useOnClickOutside(sortContainerRef, handleClickOutside);
 
   return (
     <form className="places__sorting" action="#" method="get">
-      <span className="places__sorting-caption">Sort by</span>
+      <span className="places__sorting-caption">Sort by </span>
       <span className="places__sorting-type" onClick={toggle} tabIndex={0}>
         {selectedFilter}
         <svg className="places__sorting-arrow" width="7" height="4">
@@ -41,6 +48,7 @@ function Sort({ current }: SortProps) {
       </span>
 
       <ul
+        ref={sortContainerRef}
         className={clsx('places__options places__options--custom', {
           'places__options--opened': isOn,
         })}

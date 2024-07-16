@@ -1,4 +1,4 @@
-import { RequestStatus } from '../../const.ts';
+import { RequestStatus } from 'const/const.ts';
 import { TReview } from 'types/review.ts';
 import { createSlice } from '@reduxjs/toolkit';
 import { fetchComments, postComment } from 'store/thunks/comments.ts';

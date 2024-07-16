@@ -1,11 +1,12 @@
 import { Link } from 'react-router-dom';
 import { TOfferItem } from 'types/offer-item.ts';
-import { AppRoute, ClassNamePages, SizesCards } from '../../../const.ts';
+import { AppRoute, ClassNamePages } from 'const/const.ts';
 import OfferBadge from 'components/offer-components/offer-badge';
 import OfferBookmark from 'components/offer-components/offer-bookmark';
-import { capitalizeFirstLetter } from '../../../utils/function.ts';
+import { capitalizeFirstLetter } from 'utils/function.ts';
 import RatingStars from 'components/rating-stars';
 import { memo, useCallback, useMemo } from 'react';
+import { SizesCards } from 'components/offer-components/cart-item/const.ts';
 
 type TCartItemProps = {
   offer: TOfferItem;

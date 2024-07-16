@@ -5,7 +5,7 @@ import OfferBadge from 'components/offer-components/offer-badge';
 import OfferBookmark from 'components/offer-components/offer-bookmark';
 import { capitalizeFirstLetter } from 'utils/function.ts';
 import RatingStars from 'components/rating-stars';
-import { memo, useCallback, useMemo } from 'react';
+import { memo } from 'react';
 import { SizesCards } from 'components/offer-components/cart-item/const.ts';
 
 type TCartItemProps = {
@@ -17,18 +17,12 @@ type TCartItemProps = {
 function CartItem({ offer, onCardHover, typeCard }: TCartItemProps) {
   const { id, isPremium, previewImage, title, price, isFavorite, rating } =
     offer;
-  const type = useMemo(() => capitalizeFirstLetter(offer.type), [offer.type]);
+  const type = capitalizeFirstLetter(offer.type);
   const size = SizesCards[typeCard];
 
-  const handleMouseEnter = useCallback(
-    () => onCardHover?.(id),
-    [onCardHover, id],
-  );
+  const handleMouseEnter = () => onCardHover?.(id);
 
-  const handleMouseLeave = useCallback(
-    () => onCardHover?.(null),
-    [onCardHover],
-  );
+  const handleMouseLeave = () => onCardHover?.(null);
 
   return (
     <article

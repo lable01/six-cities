@@ -3,7 +3,12 @@ import MainEmpty from 'components/main-empty';
 import MainLayout from 'layouts/main-layout';
 import Header from 'components/header-components/header';
 import Tabs from 'components/tabs';
-import { ClassName, RequestStatus, ServicePageType } from 'const/const.ts';
+import {
+  ClassName,
+  LoadingStatuses,
+  RequestStatus,
+  ServicePageType,
+} from 'const/const.ts';
 import { Helmet } from 'react-helmet-async';
 import clsx from 'clsx';
 import { useAppDispatch, useAppSelector } from 'hooks/store';
@@ -22,7 +27,6 @@ function MainPage() {
   );
   const offers = useAppSelector(offersSelectors.offers);
   const offersStatus = useAppSelector(offersSelectors.status);
-  const loadingStatuses = [RequestStatus.Idle, RequestStatus.Loading];
   const currentCity = useAppSelector(offersSelectors.city);
 
   const currentOffers = useMemo(
@@ -44,9 +48,9 @@ function MainPage() {
   }, []);
 
   if (offersStatus === RequestStatus.Failed) {
-    return <ServicePage type={ServicePageType.Error} />;
+    return <ServicePage type={ServicePageType.ServerUnavailable} />;
   }
-  if (loadingStatuses.includes(offersStatus)) {
+  if (LoadingStatuses.includes(offersStatus)) {
     return <Loader />;
   }
 

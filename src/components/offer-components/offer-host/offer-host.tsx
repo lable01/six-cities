@@ -1,5 +1,4 @@
 import { TUser } from 'types/user.ts';
-import { memo } from 'react';
 
 type TOfferHostProps = {
   host: TUser;
@@ -36,4 +35,4 @@ function OfferHost({ host }: TOfferHostProps) {
   );
 }
 
-export default memo(OfferHost);
+export default OfferHost;

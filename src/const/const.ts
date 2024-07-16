@@ -79,7 +79,8 @@ export const enum FavoriteStatusCode {
 
 export const enum ServicePageType {
   NotFound = 'Unfortunately, you ended up on a non-existing page',
-  Error = 'Unfortunately, there are problems with the server, please try again later',
+  ServerUnavailable = 'Unfortunately, there are problems with the server, please try again later',
+  ErrorApp = 'Service error, please write to support',
 }
 
 export const ErrorToast = {
@@ -101,3 +102,8 @@ export const NumberCitiesNearby = {
   Min: 0,
   Max: 3,
 } as const;
+
+export const LoadingStatuses: readonly RequestStatus[] = [
+  RequestStatus.Idle,
+  RequestStatus.Loading,
+];

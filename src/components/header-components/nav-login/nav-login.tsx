@@ -1,6 +1,5 @@
 import { Link } from 'react-router-dom';
 import { AppRoute } from 'const/const.ts';
-import { memo } from 'react';
 
 function NavLogin() {
   return (
@@ -16,4 +15,4 @@ function NavLogin() {
   );
 }
 
-export default memo(NavLogin);
+export default NavLogin;

@@ -2,7 +2,7 @@ import clsx from 'clsx';
 import { useAppDispatch } from 'hooks/store';
 import { TCityName } from 'types/city-name.ts';
 import { offersAction } from 'store/slices/offers.ts';
-import { useMemo, memo } from 'react';
+import { useMemo } from 'react';
 
 type TabProps = {
   city: TCityName;
@@ -31,4 +31,4 @@ function Tab({ city, currentCity }: TabProps) {
   );
 }
 
-export default memo(Tab);
+export default Tab;

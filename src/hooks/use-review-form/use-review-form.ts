@@ -2,7 +2,7 @@ import { useAppDispatch, useAppSelector } from 'hooks/store';
 import { userSelectors } from 'store/slices/user.ts';
 import { useNavigate } from 'react-router-dom';
 import { reviewsSelectors } from 'store/slices/reviews.ts';
-import { Dispatch, FormEvent, SetStateAction, useCallback } from 'react';
+import { Dispatch, FormEvent, SetStateAction } from 'react';
 import {
   AppRoute,
   AuthorizationStatus,
@@ -35,31 +35,20 @@ function useReviewForm({
   const navigate = useNavigate();
   const reviewStatus = useAppSelector(reviewsSelectors.reviewsStatus);
 
-  const handleSubmit = useCallback(
-    (event: FormEvent<HTMLReviewForm>) => {
-      event.preventDefault();
+  const handleSubmit = (event: FormEvent<HTMLReviewForm>) => {
+    event.preventDefault();
 
-      if (userStatus === AuthorizationStatus.Auth) {
-        dispatch(postComment({ body: review, offerId: activeOfferId }));
+    if (userStatus === AuthorizationStatus.Auth) {
+      dispatch(postComment({ body: review, offerId: activeOfferId }));
 
-        if (reviewStatus === RequestStatus.Success) {
-          setReview(InitialReviewState);
-        }
-      } else {
-        toast.error(ErrorToast.ReviewFormError);
-        navigate(AppRoute.Login);
+      if (reviewStatus === RequestStatus.Success) {
+        setReview(InitialReviewState);
       }
-    },
-    [
-      dispatch,
-      userStatus,
-      review,
-      activeOfferId,
-      reviewStatus,
-      navigate,
-      setReview,
-    ],
-  );
+    } else {
+      toast.error(ErrorToast.ReviewFormError);
+      navigate(AppRoute.Login);
+    }
+  };
 
   return { handleSubmit };
 }

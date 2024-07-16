@@ -2,7 +2,6 @@ import { TReview } from 'types/review.ts';
 import { getCurrentDate } from 'utils/function.ts';
 import RatingStars from 'components/rating-stars';
 import { ClassNamePages } from 'const/const.ts';
-import { memo } from 'react';
 
 type TReviewsInfo = {
   review: TReview;
@@ -43,4 +42,4 @@ function ReviewsInfo({ review }: TReviewsInfo) {
   );
 }
 
-export default memo(ReviewsInfo);
+export default ReviewsInfo;

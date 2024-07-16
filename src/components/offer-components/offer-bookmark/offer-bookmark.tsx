@@ -29,7 +29,6 @@ function OfferBookmark({
   );
   const userStatus =
     useAppSelector(userSelectors.status) === AuthorizationStatus.Auth;
-  console.log(userStatus);
   return (
     <button
       className={clsx(

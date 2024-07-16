@@ -1,4 +1,4 @@
-import { useCallback, useMemo, useState } from 'react';
+import { useCallback, useState } from 'react';
 import { useNavigate } from 'react-router-dom';
 import { useAppDispatch, useAppSelector } from 'hooks/store';
 import { changeFavorite } from 'store/thunks/favorites.ts';
@@ -12,13 +12,10 @@ export function useOfferBookmark(initialIsFavorite: boolean, offerId: string) {
   const [isFavorite, setIsFavorite] = useState(initialIsFavorite);
   const userStatus = useAppSelector(userSelectors.status);
 
-  const isFavoriteText = useMemo(
-    () =>
-      userStatus === AuthorizationStatus.Auth && isFavorite
-        ? 'In bookmarks'
-        : 'To bookmarks',
-    [userStatus, isFavorite],
-  );
+  const isFavoriteText =
+    userStatus === AuthorizationStatus.Auth && isFavorite
+      ? 'In bookmarks'
+      : 'To bookmarks';
 
   const handleClick = useCallback(() => {
     if (userStatus === AuthorizationStatus.Auth) {

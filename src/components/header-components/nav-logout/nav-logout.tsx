@@ -1,31 +1,22 @@
 import { Link } from 'react-router-dom';
-import { AppRoute, AuthorizationStatus } from 'const/const.ts';
-import { useAppDispatch, useAppSelector } from 'hooks/store';
-import { favoritesSelectors } from 'store/slices/favorites.ts';
-import { userSelectors } from 'store/slices/user.ts';
-import { useEffect } from 'react';
-import { fetchFavorites } from 'store/thunks/favorites.ts';
-import { logout } from 'store/thunks/auth.ts';
+import { AppRoute, LoadingStatuses } from 'const/const.ts';
 import { TUser } from 'types/user.ts';
+import useNavLogout from 'hooks/use-nav-login';
+import Loader from 'components/loader';
+import { useAppSelector } from 'hooks/store';
+import { favoritesSelectors } from 'store/slices/favorites.ts';
 
 type TNavLoginProps = {
   info: TUser;
 };
 
 function NavLogout({ info }: TNavLoginProps) {
-  const dispatch = useAppDispatch();
-  const userStatus = useAppSelector(userSelectors.status);
-  const favoriteCount = useAppSelector(favoritesSelectors.favorites).length;
+  const { favoriteCount, handleLogout } = useNavLogout();
+  const favoriteStatus = useAppSelector(favoritesSelectors.favoriteStatus);
 
-  useEffect(() => {
-    if (userStatus === AuthorizationStatus.Auth) {
-      dispatch(fetchFavorites());
-    }
-  }, [userStatus, dispatch]);
-
-  const handleLogout = () => {
-    dispatch(logout());
-  };
+  if (LoadingStatuses.includes(favoriteStatus)) {
+    return <Loader />;
+  }
 
   return (
     <>

@@ -1,7 +1,7 @@
 import clsx from 'clsx';
 import { SORT_OPTIONS } from './const';
 import useBoolean from 'hooks/use-boolean';
-import { useEffect, memo, useRef, useCallback, useMemo } from 'react';
+import { useEffect, useRef, useMemo } from 'react';
 import { useAppDispatch } from 'hooks/store';
 import { offersAction } from 'store/slices/offers.ts';
 import useOnClickOutside from 'hooks/use-on-click-outside';
@@ -15,9 +15,9 @@ function Sort({ current }: SortProps) {
   const dispatch = useAppDispatch();
   const sortContainerRef = useRef<HTMLUListElement>(null);
 
-  const handleClickOutside = useCallback(() => {
+  const handleClickOutside = () => {
     off();
-  }, [off]);
+  };
 
   useEffect(() => {
     const onEscKeyDown = (evt: KeyboardEvent) => {
@@ -73,4 +73,4 @@ function Sort({ current }: SortProps) {
   );
 }
 
-export default memo(Sort);
+export default Sort;

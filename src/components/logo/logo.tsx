@@ -1,6 +1,5 @@
 import { AppRoute } from 'const/const.ts';
 import { Link } from 'react-router-dom';
-import { memo } from 'react';
 import { SizesLogo } from './const.ts';
 
 type LogoProps = {
@@ -23,4 +22,4 @@ function Logo({ type }: LogoProps) {
   );
 }
 
-export default memo(Logo);
+export default Logo;

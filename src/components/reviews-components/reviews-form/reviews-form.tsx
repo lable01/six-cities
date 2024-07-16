@@ -1,4 +1,4 @@
-import { Fragment, memo, useState } from 'react';
+import { Fragment, useState } from 'react';
 import { ReviewLength } from './const.ts';
 import { Rating } from 'components/login-form/const.ts';
 import { InitialReviewState } from 'components/reviews-components/reviews-form/const.ts';
@@ -80,4 +80,4 @@ function ReviewsForm({ activeOfferId }: TReviewsForm) {
   );
 }
 
-export default memo(ReviewsForm);
+export default ReviewsForm;

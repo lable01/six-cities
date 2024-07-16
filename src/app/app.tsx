@@ -1,17 +1,19 @@
 import { createBrowserRouter, RouterProvider } from 'react-router-dom';
 import { AppRoute, ServicePageType } from '../const/const.ts';
 import MainPage from 'pages/main-page';
-import LoginPage from 'pages/login-page';
-import FavoritesPage from 'pages/favorites-page';
-import ServicePage from 'pages/service-page';
 import OfferPage from 'pages/offer-page';
 import ProtectedRoute from 'components/protected-route';
 import { ToastContainer } from 'react-toastify';
 import 'react-toastify/dist/ReactToastify.css';
-import { useEffect, memo } from 'react';
+import { useEffect, memo, lazy, Suspense } from 'react';
 import { checkAuth } from 'store/thunks/auth.ts';
 import { getToken } from 'services/token.ts';
 import { useAppDispatch } from 'hooks/store';
+import Loader from 'components/loader';
+
+const FavoritesPage = lazy(() => import('pages/favorites-page'));
+const LoginPage = lazy(() => import('pages/login-page'));
+const ServicePage = lazy(() => import('pages/service-page'));
 
 function App() {
   const dispatch = useAppDispatch();
@@ -33,7 +35,9 @@ function App() {
       path: AppRoute.Login,
       element: (
         <ProtectedRoute onlyUnAuth>
-          <LoginPage />
+          <Suspense fallback={<Loader />}>
+            <LoginPage />
+          </Suspense>
         </ProtectedRoute>
       ),
     },
@@ -43,23 +47,29 @@ function App() {
     },
     {
       path: AppRoute.NotFound,
-      element: <ServicePage type={ServicePageType.NotFound} />,
+      element: (
+        <Suspense fallback={<Loader />}>
+          <ServicePage type={ServicePageType.NotFound} />
+        </Suspense>
+      ),
     },
     {
       path: AppRoute.Favorites,
       element: (
         <ProtectedRoute>
-          <FavoritesPage />
+          <Suspense fallback={<Loader />}>
+            <FavoritesPage />
+          </Suspense>
         </ProtectedRoute>
       ),
     },
   ]);
 
   return (
-    <>
+    <Suspense fallback={<Loader />}>
       <ToastContainer />
       <RouterProvider router={router} />
-    </>
+    </Suspense>
   );
 }
 

@@ -2,7 +2,7 @@ import { createAsyncThunk } from '@reduxjs/toolkit';
 import { TReview } from 'types/review.ts';
 import { TOfferDetail } from 'types/offer-detail.ts';
 import { AxiosInstance } from 'axios';
-import { EndPoint } from '../../const.ts';
+import { EndPoint, ErrorToast } from 'const/const.ts';
 import { toast } from 'react-toastify';
 
 type PostCommentProps = {
@@ -25,7 +25,7 @@ const fetchComments = createAsyncThunk<
 
     return response.data;
   } catch (error) {
-    toast.error('server error loading reviews, please try again');
+    toast.error(ErrorToast.FetchComments);
     throw error;
   }
 });
@@ -43,7 +43,7 @@ const postComment = createAsyncThunk<
 
     return response.data;
   } catch (error) {
-    toast.error('server error send review, please try again');
+    toast.error(ErrorToast.PostComments);
     throw error;
   }
 });

@@ -1,6 +1,6 @@
 import { TCityName } from 'types/city-name.ts';
 import { TOfferItem } from 'types/offer-item.ts';
-import { RequestStatus } from '../const.ts';
+import { RequestStatus } from '../const/const.ts';
 
 export type TOffersState = {
   city: TCityName;

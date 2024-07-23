@@ -1,5 +1,5 @@
 import { TCityName } from 'types/city-name';
-import { CITIES, RequestStatus } from '../../const';
+import { CITIES, RequestStatus } from 'const/const.ts';
 import { SortOption } from 'components/sort/const';
 import { createSlice, PayloadAction } from '@reduxjs/toolkit';
 import { fetchAllOffers } from 'store/thunks/offers.ts';

@@ -1,7 +1,7 @@
 import { createAsyncThunk } from '@reduxjs/toolkit';
 import { TOfferItem } from 'types/offer-item.ts';
 import { AxiosInstance } from 'axios';
-import { EndPoint, FavoriteStatusCode } from '../../const.ts';
+import { EndPoint, ErrorToast, FavoriteStatusCode } from 'const/const.ts';
 import { TFavoriteStatus } from 'types/favorite-status.ts';
 import { offersAction } from 'store/slices/offers.ts';
 import { toast } from 'react-toastify';
@@ -26,7 +26,7 @@ const fetchFavorites = createAsyncThunk<
 
     return response.data;
   } catch (error) {
-    toast.error('server error loading favorites offers, please try again');
+    toast.error(ErrorToast.FetchFavorites);
     throw error;
   }
 });
@@ -50,8 +50,7 @@ const changeFavorite = createAsyncThunk<
     }
     return { offer: response.data, status };
   } catch (error) {
-    console.dir(error);
-    toast.error('server error change favorites offers, please try again');
+    toast.error(ErrorToast.ChangeFavorite);
     throw error;
   }
 });

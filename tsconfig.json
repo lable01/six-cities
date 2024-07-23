@@ -33,6 +33,8 @@
       "mocks/*": ["mocks/*"],
       "store/*": ["store/*"],
       "services/*": ["services/*"],
+      "const/*": ["const/*"],
+      "utils/*": ["utils/*"],
     }
   },
   "include": ["src", "vite.config.ts"],

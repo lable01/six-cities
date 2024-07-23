@@ -3,8 +3,9 @@ import Sort from 'components/sort';
 import Map from 'components/map';
 import { TOfferItem } from 'types/offer-item';
 import { useAppSelector } from 'hooks/store';
-import { getSortedOffers } from '../../utils/function';
 import { offersSelectors } from 'store/slices/offers';
+import { memo } from 'react';
+import useSortedOffers from 'hooks/use-sorted-offers';
 
 type MainFullProps = {
   currentOffers: TOfferItem[];
@@ -19,8 +20,7 @@ function MainFull({
 }: MainFullProps) {
   const currentCity = useAppSelector(offersSelectors.city);
   const currentSort = useAppSelector(offersSelectors.sort);
-
-  const sortedOffers = getSortedOffers(currentOffers, currentSort);
+  const sortedOffers = useSortedOffers(currentOffers, currentSort);
 
   return (
     <div className="cities__places-container container">
@@ -52,4 +52,4 @@ function MainFull({
   );
 }
 
-export default MainFull;
+export default memo(MainFull);

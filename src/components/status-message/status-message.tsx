@@ -1,5 +1,5 @@
 import { TCityName } from 'types/city-name.ts';
-import { RequestStatus } from '../../const.ts';
+import { RequestStatus } from 'const/const.ts';
 
 type TStatusMessageProps = {
   status: RequestStatus;

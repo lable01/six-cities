@@ -1,3 +1,5 @@
+import { memo } from 'react';
+
 type TOfferGalleryProps = {
   images: string[];
   type: string;
@@ -15,4 +17,4 @@ function OfferGallery({ images, type }: TOfferGalleryProps) {
   );
 }
 
-export default OfferGallery;
+export default memo(OfferGallery);

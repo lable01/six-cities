@@ -1,5 +1,5 @@
 import { TOfferItem } from 'types/offer-item.ts';
-import { FavoriteStatus, RequestStatus } from '../../const.ts';
+import { FavoriteStatus, RequestStatus } from 'const/const.ts';
 import { createSlice } from '@reduxjs/toolkit';
 import { changeFavorite, fetchFavorites } from 'store/thunks/favorites.ts';
 

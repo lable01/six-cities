@@ -1,6 +1,6 @@
 import { TOfferDetail } from 'types/offer-detail.ts';
 import { TOfferItem } from 'types/offer-item.ts';
-import { RequestStatus } from '../../const.ts';
+import { RequestStatus } from 'const/const.ts';
 import { createSelector, createSlice } from '@reduxjs/toolkit';
 import { fetchNearOffers, fetchOffer } from 'store/thunks/offers.ts';
 import { RootState } from 'types/store.ts';

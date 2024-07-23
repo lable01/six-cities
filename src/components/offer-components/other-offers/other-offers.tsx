@@ -1,5 +1,6 @@
 import { TOfferItem } from 'types/offer-item.ts';
 import CartItem from 'components/offer-components/cart-item';
+import { memo } from 'react';
 
 type TOtherOffersProps = {
   nearOffers: TOfferItem[];
@@ -26,4 +27,4 @@ function OtherOffers({ nearOffers }: TOtherOffersProps) {
   );
 }
 
-export default OtherOffers;
+export default memo(OtherOffers);

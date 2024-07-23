@@ -1,6 +1,6 @@
 import MainLayout from 'layouts/main-layout';
 import Header from 'components/header-components/header';
-import { ClassName } from '../../const';
+import { ClassName } from 'const/const.ts';
 import { Helmet } from 'react-helmet-async';
 import LoginForm from 'components/login-form';
 

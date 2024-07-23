@@ -1,6 +1,7 @@
-import { getStarsWidth } from '../../utils/function.ts';
-import { ClassNamePages } from '../../const.ts';
+import { getStarsWidth } from 'utils/function.ts';
+import { ClassNamePages } from 'const/const.ts';
 import clsx from 'clsx';
+import { memo, useMemo } from 'react';
 
 type RatingStarsProps = {
   type: (typeof ClassNamePages)[keyof typeof ClassNamePages];
@@ -8,7 +9,7 @@ type RatingStarsProps = {
 };
 
 function RatingStars({ type, rating }: RatingStarsProps) {
-  const starWidth = getStarsWidth(rating);
+  const starWidth = useMemo(() => getStarsWidth(rating), [rating]);
 
   return (
     <div className={clsx(`${type}__stars`, 'rating__stars')}>
@@ -18,4 +19,4 @@ function RatingStars({ type, rating }: RatingStarsProps) {
   );
 }
 
-export default RatingStars;
+export default memo(RatingStars);

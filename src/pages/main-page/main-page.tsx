@@ -3,11 +3,16 @@ import MainEmpty from 'components/main-empty';
 import MainLayout from 'layouts/main-layout';
 import Header from 'components/header-components/header';
 import Tabs from 'components/tabs';
-import { ClassName, RequestStatus, ServicePageType } from '../../const';
+import {
+  ClassName,
+  LoadingStatuses,
+  RequestStatus,
+  ServicePageType,
+} from 'const/const.ts';
 import { Helmet } from 'react-helmet-async';
 import clsx from 'clsx';
 import { useAppDispatch, useAppSelector } from 'hooks/store';
-import { useEffect, useState } from 'react';
+import { useEffect, useState, memo, useMemo, useCallback } from 'react';
 import { TOfferItem } from 'types/offer-item.ts';
 import { offersSelectors } from 'store/slices/offers';
 import Loader from 'components/loader';
@@ -22,11 +27,11 @@ function MainPage() {
   );
   const offers = useAppSelector(offersSelectors.offers);
   const offersStatus = useAppSelector(offersSelectors.status);
-  const loadingStatuses = [RequestStatus.Idle, RequestStatus.Loading];
   const currentCity = useAppSelector(offersSelectors.city);
 
-  const currentOffers = offers.filter(
-    (offer) => offer.city.name === currentCity,
+  const currentOffers = useMemo(
+    () => offers.filter((offer) => offer.city.name === currentCity),
+    [offers, currentCity],
   );
 
   useEffect(() => {
@@ -38,14 +43,14 @@ function MainPage() {
   const mainClassName =
     currentOffers.length === 0 ? 'page__main--index-empty' : '';
 
-  function handleCardHover(offerId: TOfferItem['id'] | null) {
+  const handleCardHover = useCallback((offerId: TOfferItem['id'] | null) => {
     setActiveOfferId(offerId);
-  }
+  }, []);
 
   if (offersStatus === RequestStatus.Failed) {
-    return <ServicePage type={ServicePageType.Error} />;
+    return <ServicePage type={ServicePageType.ServerUnavailable} />;
   }
-  if (loadingStatuses.includes(offersStatus)) {
+  if (LoadingStatuses.includes(offersStatus)) {
     return <Loader />;
   }
 
@@ -73,4 +78,4 @@ function MainPage() {
   );
 }
 
-export default MainPage;
+export default memo(MainPage);

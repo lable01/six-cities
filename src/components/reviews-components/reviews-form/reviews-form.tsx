@@ -1,43 +1,23 @@
-import { FormEvent, ReactEventHandler, useState } from 'react';
-import { Fragment } from 'react';
-import { ReviewLength } from '../../../const.ts';
-import { rating } from 'components/login-form/const.ts';
-import { useAppDispatch } from 'hooks/store';
-import { postComment } from 'store/thunks/comments.ts';
-
-type TChangeHandler = ReactEventHandler<HTMLInputElement | HTMLTextAreaElement>;
-
-type HTMLReviewForm = HTMLFormElement & {
-  comment: HTMLInputElement;
-  rating: HTMLInputElement;
-};
+import { Fragment, useState } from 'react';
+import { ReviewLength } from './const.ts';
+import { Rating } from 'components/login-form/const.ts';
+import { InitialReviewState } from 'components/reviews-components/reviews-form/const.ts';
+import useReviewForm from 'hooks/use-review-form';
+import useFieldChange from 'hooks/use-field-change';
+import { getValidReview } from 'components/reviews-components/reviews-form/function.ts';
 
 type TReviewsForm = {
   activeOfferId: string;
 };
 
 function ReviewsForm({ activeOfferId }: TReviewsForm) {
-  const dispatch = useAppDispatch();
-  const [review, setReview] = useState({
-    comment: '',
-    rating: 0,
+  const [review, setReview] = useState(InitialReviewState);
+  const isValidReviews = getValidReview(review);
+  const handleFieldChange = useFieldChange({
+    state: review,
+    setState: setReview,
   });
-
-  const isValidReviews =
-    review.comment.length < ReviewLength.min ||
-    review.comment.length > ReviewLength.max ||
-    review.rating === 0;
-
-  const handleFieldChange: TChangeHandler = (event) => {
-    const target = event.target as HTMLInputElement | HTMLTextAreaElement;
-    const { name, value } = target;
-    setReview({ ...review, [name]: name === 'rating' ? Number(value) : value });
-  };
-
-  function handleSubmit(event: FormEvent<HTMLReviewForm>) {
-    event.preventDefault();
-    dispatch(postComment({ body: review, offerId: activeOfferId }));
-  }
+  const { handleSubmit } = useReviewForm({ activeOfferId, setReview, review });
 
   return (
     <form
@@ -50,12 +30,13 @@ function ReviewsForm({ activeOfferId }: TReviewsForm) {
         Your review
       </label>
       <div className="reviews__rating-form form__rating">
-        {rating.map(({ value, title }) => (
+        {Rating.map(({ value, title }) => (
           <Fragment key={value}>
             <input
               className="form__rating-input visually-hidden"
               name="rating"
               value={value}
+              checked={review.rating === value}
               id={`${value}-stars`}
               onChange={handleFieldChange}
               type="radio"
@@ -76,6 +57,7 @@ function ReviewsForm({ activeOfferId }: TReviewsForm) {
         className="reviews__textarea form__textarea"
         id="review"
         name="comment"
+        value={review.comment}
         onChange={handleFieldChange}
         placeholder="Tell how was your stay, what you like and what can be improved"
       ></textarea>

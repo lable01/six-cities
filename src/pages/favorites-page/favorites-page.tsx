@@ -1,23 +1,36 @@
 import MainLayout from 'layouts/main-layout';
 import Header from 'components/header-components/header';
 import Footer from 'components/footer';
-import { ClassName, ClassNamePages, RequestStatus } from '../../const';
+import { ClassName, ClassNamePages, RequestStatus } from 'const/const.ts';
 import { Helmet } from 'react-helmet-async';
 import FavoritesBlock from 'components/favorite-page-component/favorites-block';
-import { useAppSelector } from 'hooks/store';
+import { useAppDispatch, useAppSelector } from 'hooks/store';
 import clsx from 'clsx';
 import FavoritesEmpty from 'components/favorite-page-component/favorites-empty';
 import { favoritesSelectors } from 'store/slices/favorites.ts';
 import Loader from 'components/loader';
-import { groupOffersByCity } from '../../utils/function.ts';
+import { groupOffersByCity } from 'utils/function.ts';
+import { useMemo, memo, useEffect } from 'react';
+import { fetchFavorites } from 'store/thunks/favorites.ts';
 
 function FavoritesPage() {
+  const dispatch = useAppDispatch();
   const favoriteOffers = useAppSelector(favoritesSelectors.favorites);
   const requestStatus = useAppSelector(favoritesSelectors.favoriteStatus);
 
-  const favoriteOffersByCity = groupOffersByCity(favoriteOffers);
+  useEffect(() => {
+    dispatch(fetchFavorites());
+  }, [dispatch]);
 
-  const hasFavorites = Object.keys(favoriteOffersByCity).length > 0;
+  const favoriteOffersByCity = useMemo(
+    () => groupOffersByCity(favoriteOffers),
+    [favoriteOffers],
+  );
+
+  const hasFavorites = useMemo(
+    () => Object.keys(favoriteOffersByCity).length > 0,
+    [favoriteOffersByCity],
+  );
 
   const classNameLayoutFavorites = hasFavorites
     ? ClassName.Favorites
@@ -53,10 +66,10 @@ function FavoritesPage() {
             )}
           </div>
         </main>
+        <Footer />
       </MainLayout>
-      <Footer />
     </>
   );
 }
 
-export default FavoritesPage;
+export default memo(FavoritesPage);

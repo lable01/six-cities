@@ -11,7 +11,7 @@ export const ClassName = {
   Main: 'page--gray page--main',
   MainEmpty: 'page__main page__main--index page__main--index-empty',
   Favorites: '',
-  FavoritesEmpty: 'page page--favorites-empty',
+  FavoritesEmpty: 'page--favorites-empty',
   Offer: '',
 } as const;
 
@@ -46,48 +46,6 @@ export const CITIES = [
   CitiesNames.Dusseldorf,
 ];
 
-export const ReviewLength = {
-  min: 50,
-  max: 300,
-};
-
-export const SizesCards = {
-  cities: {
-    width: 260,
-    height: 200,
-  },
-  'near-places': {
-    width: 260,
-    height: 200,
-  },
-  favorites: {
-    width: 150,
-    height: 110,
-  },
-} as const;
-
-export const SizesLogo = {
-  header: {
-    width: 81,
-    height: 41,
-  },
-  footer: {
-    width: 64,
-    height: 33,
-  },
-} as const;
-
-export const SizesBookmark = {
-  offerDetail: {
-    width: 31,
-    height: 33,
-  },
-  offers: {
-    width: 18,
-    height: 19,
-  },
-} as const;
-
 export const Default = {
   BaseURL: 'https://15.design.htmlacademy.pro/six-cities',
   Timeout: 5000,
@@ -106,6 +64,7 @@ export const EndPoint = {
   Login: '/login',
   Logout: '/logout',
   Offers: '/offers',
+  Nearby: '/nearby',
 } as const;
 
 export const FavoriteStatus = {
@@ -120,5 +79,31 @@ export const enum FavoriteStatusCode {
 
 export const enum ServicePageType {
   NotFound = 'Unfortunately, you ended up on a non-existing page',
-  Error = 'Unfortunately, there are problems with the server, please try again later',
+  ServerUnavailable = 'Unfortunately, there are problems with the server, please try again later',
+  ErrorApp = 'Service error, please write to support',
 }
+
+export const ErrorToast = {
+  ReviewFormError:
+    'sending reviews is possible only to authorized users, please log in',
+  CheckAuthError: 'failed to verify authorization, please try again',
+  Login: 'Failed to login, please try again',
+  Logout: 'failed to delog, please try again',
+  FetchComments: 'server error loading reviews, please try again',
+  PostComments: 'server error send review, please try again',
+  FetchFavorites: 'server error loading favorites offers, please try again',
+  ChangeFavorite: 'server error change favorites offers, please try again',
+  FetchAllOffers: 'server error loading offers, please try again',
+  FetchOffer: 'server error loading offer, please try again',
+  FetchNearOffers: 'server error loading nearby offers, please try again',
+} as const;
+
+export const NumberCitiesNearby = {
+  Min: 0,
+  Max: 3,
+} as const;
+
+export const LoadingStatuses: readonly RequestStatus[] = [
+  RequestStatus.Idle,
+  RequestStatus.Loading,
+];

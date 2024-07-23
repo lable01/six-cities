@@ -1,7 +1,7 @@
 import { createAsyncThunk } from '@reduxjs/toolkit';
 import { TUser } from 'types/user.ts';
 import { AxiosInstance } from 'axios';
-import { EndPoint } from '../../const.ts';
+import { EndPoint, ErrorToast } from 'const/const.ts';
 import { dropToken, saveToken } from 'services/token.ts';
 import { toast } from 'react-toastify';
 
@@ -18,7 +18,7 @@ const checkAuth = createAsyncThunk<TUser, void, { extra: AxiosInstance }>(
 
       return response.data;
     } catch (error) {
-      toast.error('failed to verify authorization, please try again');
+      toast.error(ErrorToast.CheckAuthError);
       throw error;
     }
   },
@@ -32,7 +32,7 @@ const login = createAsyncThunk<TUser, LoginData, { extra: AxiosInstance }>(
       saveToken(response.data.token);
       return response.data;
     } catch (error) {
-      toast.error('Failed to login, please try again');
+      toast.error(ErrorToast.Login);
       throw error;
     }
   },
@@ -45,7 +45,7 @@ const logout = createAsyncThunk<unknown, undefined, { extra: AxiosInstance }>(
       await api.delete(EndPoint.Logout);
       dropToken();
     } catch (error) {
-      toast.error('failed to delog, please try again');
+      toast.error(ErrorToast.Logout);
       throw error;
     }
   },

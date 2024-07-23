@@ -1,13 +1,14 @@
 import clsx from 'clsx';
 import { TOfferItem } from 'types/offer-item.ts';
-import { useEffect, useRef } from 'react';
+import { useEffect, useRef, memo } from 'react';
 import leaflet, { LayerGroup } from 'leaflet';
 import 'leaflet/dist/leaflet.css';
 import useMap from 'hooks/use-map';
 import { URL_MARKER_ACTIVE, URL_MARKER_DEFAULT } from './const.ts';
+import { TOfferDetail } from 'types/offer-detail.ts';
 
 type MapProps = {
-  offers: TOfferItem[];
+  offers: (TOfferItem | TOfferDetail)[];
   activeOfferId: string | null;
   className: string;
 };
@@ -44,7 +45,7 @@ function Map({ offers, activeOfferId, className }: MapProps) {
     }
   }, [currentCityLocation, map]);
 
-  useEffect(() => {
+  const addMarkers = () => {
     if (map) {
       const markerLayerCurrent = markerLayer.current;
       offers.forEach((offer) => {
@@ -67,11 +68,15 @@ function Map({ offers, activeOfferId, className }: MapProps) {
         markerLayerCurrent.clearLayers();
       };
     }
-  }, [activeOfferId, map, offers]);
+  };
+
+  useEffect(() => {
+    addMarkers();
+  }, [addMarkers]);
 
   return (
     <section className={clsx('map', className)} ref={mapContainerRef}></section>
   );
 }
 
-export default Map;
+export default memo(Map);

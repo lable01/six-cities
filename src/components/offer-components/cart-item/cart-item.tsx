@@ -1,10 +1,12 @@
 import { Link } from 'react-router-dom';
 import { TOfferItem } from 'types/offer-item.ts';
-import { AppRoute, ClassNamePages, SizesCards } from '../../../const.ts';
+import { AppRoute, ClassNamePages } from 'const/const.ts';
 import OfferBadge from 'components/offer-components/offer-badge';
 import OfferBookmark from 'components/offer-components/offer-bookmark';
-import { capitalizeFirstLetter } from '../../../utils/function.ts';
+import { capitalizeFirstLetter } from 'utils/function.ts';
 import RatingStars from 'components/rating-stars';
+import { memo } from 'react';
+import { SizesCards } from 'components/offer-components/cart-item/const.ts';
 
 type TCartItemProps = {
   offer: TOfferItem;
@@ -17,13 +19,10 @@ function CartItem({ offer, onCardHover, typeCard }: TCartItemProps) {
     offer;
   const type = capitalizeFirstLetter(offer.type);
   const size = SizesCards[typeCard];
-  function handleMouseEnter() {
-    onCardHover?.(id);
-  }
 
-  function handleMouseLeave() {
-    onCardHover?.(null);
-  }
+  const handleMouseEnter = () => onCardHover?.(id);
+
+  const handleMouseLeave = () => onCardHover?.(null);
 
   return (
     <article
@@ -66,4 +65,4 @@ function CartItem({ offer, onCardHover, typeCard }: TCartItemProps) {
   );
 }
 
-export default CartItem;
+export default memo(CartItem);

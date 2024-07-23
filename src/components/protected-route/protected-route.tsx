@@ -1,6 +1,6 @@
 import { ReactNode } from 'react';
 import { Navigate, useLocation } from 'react-router-dom';
-import { AppRoute, RequestStatus } from '../../const.ts';
+import { AppRoute, RequestStatus } from 'const/const.ts';
 import { useAppSelector } from 'hooks/store';
 import { userSelectors } from 'store/slices/user.ts';
 import Loader from 'components/loader';

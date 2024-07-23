@@ -1,7 +1,7 @@
 import { TReview } from 'types/review.ts';
-import { getCurrentDate } from '../../../utils/function.ts';
+import { getCurrentDate } from 'utils/function.ts';
 import RatingStars from 'components/rating-stars';
-import { ClassNamePages } from '../../../const.ts';
+import { ClassNamePages } from 'const/const.ts';
 
 type TReviewsInfo = {
   review: TReview;

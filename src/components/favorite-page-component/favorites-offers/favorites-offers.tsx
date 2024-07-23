@@ -1,5 +1,6 @@
 import { TOfferItem } from 'types/offer-item.ts';
 import CartItem from 'components/offer-components/cart-item';
+import { memo } from 'react';
 
 type TFavoritesOffers = {
   city: string;
@@ -25,4 +26,4 @@ function FavoritesOffers({ city, favoritesOffers }: TFavoritesOffers) {
   );
 }
 
-export default FavoritesOffers;
+export default memo(FavoritesOffers);
